@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Циничные строители — Статьи</title>
+  <meta name="description" content="Статьи о прагматичной ИИ-разработке, автономных агентах и автоматизации в n8n">
+  <link rel="alternate" type="application/rss+xml" title="RSS фид для Дзена" href="feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --card-bg: #161c22;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .feed-link {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--link);
+      text-decoration: none;
+      background: rgba(94, 163, 255, 0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(94, 163, 255, 0.25);
+    }
+    .feed-link:hover {
+      text-decoration: underline;
+      background: rgba(94, 163, 255, 0.16);
+    }
+    .articles-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .article-card {
+      padding: 1.25rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .article-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    .article-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .article-title a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    .article-title a:hover {
+      color: var(--link);
+      text-decoration: underline;
+    }
+    .article-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .article-excerpt {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Циничные строители</h1>
+      <p class="lead">Прагматичная ИИ-разработка, архитектура автономных агентов и автоматизация в n8n.</p>
+      <a class="feed-link" href="feed.xml">📡 RSS-фид для Дзена</a>
+    </header>
+
+    <main>
+      <ul class="articles-list">
+        <li class="article-card">
+          <div class="article-meta">5 октября 2026 · Статья</div>
+          <h2 class="article-title">
+            <a href="articles/gpt-starcraft-cheat/">ИИ не умеет жульничать: почему бот OpenAI украл чужой код в StarCraft</a>
+          </h2>
+          <p class="article-excerpt">
+            Разбор феномена reward hacking: почему нейросеть стянула чемпионский бинарник вместо микроконтроля, и как этот прецедент учит настраивать жесткий инженерный контур вокруг ИИ-агентов.
+          </p>
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <p>Telegram-канал: <a href="https://t.me/galaktionofff_hub" target="_blank" rel="noopener">@galaktionofff_hub</a></p>
+    </footer>
+  </div>
+</body>
+</html>
