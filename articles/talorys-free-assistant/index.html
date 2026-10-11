@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Личный ИИ-ассистент с памятью за ноль рублей: поднимаем Talorys на Cloudflare Workers</title>
+  <meta name="description" content="Как развернуть автономного персонального ИИ-ассистента Talorys с собственной памятью на бесплатном бессерверном стеке Cloudflare без абонентской платы.">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+    .article-footer {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .article-footer p {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Личный ИИ-ассистент с памятью за ноль рублей: поднимаем Talorys на Cloudflare Workers</h1>
+      <div class="meta">11 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Отдавать каждый месяц по $20 за коммерческие ИИ-подписки ради управления задачами, заметок и контекстного диалога — сомнительная трата бюджета. Особенно когда переписки утекают на чужие серверы, а продление тарифов по зарубежным картам превращается в регулярный квест.</p>
+
+      <p>В чём прикол: для персонального агента больше не нужно арендовать VPS или круглосуточно греть домашнюю видеокарту. В открытый доступ выкатили <a href="https://github.com/rociiu/talorys" target="_blank" rel="noopener">Talorys</a> — автономного ассистента с собственной памятью, который разворачивается одной командой в бесплатный контур Cloudflare.</p>
+
+      <figure><img src="/images/talorys-free-assistant/1.png" alt="Минималистичный домашний рабочий стол с открытым ноутбуком, на экране дашборд персонального ИИ-ассистента с графиками задач и окном чата, мягкий неоновый оранжевый и синий свет, темная комната, кинематографичный ракурс 16:9, landscape, без текста" loading="lazy"></figure>
+
+      <h2>Архитектура на периферии: стек без абонентской платы</h2>
+
+      <p>Стереотип прост: self-hosted ИИ якобы требует либо мощного домашнего ПК, либо платной виртуальной машины. Если нет свободной видеопамяти под локальную модель, приходится оплачивать сервер и настраивать прокси.</p>
+
+      <p>Здесь архитектура принципиально иная — периферийный serverless. Проект Talorys полностью укладывается в бессерверный стек Cloudflare:</p>
+      <ul>
+        <li>Фронтенд: панель управления на React и Vite в Cloudflare Pages.</li>
+        <li>Маршрутизатор: микросервис на базе Hono внутри Cloudflare Workers.</li>
+        <li>Долгосрочная память: хранилище Durable Objects со встроенной базой SQLite. Оно держит профиль владельца, историю чатов, заметки и списки дел.</li>
+        <li>Нейросетевой инференс: движок <a href="https://developers.cloudflare.com/workers-ai/" target="_blank" rel="noopener">Cloudflare Workers AI</a> с моделью <code>@cf/zai-org/glm-4.7-flash</code>.</li>
+      </ul>
+
+      <p>Главный поинт, который стоит понять: в такой схеме нет простаивающего сервера с ежемесячными счетами. Нет открытых портов домашнего роутера и риска, что сбой питания положит систему. Сервис активируется по запросу, отвечает за доли секунды и снова засыпает.</p>
+
+      <h2>Развертывание в четыре шага: от одной команды до рабочего интерфейса</h2>
+
+      <p>Прагматика и ничего лишнего: чтобы поднять контур, не нужны навыки DevOps или написание манифестов.</p>
+
+      <p>За пару минут без силовых затрат пайплайн поднимается прямо из терминала:</p>
+      <ol>
+        <li>Окружение. Нужен бесплатный аккаунт Cloudflare и Node.js не ниже версии 20.18.</li>
+        <li>Запуск. В консоли вбиваем команду: <code>npx create-talorys@latest</code>.</li>
+        <li>Авторизация. Скрипт через Wrangler запрашивает вход в Cloudflare и задает пароль администратора для защиты веб-панели.</li>
+        <li>Инициализация. Сборщик сам настраивает Cloudflare Pages, воркер, базу SQLite в Durable Object и биндинги к Workers AI.</li>
+      </ol>
+
+      <p>На выходе вы получаете адрес вида <code>ваш-проект.pages.dev</code>. Это закрытый персональный комбайн: вводите пароль — и заметки, расписание и умный диалог готовы к работе.</p>
+
+      <figure><img src="/images/talorys-free-assistant/2.png" alt="3D-изометрия архитектуры распределенных бессерверных вычислений, светящиеся узлы данных соединяются линиями связи на темной платформе, технологичный минимализм, 16:9, landscape, без текста" loading="lazy"></figure>
+
+      <h2>Реальные лимиты и экономика: где граница бесплатного тарифа</h2>
+
+      <p>Смотрите, как это выглядит на цифрах:</p>
+      <ul>
+        <li>Аренда VPS под бота обходится в 400–800 рублей ежемесячно ($50–100 в год).</li>
+        <li>Подписка на закрытые платформы забирает от 2000 рублей в месяц ($240 в год).</li>
+        <li>Тариф Cloudflare в этом сетапе обходится ровно в 0 рублей.</li>
+      </ul>
+
+      <p>Но тут есть один важный моментик: бесплатные ресурсы не безграничны. Cloudflare начисляет 10 000 нейронов (Neurons) в сутки на Workers AI. Для легковесной модели GLM-4.7-Flash этого хватает примерно на пару десятков развернутых контекстных диалогов в день.</p>
+
+      <p>При исчерпании лимита генерация текста встает на паузу до полуночи по UTC.</p>
+
+      <p>То есть ещё раз: если квота на нейросеть исчерпана, ассистент не превращается в кирпич. Все остальные разделы — база заметок, задачи и напоминания на будильниках Durable Objects — продолжают работать без сбоев. Запросы к SQLite на бесплатном плане ограничены планкой в 100 000 операций в сутки, чего с запасом хватает на одного человека.</p>
+
+      <p>В проекте нет сторонней телеметрии, сбора аналитики и трекеров. Все файлы и записи хранятся строго в вашей учетной записи.</p>
+
+      <figure><img src="/images/talorys-free-assistant/3.png" alt="Концептуальная технологичная иллюстрация защищенного цифрового хранилища, светящийся контур щита вокруг блоков данных, изумрудные и графитовые тона, атмосфера приватности, 16:9, landscape, без текста" loading="lazy"></figure>
+
+      <h2>Что в сухом остатке</h2>
+
+      <p>Для повседневных задач — структурировать мысли, фиксировать задачи, ставить таймеры и обращаться к ИИ — больше не нужно отдавать деньги за чужие комбайны.</p>
+
+      <p>Бессерверные платформы дают достаточный запас мощностей, чтобы закрыть персональные сценарии без абонентской платы. Проекты вроде Talorys доказывают, что персональный стек может быть независимым, приватным и подниматься за считанные минуты.</p>
+
+      <p>А как вы строите персональных ассистентов: платите за подписки готовых сервисов или разворачиваете решения на собственных серверах и периферии? Напишите в комментариях, насколько для вас важна приватность заметок.</p>
+    </article>
+  </div>
+</body>
+</html>
