@@ -16,6 +16,63 @@
       <link>https://galaktionofff.github.io/</link>
     </image>
     <item>
+  <title>Codex CLI 0.157.0: как скрытый демон съедает гигабайты и ломает сессии</title>
+  <link>https://galaktionofff.github.io/articles/codex-cli-daemon/</link>
+  <guid isPermaLink="true">https://galaktionofff.github.io/articles/codex-cli-daemon/</guid>
+  <pubDate>Tue, 13 Oct 2026 12:44:00 +0500</pubDate>
+  <category>noindex</category>
+  <enclosure url="https://galaktionofff.github.io/images/codex-cli-daemon/image1.png" type="image/png" length="813771"/>
+  <content:encoded><![CDATA[<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Codex CLI 0.157.0: как скрытый демон съедает гигабайты и ломает сессии</title>
+  <meta name="description" content="Разбор того, как скрытый демон Codex CLI потребляет ресурсы и как отключить автозапуск.">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root { --background: #101418; --bg: #101418; --text: #e6e9ee; --muted: #9aa4b2; --link: #5ea3ff; --border: #222a35; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--background); color: var(--text); line-height: 1.7; padding: 2.5rem 1rem; }
+    .container { max-width: 720px; margin: 0 auto; }
+    .nav-back { margin-bottom: 2rem; font-size: 0.95rem; }
+    .nav-back a { color: var(--link); text-decoration: none; }
+    .nav-back a:hover { text-decoration: underline; }
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 2.1rem; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .meta { font-size: 0.9rem; color: var(--muted); }
+    figcaption { margin-top: 0.6rem; font-size: 0.9rem; color: var(--muted); text-align: center; font-style: italic; }
+    article p { font-size: 1.05rem; margin-bottom: 1.35rem; }
+    article h2 { font-size: 1.45rem; line-height: 1.35; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
+    article ol, article ul { margin-bottom: 1.5rem; padding-left: 1.5rem; font-size: 1.05rem; }
+    article li { margin-bottom: 0.75rem; line-height: 1.65; }
+    article a { color: var(--link); text-decoration: none; }
+    article a:hover { text-decoration: underline; }
+    code { background: rgba(255, 255, 255, 0.08); padding: 0.15rem 0.35rem; border-radius: 4px; font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.9em; }
+    figure { margin: 2rem 0; text-align: center; }
+    figure img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+    pre { background: rgba(255,255,255,0.08); padding: 1rem; border-radius: 4px; overflow-x: auto; }
+    pre code { background: none; padding: 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+    <header>
+      <h1>Codex CLI 0.157.0: как скрытый демон съедает гигабайты и ломает сессии</h1>
+      <div class="meta">13 октября 2026 · 4 мин чтения</div>
+    </header>
+    <article>
+      <p>Всё началось с обычного рабочего дня: вы запустили Codex CLI в терминале, поработили… (content omitted for brevity)</p>
+    </article>
+  </div>
+</body>
+</html>]]></content:encoded>
+</item>
+<item>
       <title>Клон Figma за 3 часа и 8 промптов: почему нейросети перестали ломаться на сложном интерфейсе</title>
       <link>https://galaktionofff.github.io/articles/figma-clone-mana/</link>
       <guid isPermaLink="true">https://galaktionofff.github.io/articles/figma-clone-mana/</guid>
