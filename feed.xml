@@ -67,6 +67,18 @@
     </header>
     <article>
       <p>Всё началось с обычного рабочего дня: вы запустили Codex CLI в терминале, поработили… (content omitted for brevity)</p>
+      <figure>
+        <img src="https://galaktionofff.github.io/images/codex-cli-daemon/image1.png" alt="Dark terminal window with a ghostly process monitor, swirling neon lines representing background activity, showing a hidden daemon persisting after the terminal is closed, 16:9" loading="lazy" />
+        <figcaption>Тень процесса, живущего после закрытия терминала.</figcaption>
+      </figure>
+      <figure>
+        <img src="https://galaktionofff.github.io/images/codex-cli-daemon/image2.png" alt="Futuristic control panel with glowing indicators of background processes and storage usage, symbolizing hidden resource consumption, 16:9" loading="lazy" />
+        <figcaption>Невидимые процессы съедают дисковое пространство.</figcaption>
+      </figure>
+      <figure>
+        <img src="https://galaktionofff.github.io/images/codex-cli-daemon/image3.png" alt="Dark techno‑aesthetic terminal showing cleanup commands, with a clean filesystem view after deleting old packages, 16:9" loading="lazy" />
+        <figcaption>Очистка хранилища от старых пакетов – последний шаг к гигиене.</figcaption>
+      </figure>
     </article>
   </div>
 </body>
