@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>500 роликов без видеосетей: как связка Three.js и Claude ломает экономику контента</title>
+  <meta name="description" content="Как связка Three.js и Claude ломает экономику видеопроизводства: создание 500 готовых 3D-роликов без видеосетей, модульная архитектура сцен и рендер кодом.">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>500 роликов без видеосетей: как связка Three.js и Claude ломает экономику контента</h1>
+      <div class="meta">14 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Обычный сценарий с генеративным видео предсказуем: подписка за $50, витиеватый промпт и ожидание в очереди. На выходе камера часто пролетает мимо нужной точки, а надписи превращаются в кашу.</p>
+
+      <p>Хотите изменить ракурс или проверить новый хук? Снова платите за генерацию и ждите рендер.</p>
+
+      <p>В сообществе разработчиков недавно появился кейс с иной философией: по словам команды, они собрали 500 готовых 3D-роликов за три недели и потратили ровно ноль рублей на видеосети. Вместо тяжелых генераторов фабрику собрали на Three.js под управлением Claude Opus 5.5.</p>
+
+      <figure><img src="/images/threejs-claude-3d-factory/1.png" alt="Isometric 3D workstation setup with glowing procedural WebGL wireframe meshes, floating geometric primitives, modular code node connections, volumetric ambient lighting in dark cyan and deep purple, 16:9, landscape" loading="lazy"><figcaption><em>Параметрический 3D-конвейер на коде заменяет непредсказуемый рендер диффузионных нейросетей.</em></figcaption></figure>
+
+      <h2>Иллюзия диффузии: почему видеосети сжигают бюджет</h2>
+
+      <p>На коротких промо Runway, Kling или Luma впечатляют: неон красиво ложится на асфальт, камера плавно скользит вдоль пейзажей.</p>
+
+      <p>В реале расклад такой: сотни вариаций под тесты превращают диффузию в финансовую дыру. Каждый дубль сжигает кредиты. Если ракурс сместился, подвинуть камеру нельзя — приходится заново оплачивать весь прогон пикселей.</p>
+
+      <p>Хуже всего дела с типографикой и геометрией. Модель угадывает пятна цвета, а не координаты. Для продуктовых роликов и моушн-дизайна это постоянный брак: грани плывут, а текст дрожит.</p>
+
+      <h2>Архитектура фабрики: Three.js под управлением Claude Opus 5.5</h2>
+
+      <p>Авторы кейса пошли от обратного: если браузер рендерит 3D со скоростью 60 кадров в секунду на клиентском железе, зачем платить облакам за каждый кадр видео?</p>
+
+      <p>Начнём с базы. Конвейер строится на трех блоках:</p>
+
+      <ul>
+        <li><strong>Модульная сцена Three.js.</strong> Сцену собирают из заготовок: траектории камеры, свет, материалы, частицы и плашки.</li>
+        <li><strong>Claude Opus 5.5 как графический инженер.</strong> Модели передают матрицу параметров: тезисы, палитру и тайминги. Модель генерирует компактный код конфигурации сцены, связывая блоки.</li>
+        <li><strong>Безголовый рендер в браузере.</strong> Chromium через Puppeteer отрисовывает сцену с фиксированным шагом таймера без пропуска кадров и сшивает их через FFmpeg в MP4.</li>
+      </ul>
+
+      <p>Главный выигрыш — скорость итераций. Если аналитика удержания показывает спад на второй секунде, в коде меняют вектор камеры или скорость зума, и сцена пересобирается локально за полминуты.</p>
+
+      <figure><img src="/images/threejs-claude-3d-factory/2.png" alt="Modular 3D scene architecture graph showing procedural camera trajectories, dynamic lighting rigs, and interconnected WebGL geometry blocks, sleek dark technical viewport, neon accents, 16:9, landscape" loading="lazy"><figcaption><em>Каждая сцена собирается из модульных блоков: ракурс камеры и освещение меняются правкой пары переменных.</em></figcaption></figure>
+
+      <h2>Слом шаблона: исполняемый код вместо случайных пикселей</h2>
+
+      <p>Меня в этом подходе зацепила трезвость: авторы перестали воспринимать ИИ как видеокамеру и взглянули на него как на генератор исполняемой логики.</p>
+
+      <p>Логика простая: генерация кода текстовой моделью стоит копейки по сравнению с инференсом видеосетей. По словам создателей пайплайна, генерация кода обошлась бесплатно благодаря штатным лимитам, а рендер шел детерминированным движком на локальной машине.</p>
+
+      <p>Разница не в таланте, а в системе:</p>
+
+      <ol>
+        <li><strong>Абсолютная повторяемость.</strong> Формы не плывут, отражения подчиняются оптике, а типографика рендерится с четкостью векторных линий.</li>
+        <li><strong>Нулевая стоимость правок.</strong> Создание двадцати вариантов ролика требует лишь изменения входных переменных скрипта.</li>
+        <li><strong>Модульность вместо хаоса.</strong> Инженер задает каркас в Three.js, а модель лишь варьирует параметры внутри заданных границ.</li>
+      </ol>
+
+      <figure><img src="/images/threejs-claude-3d-factory/3.png" alt="High-speed programmatic video rendering pipeline transforming structured JavaScript code arrays into crisp cinematic frames, dark matte workstation console, emerald and electric blue telemetry paths, 16:9, landscape" loading="lazy"><figcaption><em>Инженерный подход: вместо ожидания очереди в облачном генераторе видео собирается кодом на собственном железе.</em></figcaption></figure>
+
+      <h2>Где начинаются ограничения и что в сухом остатке</h2>
+
+      <p>Особо никакой магии здесь нет: у чистого WebGL есть четкие рамки.</p>
+
+      <p>Three.js в связке с браузерным рендером не заменит фильм с живыми актерами. Если задача требует показать человека в кадре, диффузионные видеосети пока безальтернативны.</p>
+
+      <p>Но для продуктового моушн-дизайна, демонстрации интерфейсов, инфографики и хуков под соцсети программный конвейер выигрывает у диффузии по скорости и себестоимости.</p>
+
+      <p>Что в сухом остатке: заявленные в кейсе 500 роликов за три недели без затрат на видеосети — наглядный сигнал взросления автоматизации. Слепой восторг перед тяжелыми моделями сменяется практичной сборкой: модель пишет детерминированный код, а визуализацию берет на себя проверенный движок.</p>
+
+      <p>А как вы относитесь к генерации видео через код: пробовали собирать ролики программно или пока доверяете только диффузионным сервисам? Напишите в комментариях, какой подход кажется вам более практичным в бою.</p>
+    </article>
+  </div>
+</body>
+</html>
