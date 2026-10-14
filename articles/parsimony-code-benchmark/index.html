@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Тест прошёл, проект умер: как новый бенчмарк Parsimony ловит нейросети на раздувании кода</title>
+  <meta name="description" content="Разбор бенчмарка Parsimony: как новый инструмент ловит нейросети на раздувании кода, почему лидерборды поощряют мусорные патчи и зачем считать синтаксические кирпичики вместо строк.">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Тест прошёл, проект умер: как новый бенчмарк Parsimony ловит нейросети на раздувании кода</h1>
+      <div class="meta">14 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Вы просите модель починить баг в три строки. Нейросеть бодро рапортует об успехе, автотест зеленеет.</p>
+
+      <p>Но в диффе — тихий кошмар: три новых класса, четыре обёртки и сотни строк клея там, где нужно было поправить условие. Задача решена, но проект получил дозу технического долга.</p>
+
+      <p>До сих пор лидерборды не наказывали за такую графоманию: замеряли лишь процент тестов и расходы на токены. 13 октября в <a href="https://news.ycombinator.com/item?id=50077619" target="_blank" rel="noopener">обсуждении на Hacker News</a> автор представил открытый независимый бенчмарк <a href="https://parsimony.lasu.dev/" target="_blank" rel="noopener">Parsimony</a> — первый инструмент, считающий объём лишнего кода от LLM.</p>
+
+      <figure><img src="/images/parsimony-code-benchmark/img1.png" alt="Split-screen visual metaphor: left shows bloated amber code; right shows razor-sharp cyan algorithmic structure, glowing badge &quot;PARSIMONY&quot; in center, dark graphite background, 16:9, landscape" loading="lazy"><figcaption><em>Бенчмарк Parsimony оценивает не только решение задачи, но и чистоту полученного патча.</em></figcaption></figure>
+
+      <h2>Почему стандартные лидерборды поощряют мусорный код</h2>
+
+      <p>Бенчмарки вроде SWE-bench Verified, SWE-bench Live или DeepSWE оценивают solve rate. Написала модель пятьдесят строк костылей или пятьсот — не имеет значения, пока проверки зелёные.</p>
+
+      <p>Для разработчика слепая вера этим цифрам — верный способ купить себе головную боль. Код от нейросети всё равно придётся читать человеку и отдавать обратно в контекст агенту на следующем шаге.</p>
+
+      <p>Раздутая база быстрее забивает контекст и провоцирует сбои. Модели научились хакать проверки: вместо точечной правки они городят защитные слои дублирующих функций. Задача закрыта, а репозиторий тонет в лишних абстракциях.</p>
+
+      <h2>Синтаксические кирпичики вместо строчек кода</h2>
+
+      <p>Автор создал проект независимо, без связей с существующими бенчмарками. Код открыт в <a href="https://github.com/La5u/Parsimony" target="_blank" rel="noopener">репозитории на GitHub</a>.</p>
+
+      <p>Инструмент берёт уже опубликованные патчи из публичных прогонов DeepSWE, SWE-bench Verified и SWE-bench Live.</p>
+
+      <p>Считать строки бессмысленно: форматирование легко ломает замеры. Поэтому Parsimony разбирает синтаксическое дерево (AST) и считает «coding units» — синтаксические кирпичики:</p>
+
+      <ul>
+        <li>Statements — операторы и управляющие конструкции;</li>
+        <li>Calls — вызовы функций и методов;</li>
+        <li>Names — объявленные переменные и идентификаторы;</li>
+        <li>Literals — константы, строки и числа.</li>
+      </ul>
+
+      <p>Прикол в том, что удалённый код вычитается: считается чистая разница (net units). Если модель вычистила старый костыль и написала компактное решение, она получает преимущество.</p>
+
+      <figure><img src="/images/parsimony-code-benchmark/img2.png" alt="3D visualization of an abstract syntax tree parsing code diffs, glowing translucent green nodes for deleted code and amber nodes for additions, sleek titanium telemetry aesthetic, 16:9, landscape" loading="lazy"><figcaption><em>В зачёт идут не строки, а синтаксические кирпичики: операторы, вызовы функций и литералы.</em></figcaption></figure>
+
+      <h2>Полупрозрачные круги: что с GPT-6 и Claude 5.5</h2>
+
+      <p>Но тут есть один важный моментик: точность замеров упирается в доступность данных. Если авторы модели не выкладывают полные диффы решений, оценить лаконичность стандартным путём нельзя.</p>
+
+      <p>С новейшими флагманами вроде GPT-6 и Claude 5.5 именно такая история: публичных датасетов с их патчами на этих тестах попросту нет.</p>
+
+      <p>Автор инструмента поступил честно: он сам прогнал эти модели на выборке от 3 до 10 задач за счёт личных подписок.</p>
+
+      <p>В общем рейтинге Parsimony такие результаты показаны полупрозрачными кружками и намеренно не ранжируются. Это принципиальная позиция: инструмент отделяет статистику больших бенчмарков от пилотных проб. Чтобы закрыть пробел, создатель проекта приглашает делиться публичными экспортами патчей для свежих моделей.</p>
+
+      <figure><img src="/images/parsimony-code-benchmark/img3.png" alt="Benchmark comparison leaderboard on a dark transparent glass HUD, rank indicators alongside faint translucent glowing circles with label &quot;3-10&quot;, dark studio lighting, 16:9, landscape" loading="lazy"><figcaption><em>Модели без публичных датасетов отображаются полупрозрачными кружками и не ранжируются в общем зачёте.</em></figcaption></figure>
+
+      <h2>Взгляд практика: почему лаконичность важнее процентов</h2>
+
+      <p>Когда я смотрю на отчёты с лидербордов, меня всегда задевает одна деталь: авторы хвастаются процентами, но молчат о качестве диффа.</p>
+
+      <p>В реальной разработке всё решает правило: быстро делать не равно быстро в реальности. Написать за минуту простыню лишнего кода — сомнительный плюс, если потом полчаса уходит на вычистку лишних обёрток.</p>
+
+      <p>Появление Parsimony — наглядный сигнал взросления индустрии. Мы выходим из периода восторга, когда радовались любому компилируемому коду от нейросети.</p>
+
+      <p>Наступает этап инженерной гигиены. Истинная ценность инструмента — не в способности раздуть коммит на сотни строк, а в умении решить проблему точечными операторами, не оставив после себя мусора.</p>
+
+      <p>А вы замечали за нейросетями привычку городить лишние обёртки там, где всё решается в пару строк? Как вы боретесь с раздуванием кода: правите промпты или вычищаете диффы руками перед коммитом? Делитесь опытом в комментариях.</p>
+    </article>
+  </div>
+</body>
+</html>
