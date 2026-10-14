@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Зачем Anthropic похоронила Git: 30 000 мержей в день и новая система контроля версий Scion</title>
+  <meta name="description" content="Разбор отказа Anthropic от Git: 30 000 мержей агентов в сутки, система контроля версий Scion и движок ревью Antique.">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Зачем Anthropic похоронила Git: 30 000 мержей в день и новая система контроля версий Scion</h1>
+      <div class="meta">14 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Двадцать лет индустрия жила с ощущением, что Git — навсегда. Ветки, коммиты, пулреквесты и неспешное ревью казались стандартом.</p>
+
+      <p>Но когда код внутри компании пишут автономные агенты, привычная схема ломается. В <a href="https://www.anthropic.com/engineering/redesigning-source-control" target="_blank" rel="noopener">инженерном блоге Anthropic</a> вышел показательный разбор: компания отказалась от Git и построила систему контроля версий Scion вместе с движком ревью Antique.</p>
+
+      <figure><img src="/images/anthropic-scion-source-control/image1.png" alt="Overloaded code repository monolith fracturing under a torrent of automated code updates, luminous digital stream with amber and cyan telemetry nodes, glowing badge &quot;30,000&quot;, dark graphite background, isometric 3D render, 16:9, landscape" loading="lazy"><figcaption><em>Пять месяцев работы с автономными агентами подняли поток правок в двенадцать раз — и сломали привычный Git-пайплайн.</em></figcaption></figure>
+
+      <h2>Хроника перегрузки: как агенты взломали процесс</h2>
+
+      <p>Факты на стол. В мае 2026 года в монорепозитории Anthropic фиксировали около 2 500 мержей в день. Затем к разработке подключили кодинг-агентов на базе моделей класса Fable и Mythos.</p>
+
+      <p>К сентябрю поток изменений улетел в стратосферу: свыше 30 000 мержей в сутки. Пик пришёлся на 9 сентября — ровно 30 401 слияние за день. Каждые три секунды в монорепу падает свежий код.</p>
+
+      <p>Здесь Git упёрся в потолок. История главной ветки монорепы Anthropic весит около 100 ГБ, сжатая рабочая копия — более 25 ГБ. Когда сотни агентов непрерывно гоняют <code>fetch</code>, делают <code>rebase</code> и синхронизируют дерево правок, диски и сеть захлёбываются.</p>
+
+      <h2>Scion и Antique: возврат к централизации</h2>
+
+      <p>Инженеры компании создали собственный контроль версий Scion и движок ревью Antique.</p>
+
+      <p>Смотрите, в чём разница. Как отмечал <a href="https://simonwillison.net/2026/Oct/13/redesigning-source-control/" target="_blank" rel="noopener">разбор известного инженера</a>, Scion — фактически реинвенция централизованного контроля версий в духе Subversion. В распределённой системе каждому нужна полная история проекта. Агенту в контейнере она ни к чему: ему требуется за секунду стянуть срез файлов, внести правку и зафиксировать её на сервере без накладных расходов.</p>
+
+      <p>Вслед за ветками рухнули и классические пулреквесты. Человек физически не вычитает 30 000 PR за сутки. Поэтому появился Antique: к середине июля антик-запросы почти полностью вытеснили традиционные пулреквесты, превратив приёмку в автоматический конвейер верификации.</p>
+
+      <figure><img src="/images/anthropic-scion-source-control/image2.png" alt="Centralized high-speed version control server hub processing thousands of micro-transactions in parallel against tangled lagging branch nodes, matte titanium plates, clean neon cyan routing traces, dark obsidian background, subtle emblem &quot;SCION&quot;, 16:9, landscape" loading="lazy"><figcaption><em>Централизованный движок Scion заменил тяжёлые распределённые копии на легковесные срезы для агентов.</em></figcaption></figure>
+
+      <h2>Слом шаблона: код больше не пишется под человеческий глаз</h2>
+
+      <p>Главный поинт, который стоит понять: привычный тулчейн создавался под биологические ограничения человека.</p>
+
+      <p>Люди работают асинхронно, долго читают дифф и спорят в комментариях. Отсюда появились ветки, долгие согласования и распределённые копии.</p>
+
+      <p>Агент работает иначе: он не устаёт, правит код микро-пачками и сразу берёт следующую задачу. При таком темпе попытка заставить человека вручную подтверждать каждый коммит становится главным тормозом системы.</p>
+
+      <p>В чём логика нового подхода? Контроль смещается с чтения строк на автоматическую верификацию архитектурных инвариантов, строгие контракты и моментальный откат. Инженер больше не вычитывает тысячи строк: он задаёт правила игры, пишет тесты и наблюдает за системой на верхнем уровне.</p>
+
+      <figure><img src="/images/anthropic-scion-source-control/image3.png" alt="Software engineer sitting in front of a futuristic multi-screen supervisory console, observing architectural telemetry while thousands of background code micro-commits execute silently underneath, deep midnight blue and warm amber lighting, clean minimalism, 16:9, landscape" loading="lazy"><figcaption><em>Роль разработчика меняется: вместо построчной вычитки человек настраивает контракты и правила приёмки.</em></figcaption></figure>
+
+      <h2>Что это значит для небольших команд</h2>
+
+      <p>Казалось бы: где монорепа Anthropic на 100 гигабайт, а где проект инди-хакера или небольшой команды?</p>
+
+      <p>Держать в голове мысль: масштаб разный, вектор один. Когда я настраиваю связки локальных агентов для рутины, симптомы те же: чем больше кода генерируют модели, тем быстрее ручное согласование каждой запятой превращается в затык.</p>
+
+      <p>Если вы внедряете кодинг-агентов, вам не нужен свой Scion, но нужна перестройка процессов:</p>
+
+      <ul>
+        <li>Вкладываться в автотесты и строгую типизацию вместо разглядывания диффов.</li>
+        <li>Дробить задачи на короткие микро-правки вместо тяжёлых коммитов на несколько дней.</li>
+        <li>Настраивать мониторинг и быстрый откат: на высокой скорости ошибки неизбежны.</li>
+      </ul>
+
+      <p>Эпоха, когда программист гордился тем, что вычитал 500 строк чужого кода, заканчивается. Будущее — за теми, кто умеет выстраивать надёжные автоматические конвейеры приёмки.</p>
+
+      <p>А как вы контролируете код от нейросетей: читаете каждый файл руками или уже доверяете проверку автотестам и линтерам? Напишите в комментариях.</p>
+    </article>
+  </div>
+</body>
+</html>
