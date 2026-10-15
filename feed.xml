@@ -8,13 +8,55 @@
     <link>https://galaktionofff.github.io/</link>
     <description>Статьи о прагматичной ИИ-разработке, архитектуре автономных агентов и автоматизации в n8n</description>
     <language>ru</language>
-    <lastBuildDate>Wed, 14 Oct 2026 13:53:38 +0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 08:15:00 +0500</lastBuildDate>
     <atom:link href="https://galaktionofff.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://galaktionofff.github.io/images/gpt-starcraft-cheat/1.png</url>
       <title>Циничные строители</title>
       <link>https://galaktionofff.github.io/</link>
     </image>
+    <item>
+      <title>Банки сбрасывают долги дата-центров: почему эпоха дешёвых токенов подходит к концу</title>
+      <link>https://galaktionofff.github.io/articles/ai-debt-offload/</link>
+      <guid isPermaLink="true">https://galaktionofff.github.io/articles/ai-debt-offload/</guid>
+      <pubDate>Thu, 15 Oct 2026 08:15:00 +0500</pubDate>
+      <category>noindex</category>
+      <enclosure url="https://galaktionofff.github.io/images/ai-debt-offload/image1.png" type="image/png" length="1470622"/>
+      <content:encoded><![CDATA[<h1>Банки сбрасывают долги дата-центров: почему эпоха дешёвых токенов подходит к концу</h1>
+<p>Пока в сети спорят о качестве reasoning-моделей, на кредитном рынке тихо щелкнул выключатель.</p>
+<p>Все привыкли, что вычисления дешевеют по экспоненте, а видеокарты в облаке доступны по первому клику. Кажется, будто этот банкет бесконечно оплачивают сами бигтехи. Но в реальности эра копеечных токенов держалась на долговом плече: банки выдавали миллиардные кредиты под стройку дата-центров в расчете быстро перепродать эти обязательства инвесторам.</p>
+<p>И прямо сейчас эта схема начала буксовать.</p>
+<figure><img src="https://galaktionofff.github.io/images/ai-debt-offload/image1.png" width="800" alt="Wall Street financial district skyline transitioning into a massive industrial data center complex under cold steel-gray overcast lighting, holographic credit default bond charts glowing faint red in the foreground, 16:9, landscape" /><figcaption><em>Банки начали избавляться от долговых обязательств дата-центров, заподозрив охлаждение рынка.</em></figcaption></figure>
+<h2>Цифры охлаждения: как захлебнулся кредитный конвейер</h2>
+<p>Смотрите, как это выглядит на цифрах, которые зафиксировали аналитики Morgan Stanley:</p>
+<ul>
+<li>В сентябре технологические компании привлекли по миру всего <strong>$23 млрд</strong> AI-связанного долга — меньше половины от августовского объёма.</li>
+<li>Это продолжение крутого спада с июня, когда был зафиксирован исторический рекорд: <strong>$113 млрд</strong> на инфраструктуру и чипы.</li>
+<li>На рынке первоклассных корпоративных облигаций США (investment-grade) размещения под AI в сентябре <strong>остановились полностью</strong>, хотя с января по август техгиганты заняли около <strong>$306 млрд</strong>.</li>
+</ul>
+<p>Спад с пиковых $113 млрд до $23 млрд и пауза в облигациях — жесткий сигнал: долговой рынок уперся в лимиты.</p>
+<h2>В чём логика: почему банки избавляются от займов</h2>
+<p>В <a href="https://startupfortune.com/banks-are-now-trying-to-offload-the-ai-data-center-debt-they-just-underwrote/" target="_blank" rel="noopener">разборе Startup Fortune</a> вскрыта механика: банки вроде JPMorgan и MUFG финансировали стройки дата-центров в расчете быстро сбыть облигации инвесторам.</p>
+<p>Но инвесторы засомневались в быстрой окупаемости мегаваттных строек. Спрос на бумаги падает, а банки уперлись во внутренние лимиты: держать десятки миллиардов кредитов на одном секторе запрещают регуляторы и риск-контроль.</p>
+<p>Чтобы освободить балансы, банки сбрасывают риски через сделки передачи риска (significant risk transfers) и продают доли займов фондам с дисконтом. Финансисты спешат избавиться от горячих бумаг, пока рынок не осознал реальную цену возврата инвестиций.</p>
+<figure><img src="https://galaktionofff.github.io/images/ai-debt-offload/image2.png" width="800" alt="Isometric financial trading terminal showing declining bond curves, dark matte interface with glowing numbers &quot;$23B&quot; and &quot;$113B&quot; on screen, cold architectural concrete background, 16:9, landscape" /><figcaption><em>За четыре месяца объём привлечения долга под инфраструктуру упал со $113 млрд до $23 млрд.</em></figcaption></figure>
+<h2>Иллюзия вечной субсидии: что это меняет для инженеров</h2>
+<p>Казалось бы, где кредитные маневры Уолл-стрит, а где независимый разработчик или соло-фаундер?</p>
+<p>Связь прямая: экономика доступного ИИ держится на чужих займах.</p>
+<p>Когда провайдеры отдают API за центы, а облака сдают GPU по промо-тарифам, эту разницу компенсировал дешевый кредит. Как только заемные деньги дорожают, а банки перекрывают кран, субсидии тают.</p>
+<p>Главный поинт, который стоит понять: если экономика сервиса завязана на бесконечное удешевление вычислений, вы строите бизнес на чужом долге. Рано или поздно вендорам придется показывать чистую прибыль, и реальный счет за инференс выставят вам.</p>
+<figure><img src="https://galaktionofff.github.io/images/ai-debt-offload/image3.png" width="800" alt="Split concept art: on the left an industrial hyperscale data center in deep shadow; on the right a compact independent local server rig on an engineer desk glowing calm neon cyan, 16:9, landscape" /><figcaption><em>Автономия от облаков: локальные мощности становятся базовой страховкой от роста тарифов.</em></figcaption></figure>
+<h2>Прагматичная страховка: три правила для своего стека</h2>
+<p>Я смотрю на этот разворот с трезвым расчетом: инженерам пора переходить к защитной архитектуре.</p>
+<p>Держать в голове одну мысль: инфраструктурный суверенитет — это базовый риск-менеджмент.</p>
+<ol>
+<li><strong>Не завязывайте экономику на субсидированные API.</strong> Проверяйте модель на прочность: выживет ли продукт при росте стоимости вызова в два-три раза? Если маржа обнуляется — оптимизируйте логику до релиза.</li>
+<li><strong>Держите локальный фоллбек.</strong> Открытые модели на 8B параметров запускаются на собственном недорогом сервере и страхуют базовый функционал, если облачный вендор пересмотрит тарифы.</li>
+<li><strong>Режьте контекст на входе.</strong> Прогонять через тяжелую модель простыни сырых данных расточительно. Простой скрипт или регулярка отсекают 90% мусора до вызова нейросети.</li>
+</ol>
+<p>Кредитный пузырь вокруг дата-центров может сдуваться медленно, но сигнал подан. Выигрывает не тот, кто рассчитывал на вечную щедрость инвесторов, а тот, кто контролирует свой стек и себестоимость каждого запроса.</p>
+<p>А вы закладываете в свои проекты риск подорожания API и аренды видеокарт? Готовите запасной аэродром на локальных моделях или полагаетесь на облачные подписки? Делитесь опытом в комментариях.</p>]]></content:encoded>
+    </item>
     <item>
       <title>500 роликов без видеосетей: как связка Three.js и Claude ломает экономику контента</title>
       <link>https://galaktionofff.github.io/articles/threejs-claude-3d-factory/</link>
