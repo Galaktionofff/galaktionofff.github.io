@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>ИИ массово декомпилирует игры: почему это одновременно спасение софта и приговор закрытому коду</title>
+  <meta name="description" content="Нейросети научились восстанавливать исходный код игр за считанные дни: почему массовая декомпиляция возрождает старые проекты, но ставит крест на защите закрытых бинарников.">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/ai-decompiling-games/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>ИИ массово декомпилирует игры: почему это одновременно спасение софта и приговор закрытому коду</h1>
+      <div class="meta">15 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Привыкайте к мысли: любой скомпилированный бинарник, который вы отдали пользователю, больше вам не принадлежит.</p>
+
+      <p>В сообществе разработчиков обсуждают материал инди-разработчика Popcar: нейросети научились массово декомпилировать игры за считанные дни. На этот прецедент обратил внимание исследователь Саймон Уиллисон в своей <a href="https://simonwillison.net/2026/Oct/14/ai-is-mass-decompiling-games/" target="_blank" rel="noopener">заметке</a>, точно сформулировав суть: происходящее одновременно восхищает и пугает индустрию.</p>
+
+      <figure><img src="/images/ai-decompiling-games/img1.png" alt="Cybernetic retro game cartridge splitting open to reveal glowing lines of code and logic gates, dark background with orange rim light, 16:9, landscape" loading="lazy"><figcaption><em>ИИ научился восстанавливать исходный код игр из скомпилированных файлов за считанные дни.</em></figcaption></figure>
+
+      <h2>Бум сохранения: как ИИ возвращает нам купленные игры</h2>
+
+      <p>Начнём с базы. Декомпиляция — это обратная разработка: когда машинный бинарник из нулей и единиц восстанавливают в читаемый код на C или C++.</p>
+
+      <p>Раньше ручная декомпиляция старой игры вроде Mario 64 занимала у энтузиастов годы побайтового ковыряния в дизассемблере. Теперь специализированные модели берут эту рутину на себя: закрытый бинарник за дни превращается в собираемый проект.</p>
+
+      <p>И здесь кроется колоссальный плюс. Корпорации массово закрывают цифровые магазины, глушат серверы и превращают купленные релизы в тыкву. Но декомпиляция ломает этот диктат: фанаты восстанавливают логику и переносят тайтлы на новое железо.</p>
+
+      <p>Чаще всего такие порты собирают в WebAssembly — формат, позволяющий запускать софт на C++ прямо в браузере без эмуляторов. Старые проекты оживают, обрастают фанатскими кроссоверами и работают на смартфонах. Пользователи впервые получают возможность реально владеть купленным софтом независимо от воли издателя.</p>
+
+      <h2>Конец эпохи закрытых бинарников</h2>
+
+      <p>Но тут есть один важный моментик, от которого бизнес бросает в холодный пот.</p>
+
+      <p>Если нейросеть разбирает сложный игровой движок со всей его физикой и сетевым стеком — она точно так же вскроет абсолютно ЛЮБОЙ софт.</p>
+
+      <p>В реале расклад такой: понятие «защиты исполняемого файла» обнулилось. Раньше автор закрывал коммерческий софт обфускацией и продавал лицензии. Теперь платное приложение, плагин или мобильный клиент можно за пару вечеров превратить в открытый исходный код против воли создателя.</p>
+
+      <p>Компании смогут потрошить продукты конкурентов и забирать закрытые алгоритмы. Остановить это некому: копирайт бессилен перед локальными моделями, а доказать факт заимствования логики невозможно. Индустрия софта стоит на пороге масштабного взрыва.</p>
+
+      <figure><img src="/images/ai-decompiling-games/img2.png" alt="Digital vault door shattered open with glowing code fragments dispersing into open space, dark minimal aesthetic, 16:9, landscape" loading="lazy"><figcaption><em>Любой скомпилированный бинарник теперь можно открыть и разобрать на алгоритмы без согласия автора.</em></figcaption></figure>
+
+      <h2>Слом шаблона: почему защита кода больше не работает</h2>
+
+      <p>О чём это говорит тем, кто строит цифровые продукты сегодня?</p>
+
+      <p>Среди инди-хакеров и vibe-кодеров жила иллюзия: главное — написать уникальную программу и спрятать её в бинарник.</p>
+
+      <p>Логика простая: эта иллюзия мертва. Когда код генерируется машинами за минуты и так же декомпилируется назад, сам исходник перестает быть активом. Секретный алгоритм на клиенте больше не защищает бизнес.</p>
+
+      <p>Ценность бесповоротно смещается в три точки:</p>
+
+      <ol>
+        <li><strong>Дистрибуция и доверие аудитории.</strong> Если ваш продукт скопируют за два дня, победит не тот, у кого код чище, а тот, у кого выстроена прямая доставка до пользователей.</li>
+        <li><strong>Серверный контур и живой стейт.</strong> Единственный рубеж обороны — выносить ключевую логику и данные на свои серверы. Клиентский код по умолчанию считается публичным.</li>
+        <li><strong>Скорость итераций.</strong> Копируются приёмы, а не скорость реакции. Пока конкуренты декомпилируют вашу прошлую версию, вы уже внедряете следующую.</li>
+      </ol>
+
+      <figure><img src="/images/ai-decompiling-games/img3.png" alt="Engineer sitting at dark terminal desk surrounded by modular clean cloud telemetry lines, focused atmospheric lighting, 16:9, landscape" loading="lazy"><figcaption><em>Ценность сместилась: софт защищает не закрытый файл, а серверная архитектура и дистрибуция.</em></figcaption></figure>
+
+      <h2>Что в сухом остатке</h2>
+
+      <p>Я смотрю на этот тренд без паники, но с трезвым расчётом.</p>
+
+      <p>С одной стороны, отрадно, что энтузиасты вырывают культурное наследие игр у корпораций, возвращая нам право на купленный софт. С другой стороны, безопасность через сокрытие бинарника умерла.</p>
+
+      <p>Если вы продаете софт, опираясь на закрытость скомпилированного кода — перестраивайте архитектуру. Держите ядро на бэкенде, вкладывайтесь в дистрибуцию, а клиентскую часть воспринимайте как открытую витрину. Других вариантов индустрия нам уже не оставит.</p>
+
+      <p>А как вы относитесь к массовой декомпиляции: это победа цифровой свободы или смертельная угроза для независимых разработчиков? Защищаете ли вы свои клиенты или уже смирились с неизбежным? Делитесь в комментариях.</p>
+    </article>
+  </div>
+</body>
+</html>
