@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Порог полезности: когда ИИ-агенты реально начнут экономить нам время</title>
+  <meta name="description" content="Понятие «порог полезности» (threshold of usefulness) от OpenAI: почему умение агента всё ещё не гарантирует экономию времени и как выстраивать контрольные точки вместо запретов.">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Порог полезности: когда ИИ-агенты реально начнут экономить нам время</h1>
+      <div class="meta">15 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Сколько раз вы ловили себя на мысли, что проще сделать задачу руками, чем двадцать минут настраивать промпт агенту, а потом перепроверять за ним каждую строчку?</p>
+
+      <p>Каждый релиз встречают восторгами: нейросети пишут код, собирают данные и рассуждают. Но в боевом пайплайне энтузиазм гаснет: модель умеет многое, только времени на контроль уходит больше, чем если задачу закрыть без неё.</p>
+
+      <figure><img src="../../images/agent-usefulness-threshold/1.png" alt="Modern minimalist developer workspace, glowing terminal screen showing agent reasoning trace beside a clean graphic threshold line, cyan and amber rim light, 16:9, landscape" loading="lazy"><figcaption><em>Точка отсечения: агент приносит пользу только тогда, когда валидация результата не отнимает больше времени, чем ручная работа.</em></figcaption></figure>
+
+      <h2>Порог полезности: не «что умеет модель», а «сколько времени бережёт»</h2>
+
+      <p>На конференции AI Engineer NYC в Нью-Йорке Джозеф Ким, глава ChatGPT для финансовых сервисов в OpenAI, ввёл понятие <strong>«порог полезности» (threshold of usefulness)</strong>: «точка, где модель становится достаточно способной и надёжной, чтобы экономить тебе время».</p>
+
+      <p>Ключевая деталь — в надёжности. Индустрия привыкла мерить ИИ рекордами в бенчмарках. Но в работе важен не разовый пик, а стабильность. Если агент ошибается в трёх случаях из десяти, порог не пройден: придётся проверять все десять ответов. Вместо экономии вы получаете роль уставшего ревьюера.</p>
+
+      <p>Для солопренёра и инженера это тот же фильтр: не «умеет ли модель», а «достаточно ли она надёжна, чтобы сберечь моё время».</p>
+
+      <h2>Финансовый стек как полигон: зачем OpenAI и Anthropic смотрят на Уолл-стрит</h2>
+
+      <p>Показательно, что на AI Engineer NYC и OpenAI, и Anthropic строили ключевые доклады вокруг финансового сектора. Anthropic показывала, как строит современный AI-стек финансовых сервисов. А Джозеф Ким из OpenAI дал прогноз на 2027 год: финансовая индустрия будет меньше полагаться на Excel и PowerPoint, а агенты станут достаточно хороши для генерации инвестиционных идей и трейдинга.</p>
+
+      <p>Как отмечается в <a href="https://www.latent.space/p/crossing-the-threshold" target="_blank" rel="noopener">разборе Latent Space</a>, финансы выбраны не случайно — это предельно жесткий полигон.</p>
+
+      <p>Идея такая: цена ошибки здесь измеряется деньгами, а регуляторы исключают галлюцинации. Если агент научится стабильно вести финансовые операции, он перешагнет порог полезности и в остальных задачах автоматизации.</p>
+
+      <figure><img src="../../images/agent-usefulness-threshold/2.png" alt="High-tech financial analytics screens with structured ledger nodes and telemetry trails, dark graphite background, subtle emerald glow, 16:9, landscape" loading="lazy"><figcaption><em>Уолл-стрит стала главным стресс-тестом для агентов: цена стохастической ошибки здесь исключает слепую веру в автономию.</em></figcaption></figure>
+
+      <h2>Слом шаблона: где ставить контрольные точки, а не сколько плодить запретов</h2>
+
+      <p>Главной темой конференции стал баланс автономии агентов и безопасности.</p>
+
+      <p>Первый порыв при сбоях ИИ — обложить его инструкциями и запретами. Но частокол запретов лишь делает модель беспомощной.</p>
+
+      <p>Главный урок AI Engineer NYC тоньше: безопасная автономия зависит от того, ГДЕ именно вы ставите контролы и человеческое суждение, а не от количества ограничений.</p>
+
+      <p>В чём прикол: агенту нужна свобода в поиске гипотез, анализе контекста и сборке черновиков. Но на развилках, где действие необратимо — списание денег, перезапись базы или деплой, — обязан стоять барьер подтверждения человеком.</p>
+
+      <p>Это не война инструментов, это разделение ролей. Собирая сценарии в n8n или терминале, я опираюсь ровно на это: не учить модель осторожности длинным промптом, а забрать у неё право финального клика в необратимых точках.</p>
+
+      <figure><img src="../../images/agent-usefulness-threshold/3.png" alt="Conceptual automated software pipeline with an illuminated human validation gateway, crisp neon blue vectors on dark background, 16:9, landscape" loading="lazy"><figcaption><em>Архитектурный рубеж: свобода поиска на входе и обязательный человеческий фильтр на необратимых действиях.</em></figcaption></figure>
+
+      <h2>Прагматика и ничего лишнего: как оценивать агентов на практике</h2>
+
+      <p>То есть ещё раз: ценность автоматизации заключается не в абстрактном умении модели, а в архитектуре контроля.</p>
+
+      <p>Если отбросить хайп, остаются три ориентира:</p>
+
+      <ol>
+        <li><strong>Быстро делать не равно быстро в реальности.</strong> Если генерация занимает секунды, а на отлов багов уходит два часа — порог полезности не пройден. Проще закрыть задачу руками.</li>
+        <li><strong>Точки валидации важнее промптов.</strong> Не надейтесь на сознательность нейросети. Определите фатальные узлы и вынесите туда аппрув человека.</li>
+        <li><strong>Надёжность бьёт эрудицию.</strong> Для рабочего пайплайна модель, выполняющая атомарный шаг со стабильностью 99%, полезнее флагмана с редкими озарениями.</li>
+      </ol>
+
+      <p>Пока одни ждут 2027 года и автономии в трейдинге, прагматичный подход прост: отдавайте агенту только те участки, где он уже сегодня бережёт время, и держите руку на рубильнике.</p>
+
+      <p>А на каких задачах в вашей практике агенты уже перешагнули порог полезности, а где проще сделать всё самому? Делитесь в комментариях, как вы выстраиваете контроль за нейросетями.</p>
+    </article>
+  </div>
+</body>
+</html>
