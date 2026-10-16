@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Софт забрали бесплатно, а компанию разорили: чему программистов учит дело «Омега Софт»</title>
+  <meta name="description" content="Разбор судебного дела «Омега Софт» против Транснефти: почему невыплата 24,7 млн рублей, списание гарантии и РНП стали жестким уроком для IT-студий и разработчиков.">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/transneft-software-case/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Софт забрали бесплатно, а компанию разорили: чему программистов учит дело «Омега Софт»</h1>
+      <div class="meta">16 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>Опасная иллюзия инженера — верить, что работающий софт защитит лучше юридических бумаг.</p>
+
+      <p>В сообществе разработчиков обсуждают <a href="https://habr.com/ru/articles/1095014/" target="_blank" rel="noopener">статью главы «Омега Софт» Алексея Рыбакова на Хабре</a>. Компания из Йошкар-Олы 15 лет создавала промышленный софт, но судебный спор по делу № А40-311087/2025 закончился катастрофой. Суд бесплатно передал готовую систему структурам Транснефти, оставил исполнителя без заработанных 24,7 млн рублей, взыскал независимую гарантию на 3,2 млн рублей и отправил компанию в РНП.</p>
+
+      <figure><img src="/images/transneft-software-case/1.png" alt="Developer before a massive corporate skyscraper, cold shadows, holographic contract with case number А40-311087/2025, cinematic 16:9 landscape" loading="lazy"><figcaption><em>Судебное решение по делу № А40-311087/2025 оставило разработчиков без софта, без оплаты и с волчьим билетом в реестре недобросовестных поставщиков.</em></figcaption></figure>
+
+      <h2>Ловушка чужой инфраструктуры: как ожидание превращается в просрочку</h2>
+
+      <p>Для меня этот кейс стал отрезвляющим уроком. Конфликт возник вокруг внедрения: по версии исполнителя, службы заказчика 7 месяцев не могли настроить свои серверы для установки софта.</p>
+
+      <p>Вроде казалось бы, но отнюдь: если клиент затягивает подготовку площадки, исполнитель ждет сдвига дедлайна. Команда терпеливо ждет доступа, помогает чужим инженерам и верит в партнерство.</p>
+
+      <p>Но в суде человеческого фактора нет. Пока разработчик ждет серверы без официального уведомления о приостановке работ, договорной таймер тикает против него. Срок истек — корпорация заявляет о срыве обязательств. Доказать на словах, что виновата чужая инфраструктура, задним числом невозможно.</p>
+
+      <h2>Независимая гарантия и передача прав: механизмы финансовой петли</h2>
+
+      <p>Где тут потерянные деньги: помимо невыплаченных 24,7 млн рублей за проект, по компании ударила независимая гарантия.</p>
+
+      <p>Прикол в том, что многие считают гарантию формальностью для участия в конкурсе. На деле это капкан. Банк выплачивает деньги заказчику по первому требованию — без суда, экспертиз и выяснения виновных. Заказчик забрал 3,2 млн рублей, а банк списал их с разработчика.</p>
+
+      <p>Вторая угроза типовых договоров — момент отчуждения прав. Если в контракте переход прав зафиксирован при передаче исходников или промежуточного акта, исполнитель теряет рычаг влияния. Код официально становится чужим, а вопрос оплаты зависает в судах.</p>
+
+      <figure><img src="/images/transneft-software-case/2.png" alt="Isometric dark digital vault, severed glowing cables, lock on blueprints, holographic numbers 24,7 млн ₽ and 3,2 млн ₽ under legal seizure, 16:9 landscape" loading="lazy"><figcaption><em>Финансовый капкан: безусловное списание гарантии и безвозмездный переход прав на кодовую базу лишают разработчика всех рычагов защиты.</em></figcaption></figure>
+
+      <h2>Реестр недобросовестных поставщиков: почему добросовестность не спасает</h2>
+
+      <p>Внесение в РНП — сокрушительный удар. Для небольшой IT-команды это смерть бизнеса.</p>
+
+      <p>Запись в реестре закрывает доступ к государственным закупкам и контрактам корпораций. Банки отзывают кредитные лимиты, а партнеры разрывают сотрудничество из-за токсичного статуса. Это волчий билет, обнуляющий репутацию за один день.</p>
+
+      <p>Разница не в таланте, а в системе: суд оценивает не изящество архитектуры и не коммиты в git. Судья смотрит на регистрационные штампы документов. Если инженер понадеялся на переписку и не оформил приостановку работ из-за чужих серверов, правовая машина перемалывает его без колебаний.</p>
+
+      <figure><img src="/images/transneft-software-case/3.png" alt="Courtroom bench crossed with a dark server terminal, wooden gavel striking a holographic contract, blue status lines, 16:9 landscape" loading="lazy"><figcaption><em>В судебном процессе решающее значение имеют не строчки в git-логе, а строгая бумажная фиксация каждого шага взаимодействия.</em></figcaption></figure>
+
+      <h2>Защитный протокол: выводы для солопренёров и небольших команд</h2>
+
+      <p>Я смотрю на этот случай как на жесткий урок. Сегодня благодаря ИИ-ассистентам даже соло-разработчики закрывают задачи масштаба отделов. Но чем крупнее клиент, тем опаснее иллюзия простого партнерства.</p>
+
+      <p>Вывод простой: инженерное мастерство бессильно без правовой защиты. Работая с корпоративными клиентами, держите твердые правила:</p>
+
+      <ul>
+        <li>Не передавайте исключительные права на код до поступления полной оплаты на счет.</li>
+        <li>Закладывайте сумму независимой гарантии как риск прямого списания.</li>
+        <li>При любой задержке серверов или доступов со стороны заказчика сразу оформляйте официальную приостановку работ письмом под входящий номер.</li>
+      </ul>
+
+      <p>Когда против вас играет корпоративный каток, спасает не добросовестность, а вовремя подписанные бумаги.</p>
+
+      <p>Случались ли у вас конфликты с клиентами из-за неготовности их инфраструктуры? Как вы защищаете права на код в договорах? Делитесь в комментариях.</p>
+    </article>
+  </div>
+</body>
+</html>
