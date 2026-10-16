@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>«Social vibe coding» от Bluesky: софт становится одноразовым контентом — выводы для солопренёров</title>
+  <meta name="description" content="Bluesky расширил ИИ-инструмент Attie для генерации соц-приложений и сайтов по промпту. Разбираем концепцию social vibe coding, феномен одноразового софта и выводы для соло-разработчиков.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="«Social vibe coding» от Bluesky: софт становится одноразовым контентом — выводы для солопренёров">
+  <meta property="og:description" content="Bluesky расширил ИИ-инструмент Attie для генерации соц-приложений и сайтов по промпту. Разбираем концепцию social vibe coding, феномен одноразового софта и выводы для соло-разработчиков.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/bluesky-attie-social-vibe-coding/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/bluesky-attie-social-vibe-coding/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/bluesky-attie-social-vibe-coding/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>«Social vibe coding» от Bluesky: софт становится одноразовым контентом — выводы для солопренёров</h1>
+      <div class="meta">16 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+      <p>До сих пор вайб-кодинг оставался делом разработчиков: мы спорили о контексте, гоняли генерацию в терминале и скармливали моделям спецификации.</p>
+
+      <p>15 октября на конференции TechCrunch Disrupt глава Bluesky Тони Шнайдер показал следующий шаг. Соцсеть расширила ИИ-инструмент Attie: теперь любой пользователь может ввести текстовый запрос и за пару минут получить работающее приложение — игру, опрос или дашборд со своим сайтом.</p>
+
+      <figure><img src="/images/bluesky-attie-social-vibe-coding/img1.png" alt="Интерфейс социальной сети Bluesky с логотипом в виде синей бабочки, окно текстового промпта Attie преобразуется в интерактивный сайт с опросом и отдельным адресом URL 16:9" loading="lazy"><figcaption><em>Генератор Attie превращает текстовый запрос пользователя в отдельный сайт с интерактивным приложением за несколько минут.</em></figcaption></figure>
+
+      <h2>От алгоритмических фидов к собственным сайтам: что показал Bluesky</h2>
+
+      <p>Инструмент Attie запустился ранее в 2026 году и изначально помогал собирать персональные алгоритмические ленты в Bluesky по текстовым подсказкам.</p>
+
+      <p>Теперь функционал расширили до микро-приложений. Как <a href="https://techcrunch.com/2026/10/15/bluesky-expands-its-ai-powered-attie-app-to-let-anyone-build-websites-games-and-more/" target="_blank" rel="noopener">сообщил TechCrunch</a>, Тони Шнайдер назвал концепцию «social vibe coding» — вайб-кодинг для сообщества. Пользователь описывает идею словами, а система разворачивает интерактивный сервис на поддомене attie.site.</p>
+
+      <p>Для демонстрации показали опрос о предпочтениях между <a href="https://whisking-humble-garden.attie.site/" target="_blank" rel="noopener">Pokémon Red и Blue</a>, созданный за пару минут. В каталоге на <a href="https://humming-loyal-zeppelin.attie.site/" target="_blank" rel="noopener">сайте Attie</a> уже лежат примеры: мини-игры, калькуляторы и дашборды.</p>
+
+      <p>В чём прикол: человеку больше не нужно открывать IDE, настраивать хостинг или возиться с DNS. Софт становится быстрым высказыванием, вроде поста или мема.</p>
+
+      <h2>Эволюция софта: когда код становится расходным материалом</h2>
+
+      <p>О чём это говорит? Граница между разработчиком и пользователем соцсети стирается.</p>
+
+      <p>В реале расклад такой: раньше интерактивный опрос требовал конструктора форм либо навыков верстки. Разработчики строили продукты вокруг простых утилит: генераторов паролей, конвертеров валют и опросников.</p>
+
+      <p>Когда соцсеть встраивает генератор софта прямо в ленту, ценность изолированного микрокода обнуляется. Зачем идти на сторонний сайт, если утилиту можно собрать под конкретное обсуждение за пару минут?</p>
+
+      <p>Логика простая: софт переходит в категорию одноразового контента. Его создают ради одного повода, используют внутри комьюнити и забывают.</p>
+
+      <figure><img src="/images/bluesky-attie-social-vibe-coding/img2.png" alt="Экран сравнения двух подходов: слева сложная схема развертывания сервера с таймером на 40 часов, справа текстовая строка запроса со стрелкой к готовому сайту за 3 минуты 16:9" loading="lazy"><figcaption><em>Разница в скорости: развертывание базового веб-инструмента сократилось с десятков часов инженерного труда до трехминутного промпта.</em></figcaption></figure>
+
+      <h2>Слом шаблона: в чём настоящая ценность продукта</h2>
+
+      <p>Меня в релизе зацепила реакция индустрии: многие сочли анонс очередной забавой с покемонами.</p>
+
+      <p>Но есть подвох: для тех, кто строит цифровые продукты в одиночку, игнорировать этот сдвиг опасно.</p>
+
+      <p>Рычаг роста не в генерации кода, а в дистрибуции и удержании внимания. Доступ к интерфейсам стал массовым. То, что недавно продавалось как микро-SaaS за $15 в месяц, теперь собирается обычным пользователем за пару кликов.</p>
+
+      <p>И тут самое интересное: иллюзия того, что знание синтаксиса гарантирует выживание проекта, рухнула. Если вся суть сервиса сводится к форме ввода и выводу текста, платформы съедят его мгновенно.</p>
+
+      <p>Конкурентное преимущество уходит в глубину: надежные базы данных, очереди, интеграция с инфраструктурой и валидация данных. Пользователю нужен рабочий процесс, а не одноразовая страница.</p>
+
+      <figure><img src="/images/bluesky-attie-social-vibe-coding/img3.png" alt="Инженер на фоне многослойной архитектурной диаграммы с защищенными базами данных и внешними шлюзами, контрастирующей с плоской поверхностью простого сайта 16:9" loading="lazy"><figcaption><em>Реальный барьер для конкуренции: надежная инженерная обвязка и глубокая логика бэкенда вместо поверхностной генерации интерфейсов.</em></figcaption></figure>
+
+      <h2>Практический вывод для солопренёров: как использовать тренд</h2>
+
+      <p>Я смотрю на кейс Bluesky без паники, но с четким расчётом. «Social vibe coding» — индикатор смены привычек аудитории.</p>
+
+      <p>Что в сухом остатке:</p>
+
+      <p>Во-первых, не тратьте недели на полировку примитивных интерфейсов. Если нужно проверить идею «об рынок» сырым приложением — используйте генераторы и проверяйте гипотезу сразу. Скорость проверки спроса решает всё.</p>
+
+      <p>Во-вторых, уходите от поверхностных утилит к системной автоматизации. Устойчивость продукта лежит там, где данные связываются между сервисами и сохраняются в надежных хранилищах.</p>
+
+      <p>Держать в голове одну мысль: код стал дешевым, архитектура и дистрибуция стали бесценными. Пользуйтесь скоростью генераторов, но стройте фундамент там, куда соцсети не дотянутся.</p>
+
+      <p>А как вы относитесь к идее «социального вайб-кодинга»: видите ли в этом будущее интерфейсов или считаете одноразовые приложения временным хайпом? Делитесь мнением в комментариях.</p>
+    </article>
+  </div>
+</body>
+</html>
