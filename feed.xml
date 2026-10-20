@@ -16,6 +16,48 @@
       <link>https://galaktionofff.github.io/</link>
     </image>
     <item>
+      <title>KiviDB: Rust‑база‑данных, совместимая с Redis, вдвое ускоряет кеш‑pipeline</title>
+      <link>https://galaktionofff.github.io/articles/kividb-rust-redis/</link>
+      <guid isPermaLink="true">https://galaktionofff.github.io/articles/kividb-rust-redis/</guid>
+      <pubDate>Tue, 20 Oct 2026 10:20:00 +0000</pubDate>
+      <category>noindex</category>
+      <enclosure url="https://galaktionofff.github.io/images/kividb-rust-redis/img1.png" type="image/png" length="1177989"/>
+      <description>Сравнительная графика: KiviDB вытягивает 21,2 млн ops/sec, в то время как Dragonfly — 9,1 млн, а Redis 2,4 млн.</description>
+      <content:encoded><![CDATA[<h2>Хук</h2>
+<p>С начала февраля 2026 года один соло‑разработчик запустил проект, который обещает вдвое увеличить эффективность Redis‑кэша без изменения протокола. Показатели сразу бросаются в глаза: 21,2 млн ops/sec‑ов на pipeline‑запросах. <a href="https://github.com/kividbio/kividb">GitHub‑репозиторий проекта</a>.</p>
+<figure><img src="https://galaktionofff.github.io/images/kividb-rust-redis/img1.png" alt="Диаграмма сравнения KiviDB, Dragonfly и Redis по ops/sec на GET‑pipeline 16" loading="lazy"><figcaption><em>Сравнительная графика: KiviDB вытягивает 21,2 млн ops/sec, в то время как Dragonfly — 9,1 млн, а Redis 2,4 млн.</em></figcaption></figure>
+<p><em>Сравнительная графика: KiviDB вытягивает 21,2 млн ops/sec, в то время как Dragonfly — 9,1 млн, а Redis 2,4 млн.</em></p>
+<h2>Архитектура и идеи</h2>
+<p>KiviDB построена на Rust и заимствует лучшие практики из проектов Garnet и Dragonfly. Ключевое пространство шардировано по потокам, а многопоточность реализована через <code>tokio_uring</code> для Linux‑систем, а <code>tokio‑fallback</code> — для остальных ОС. Поддержка RESP‑2 и RESP‑3 покрывает ≈ 98‑99 % команд Redis 8.10; проблемные команды отмечены в <a href="https://github.com/kividbio/kividb/issues">issues GitHub‑репозитория</a>.</p>
+<figure><img src="https://galaktionofff.github.io/images/kividb-rust-redis/img2.png" alt="Схема шардирования ключей по потокам в KiviDB, с подсветкой io_uring" loading="lazy"><figcaption><em>Схема: потоки обслуживают отдельные шард‑диапазоны, ускоряя доступ через io_uring.</em></figcaption></figure>
+<p><em>Схема: потоки обслуживают отдельные шард‑диапазоны, ускоряя доступ через io_uring.</em></p>
+<h2>Бенчмарк — где «окна» закрыты</h2>
+<p>Тесты проводились на двух c7gn.metal серверов в us‑east1, 32‑ядерных, с memtier‑benchmark, 10 млн ключей по 100 B. При pipeline‑16 GET KiviDB — 21,2 M ops/sec, Dragonfly — 9,1 M, Redis 8.10 — 2,4 M, Redis Cluster (32 шарда) — 4,7 M. Честный факт: без pipeline Dragonfly слегка опережает KiviDB (3,35 M vs 3,07 M), а потребление памяти на ключ у KiviDB — 177 B, у Dragonfly — 134 B, у Redis — 178 B. </p>
+<figure><img src="https://galaktionofff.github.io/images/kividb-rust-redis/img3.png" alt="Таблица результатов benchmark с колонками KiviDB, Dragonfly, Redis, Redis Cluster" loading="lazy"><figcaption><em>Таблица: KiviDB выигрывает в pipeline‑нагрузке, но уступает Dragonfly в одиночных запросах и слегка уступает в экономии памяти.</em></figcaption></figure>
+<p><em>Таблица: KiviDB выигрывает в pipeline‑нагрузке, но уступает Dragonfly в одиночных запросах и слегка уступает в экономии памяти.</em></p>
+<h2>Открытый код и сервис‑оболочка</h2>
+<p>Ядро KiviDB лицензировано под AGPL‑v3, а вокруг него уже развернут Managed‑сервис на AWS/GCP/Azure (доменные имена kividb.io). Автор открыто признаёт, что UI‑часть выглядит как «AI slop», но она полностью работоспособна. При разработке активно использовался Claude для ускорения прототипа, однако основные архитектурные решения принимались вручную — пример «solo + AI против большого продукта».</p>
+<h2>Практический смысл для читателя</h2>
+<ul>
+<li><strong>Векторный кэш для RAG</strong> — KiviDB умеет хранить эмбеддинги и отдавать их по ключу без пересчёта, что ускоряет Retrieval‑Augmented Generation.</li>
+<li><strong>Без смены протокола</strong> — полностью совместим с существующим кодом, использующим <code>redis-py</code>, <code>ioredis</code> и <code>redis-cli</code>.</li>
+<li><strong>Пайплайн‑нагрузки</strong> — типичные сценарии кэша и инференс‑слоёв (многократный GET в одном запросе) дают ≈ 9× прирост производительности.</li>
+</ul>
+<h2>Как это выглядит в реальном проекте?</h2>
+<p>Кратко: возьмите стандартный <code>redis</code>‑клиент, поменяйте хост на <code>kividb.io:6379</code>, включите <code>RESP3</code> и получите мгновенный прирост. Технические детали и разборы похожих инструментов собраны в <a href="t.me/galaktionov_hub?start=dzen">моём Telegram-канале</a>.</p>
+<h2>CTA</h2>
+<p>Как вы относитесь к переходу от привычного Redis к Rust‑решениям вроде KiviDB? Делитесь опытом в комментариях.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram @galaktionov_hub. Подписаться: t.me/galaktionov_hub?start=dzen</p>
+<hr />
+<h3>Варианты заголовка (для отчёта)</h3>
+<ol>
+<li>KiviDB — Rust‑база, совместимая с Redis, ускоряет кеш‑pipeline в 2 раза</li>
+<li>Как соло‑разработчик вывел Redis‑кеш в перед сверхбыстрого Rust‑сервиса KiviDB</li>
+<li>KiviDB от kividbio: честный разбор производительности Redis‑совместимой СУБД на Rust</li>
+</ol>]]></content:encoded>
+    </item>
+    <item>
       <title>Сайты закрывают двери для ИИ-агентов: почему бесплатный веб для автоматизации закончился</title>
       <link>https://galaktionofff.github.io/articles/sites-block-ai-agents/</link>
       <guid isPermaLink="true">https://galaktionofff.github.io/articles/sites-block-ai-agents/</guid>
