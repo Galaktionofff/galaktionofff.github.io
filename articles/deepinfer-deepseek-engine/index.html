@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Удар по ценам OpenAI: как DeepInfer выдаёт 155 трлн токенов в сутки на открытом коде</title>
+  <meta name="description" content="А затем команда DeepSeek выкатывает в открытый доступ инференс-движок DeepInfer вместе с моделью DeepSeek V4.1 Flash под свободной лицензией MIT.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Удар по ценам OpenAI: как DeepInfer выдаёт 155 трлн токенов в сутки на открытом коде">
+  <meta property="og:description" content="А затем команда DeepSeek выкатывает в открытый доступ инференс-движок DeepInfer вместе с моделью DeepSeek V4.1 Flash под свободной лицензией MIT.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/deepinfer-deepseek-engine/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/deepinfer-deepseek-engine/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/deepinfer-deepseek-engine/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Удар по ценам OpenAI: как DeepInfer выдаёт 155 трлн токенов в сутки на открытом коде</h1>
+      <div class="meta">21 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Удар по ценам OpenAI: как DeepInfer выдаёт 155 трлн токенов в сутки на открытом коде</h1>
+<p>Американские лаборатории годами приучали нас, что мощный ИИ обязан стоить дорого. Нам продавали подписки по двадцать долларов, выставляли счета на тысячи за API и уверяли, что порог входа исчисляется миллиардами.</p>
+<p>А затем команда DeepSeek выкатывает в открытый доступ инференс-движок DeepInfer вместе с моделью DeepSeek V4.1 Flash под свободной лицензией MIT.</p>
+<figure><img src="/images/deepinfer-deepseek-engine/img1.png" alt="Массивный серверный кластер с открытым исходным кодом вытесняет закрытые монолитные облака, рядом светящиеся цифры 155 трлн токенов" loading="lazy"><figcaption><em>Открытый фреймворк DeepInfer разгоняет кластер до 155 триллионов токенов в сутки, превращая вычисления в общедоступный ресурс.</em></figcaption></figure>
+<p><em>Открытый фреймворк DeepInfer разгоняет кластер до 155 триллионов токенов в сутки, превращая вычисления в общедоступный ресурс.</em></p>
+<h2>Маркетинг закрытых гигантов против математики MoE</h2>
+<p>Главный поинт, который стоит понять: бизнес закрытых вендоров держится на высокой маржинальности вычислений. Когда разработчик платит от $3 до $15 за миллион токенов reasoning-моделей, он спонсирует штат сейлзов и раздутые оценки фондов.</p>
+<p>Но тут есть один важный моментик: модель DeepSeek V4.1 Flash построена на архитектуре Mixture of Experts (MoE). На бумаге у неё 552 миллиарда параметров и контекст в 1 миллион токенов. Однако при запросе активируются всего 16 миллиардов весов.</p>
+<p>Дёргает только нужное: роутер распределяет токены по узким экспертным блокам. Вы получаете кругозор огромной сети, но платите за вычислительные ресурсы компактной модели.</p>
+<p>Связанные материалы и разборы — <a href="t.me/galaktionov_hub?start=dzen">здесь</a>.</p>
+<h2>Анатомия DeepInfer: как выжать 155 трлн токенов в сутки</h2>
+<p>Но выпустить веса — это половина дела. Затык всегда прятался в софте обслуживания запросов. Если поднять тяжелую сеть на стандартных библиотеках, видеопамять захлебнётся, а задержка улетит в космос.</p>
+<p>Для решения этой задачи инженеры создали собственный стек, выложенный <a href="https://github.com/deepseek-ai/DeepInfer">в репозитории DeepInfer на GitHub</a>.</p>
+<p>Смотрите, как это выглядит на цифрах:
+* <strong>155 триллионов токенов в сутки</strong> — суммарная пропускная способность кластера под DeepInfer.
+* <strong>$38 на ускоритель в час</strong> — операционная выручка дата-центра при минимальных офф-пиковых тарифах.
+* <strong>$0.15 за миллион входных токенов</strong> во внепиковые часы ($0.30 в пике) и $0.60 за генерацию — цены, делающие закрытые API бессмысленными.
+* <strong>Лицензия MIT</strong> — карт-бланш на коммерческий запуск на собственном железе.</p>
+<p>Фреймворк пересобирает параллелизм тензоров и кэш внимания. Система распределяет экспертов по узлам и убирает простой чипов.</p>
+<p>Контекст события и выводы — <a href="t.me/galaktionov_hub?start=dzen">в Telegram</a>.</p>
+<figure><img src="/images/deepinfer-deepseek-engine/img2.png" alt="Архитектурная схема маршрутизации токенов через активные экспертные блоки MoE на фоне серверов с индикаторами пиковой нагрузки" loading="lazy"><figcaption><em>Маршрутизация 16 миллиардов активных параметров из 552 доступных позволяет удерживать высокую скорость генерации при минимальных затратах.</em></figcaption></figure>
+<p><em>Маршрутизация 16 миллиардов активных параметров из 552 доступных позволяет удерживать высокую скорость генерации при минимальных затратах.</em></p>
+<h2>Почему закрытые API теряют монополию</h2>
+<p>Информация возникает там, где есть разница. Пока корпорации защищают монополию закрытыми шлюзами, открытый сегмент превращает интеллект в копеечный ресурс.</p>
+<p>Когда мы связываем агентные цепочки через Hermes или терминалы Antigravity, главная статья расходов — это бесконечные вызовы LLM. Стоит запустить пайплайн в n8n на парсинг документов, и счёт за API испаряет бюджет.</p>
+<p>Инструменты вроде DeepInfer меняют правила для разработчиков:
+1. <strong>Автономия от чужих ценников.</strong> Можно поднять собственный кластер или арендовать мощности у независимых провайдеров, не оглядываясь на корпорации.
+2. <strong>Нулевой риск блокировок.</strong> Закрытый вендор может заблокировать аккаунт или перекрыть доступ. Свой стек забрать невозможно.
+3. <strong>Экономика агентов сходится.</strong> Когда миллион токенов стоит центы, агенты могут гонять сотни проверок без страха обнулить карту.</p>
+<p>Об этом событии я разбираю подробнее — <a href="t.me/galaktionov_hub?start=dzen">в канале</a>.</p>
+<figure><img src="/images/deepinfer-deepseek-engine/img3.png" alt="Сравнительный график стоимости миллиона токенов и индикатор стабильной независимой инфраструктуры" loading="lazy"><figcaption><em>Снижение стоимости инференса на порядок открывает дорогу масштабным автономным пайплайнам без привязки к корпоративным облакам.</em></figcaption></figure>
+<p><em>Снижение стоимости инференса на порядок открывает дорогу масштабным автономным пайплайнам без привязки к корпоративным облакам.</em></p>
+<h2>Что в сухом остатке</h2>
+<p>Меня зацепил этот релиз тем, насколько хладнокровно он сбивает спесь с венчурного пузыря. Я считаю, что переплата за закрытые алгоритмы уходит в прошлое. Когда открытый фреймворк выдаёт 155 триллионов токенов в сутки на честном опенсорсе, инвесторам сложно объяснять миллиардные оценки.</p>
+<p>Будущее автоматизации принадлежит тем, кто строит дешёвую инфраструктуру вокруг открытого кода.</p>
+<p>А на чём крутятся ваши пайплайны: платите за закрытые API или переводите нагрузки на открытые модели? Напишите в комментариях, как вы оптимизируете расходы на токены.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram: <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a> — <a href="https://t.me/galaktionov_hub?start=dzen">подписаться</a></p>
+    </article>
+  </div>
+</body>
+</html>
