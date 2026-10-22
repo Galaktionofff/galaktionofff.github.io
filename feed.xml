@@ -8,13 +8,61 @@
     <link>https://galaktionofff.github.io/</link>
     <description>Статьи о прагматичной ИИ-разработке, архитектуре автономных агентов и автоматизации в n8n</description>
     <language>ru</language>
-    <lastBuildDate>Thu, 22 Oct 2026 05:30:47 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 17:33:35 GMT</lastBuildDate>
     <atom:link href="https://galaktionofff.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://galaktionofff.github.io/images/gpt-starcraft-cheat/1.png</url>
       <title>Циничные строители</title>
       <link>https://galaktionofff.github.io/</link>
     </image>
+    <item>
+      <title>Бэкдор в шлюзе нейросетей: как образ LiteLLM украл ключи от OpenAI и Claude</title>
+      <link>https://galaktionofff.github.io/articles/litellm-docker-backdoor-keys/</link>
+      <guid isPermaLink="true">https://galaktionofff.github.io/articles/litellm-docker-backdoor-keys/</guid>
+      <pubDate>Thu, 22 Oct 2026 10:20:00 +0000</pubDate>
+      <category>noindex</category>
+      <enclosure url="https://galaktionofff.github.io/images/litellm-docker-backdoor-keys/img1.png" type="image/png" length="1556096"/>
+      <description>22 октября 2026 года порядок рухнул: релиз LiteLLM 1.107.0 на PyPI и в Docker Hub вышел со встроенным стилером и RAT-бэкдором.</description>
+      <content:encoded><![CDATA[<h1>Бэкдор в шлюзе нейросетей: как образ LiteLLM украл ключи от OpenAI и Claude</h1>
+<p>Шлюз LiteLLM годами считался базовым решением: единая точка входа к сотне моделей, ротация токенов и self-hosting. Инструмент поднимали в Docker, отдавали рабочие ключи от OpenAI, Claude и Gemini, а сверху вешали Watchtower для автообновлений.</p>
+<p>22 октября 2026 года порядок рухнул: релиз LiteLLM 1.107.0 на PyPI и в Docker Hub вышел со встроенным стилером и RAT-бэкдором.</p>
+<figure><img src="https://galaktionofff.github.io/images/litellm-docker-backdoor-keys/img1.png" alt="Белый серверный модуль с расколотым защитным замком и потоками уходящих данных в платформу" loading="lazy"></figure>
+<p><em>Официальные образы популярного шлюза для нейросетей вышли со встроенным вредоносным кодом.</em></p>
+<h2>Взлом изнутри: как троян выпотрошил таблицу с ключами</h2>
+<p>Вредонос попал в официальный репозиторий litellm/litellm под плавающими тегами latest, main-latest и main-stable. Серверы с автоапдейтом затянули троян в прод без предупреждений.</p>
+<p>Атакующие внедрили код в механизм автозапуска Python sitecustomize. Контейнер активировал вредонос еще до старта сетевых служб.</p>
+<p>Скрипт лез напрямую в таблицу LiteLLM_CredentialsTable, где открыто лежат токены: мастер-ключи OpenAI, доступы к Anthropic, Vertex AI и AWS Bedrock. Заодно стилер выгребал переменные окружения, ключи SSH и токены Kubernetes.</p>
+<p>Связанные схемы я разбираю — <a href="https://t.me/galaktionov_hub?start=dzen">в канале</a>.</p>
+<h2>Почасовой опрос C2 и скрытые следы заражения</h2>
+<p>Кражей ключей дело не ограничилось. В контейнере разворачивался RAT: бэкдор регистрировал таймер и каждый час запрашивал у сервера злоумышленников инструкции.</p>
+<p>Инженеров ждал капкан: вызов python или pip через docker exec повторно активировал вредоносный хук.</p>
+<p>Вроде казалось бы, но отнюдь: границы контейнера не спасли тех, кто не проверял файлы. Исследователи выделили маркеры компрометации (IoC):
+* Файл /tmp/.pc_once_72129118c59f5636c0bb — подтверждает выгрузку ключей стилером;
+* Файл /tmp/remote_code_loader.lock — фиксирует активный бэкдор с опросом C2;
+* Подозрительный трафик на сторонние IP мимо официальных API.</p>
+<p>Разборы сопутствующих инцидентов доступны <a href="https://t.me/galaktionov_hub?start=dzen">здесь</a>.</p>
+<figure><img src="https://galaktionofff.github.io/images/litellm-docker-backdoor-keys/img2.png" alt="Схематичный разрез изолированного контейнера с индикатором ежечасного таймера и заблокированным каналом утечки" loading="lazy"></figure>
+<p><em>Почасовой опрос командного сервера превращал локальный шлюз в управляемый извне плацдарм.</em></p>
+<h2>Ложная безопасность: почему докер-тег больше не спасает</h2>
+<p>Это второй инцидент с LiteLLM за 2026 год. В марте атака затронула версии 1.82.7 и 1.82.8, но тогда заражение коснулось только PyPI. Пользователи Docker спали спокойно: образ собрали из чистого коммита.</p>
+<p>События 22 октября разрушили иллюзию. Злоумышленники взломали пайплайн сборки и залили отравленный образ в Docker Hub и GHCR. Инстансы на тегах latest или main-stable мгновенно оказались под ударом.</p>
+<p>Хронику восстановили <a href="https://www.aikido.dev/blog/litellm-compromised-infostealer-rat">в отчёте исследователей Aikido Security</a>, весенние риски напомнили <a href="https://www.trendmicro.com/en_us/research/26/c/your-ai-stack-just-handed-over-your-root-keys-inside-the-litellm-pypi-breach.html">в анализе Trend Micro</a>, а практические меры изоляции описали <a href="https://llmgateway.io/blog/litellm-compromised-again">в публикации инженеров LLM Gateway</a>.</p>
+<p>Разница не в таланте, а в системе: доверие к публичному реестру при работе с боевыми токенами — неоправданный риск.</p>
+<figure><img src="https://galaktionofff.github.io/images/litellm-docker-backdoor-keys/img3.png" alt="Сравнительная инфографика небезопасного автообновления по тегам против жесткой фиксации хеша по дайджесту" loading="lazy"></figure>
+<p><em>Фиксация хеша образа по криптографическому дайджесту исключает незаметную подмену контейнера в продакшене.</em></p>
+<h2>Анатомия защиты: как изолировать шлюз без риска для баланса</h2>
+<p>Когда я узнал подробности срыва, меня зацепило то, как легко команды отдают ключи сторонним процессам. Я считаю, что инцидент с LiteLLM — отрезвляющий сигнал для каждого, кто строит локальную автоматизацию.</p>
+<p>Что пробовали и не работает: слепо надеяться на изоляцию контейнера и утилиты автообновления на серверах с боевыми секретами.</p>
+<p>Если на сервере крутился LiteLLM указанных версий, регламент жесткий:
+1. Отрезать контейнер от сети через docker network disconnect или погасить его. Не выполнять внутри команды python.
+2. С чистой машины отозвать и перевыпустить API-ключи, проверив биллинг на аномальный расход токенов.
+3. Отказаться от плавающих тегов: образы фиксируются строго по дайджесту sha256.
+4. Настроить файрвол: разрешать трафик только на доверенные домены API, отсекая сторонние IP.</p>
+<p>Инженерные памятки по безопасной обвязке сервисов я публикую <a href="https://t.me/galaktionov_hub?start=dzen">в Telegram</a>.</p>
+<p>Успели проверить инстансы LiteLLM после релиза 1.107.0 или держите прокси на изолированных серверах? Напишите в комментариях, как вы контролируете целостность докер-образов с критическими секретами.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram: <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a> — <a href="https://t.me/galaktionov_hub?start=dzen">подписаться</a></p>]]></content:encoded>
+    </item>
     <item>
       <title>Крах ответственного раскрытия: как ИИ нашел дыру в PHP и сжал окно патча до нуля</title>
       <link>https://galaktionofff.github.io/articles/php2shell-disclosure-fail/</link>
