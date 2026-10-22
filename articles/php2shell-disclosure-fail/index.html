@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Крах ответственного раскрытия: как ИИ нашел дыру в PHP и сжал окно патча до нуля</title>
+  <meta name="description" content="Безопасность интернета годами держалась на джентльменском соглашении: исследователи находят брешь, передают закрытый отчёт разработчикам и ждут патча. У команд всегда оставалось время подготовиться.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Крах ответственного раскрытия: как ИИ нашел дыру в PHP и сжал окно патча до нуля">
+  <meta property="og:description" content="Безопасность интернета годами держалась на джентльменском соглашении: исследователи находят брешь, передают закрытый отчёт разработчикам и ждут патча. У команд всегда оставалось время подготовиться.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/php2shell-disclosure-fail/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/php2shell-disclosure-fail/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/php2shell-disclosure-fail/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Крах ответственного раскрытия: как ИИ нашел дыру в PHP и сжал окно патча до нуля</h1>
+      <div class="meta">22 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Крах ответственного раскрытия: как ИИ нашел дыру в PHP и сжал окно патча до нуля</h1>
+<p>Безопасность интернета годами держалась на джентльменском соглашении: исследователи находят брешь, передают закрытый отчёт разработчикам и ждут патча. У команд всегда оставалось время подготовиться.</p>
+<p>21 октября 2026 года порядок рухнул. Две RCE-уязвимости в PHP привели к пожару: регламент раскрытия не выдержал скорости нейросетей и человеческой ошибки.</p>
+<figure><img src="/images/php2shell-disclosure-fail/img1.png" alt="Серверная стойка дата-центра с индикаторами тревоги и символом удалённого выполнения кода на терминале" loading="lazy"><figcaption><em>Экстренные патчи для PHP 8.x обнажили уязвимость сотен тысяч серверов перед мгновенным взломом.</em></figcaption></figure>
+<p><em>Экстренные патчи для PHP 8.x обнажили уязвимость сотен тысяч серверов перед мгновенным взломом.</em></p>
+<h2>Алгоритмическая разведка: когда бреши ищет нейросеть</h2>
+<p>Уязвимость класса RCE (удалённое исполнение кода) означает полную потерю контроля: атакующий запускает команды на сервере без авторизации. В Wiz Research фазу назвали «php2shell».</p>
+<p>И тут самое интересное: брешь нашёл не человек. 19 августа 2026 года Wiz выявила её комплексом Wiz Atlas с моделями Gemini 4 Argon и GPT-5.6 Sol. ИИ сделал то, на что уходили месяцы: прошерстил кодовую базу и собрал готовый сценарий атаки.</p>
+<p>Хроника развивалась быстро:
+* 20 августа: RCE подтверждено против Drupal;
+* 21 августа: атаку повторили на WordPress — основе львиной доли веба;
+* 24 августа: отчёт передан безопасности PHP;
+* 21 сентября: разработчики признали баг и начали закрытый фикс;
+* 21 октября: вышли экстренные релизы PHP 8.x.</p>
+<p>Об этом событии я разбираю подробнее — <a href="https://t.me/galaktionov_hub?start=dzen">в канале</a>.</p>
+<h2>Срыв координации: как утечка черновика сожгла окно патча</h2>
+<p>Релиз патчей намечался на 22 октября в 14:00 UTC. У мейнтейнеров было двое суток на тесты, но система дала сбой.</p>
+<p>20 октября около 15:00 UTC два CVE утекли в сеть с ложной тревогой: гуляла оценка 10.0 по шкале CVSS (реальный балл — 9.2) и неверная дата релиза. Команда PHP перенесла преанонс на 19:30 того же дня, а релиз сдвинула на 24 часа раньше — на 21 октября в 14:00 UTC.</p>
+<p>Масла в огонь подлила security-фирма Calif: ошибочно выложили видео с работающим PoC (черновиком эксплойта). Ролик стёрли, но копии разлетелись.</p>
+<p>Факты на стол: получив черновик, сообщество не тратило дни на ассемблер. Вооружившись моделями кодинга, хакеры собрали эксплойты за часы. Атаки начались уже в ночь на 21 октября — задолго до того, как дежурные инженеры добрались до серверов.</p>
+<p>Связанные материалы и разборы — <a href="https://t.me/galaktionov_hub?start=dzen">здесь</a>.</p>
+<figure><img src="/images/php2shell-disclosure-fail/img2.png" alt="Схематичный график аварийного смещения сроков патча на 24 часа раньше из-за утечки данных в сеть" loading="lazy"><figcaption><em>Сдвиг релиза на сутки вперед показал беспомощность стандартных процедур перед утечкой черновых эксплойтов.</em></figcaption></figure>
+<p><em>Сдвиг релиза на сутки вперед показал беспомощность стандартных процедур перед утечкой черновых эксплойтов.</em></p>
+<h2>Серверы в офлайн: шторм от Википедии до госсектора</h2>
+<p>PHP крутится на огромной части веба, включая любой сайт на WordPress. Без патча под прицелом оказалась вся инфраструктура.</p>
+<p>Удар последовал сразу: атаки затронули 4chan, DeviantArt и служебный блог Википедии diff.wikimedia.org. Госструктуры Финляндии и Нидерландов решили не рисковать и превентивно увели порталы в офлайн.</p>
+<p>Ситуация дошла до крайности: NSA Cybersecurity и британский NCSC рекомендовали выдёргивать серверы из сети, если немедленный апдейт невозможен.</p>
+<p>Детали зафиксированы <a href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/">в блоге The PHP Foundation</a>, хронологию представили <a href="https://www.wiz.io/blog/php2shell-php-rce">исследователи Wiz Research</a>, а масштабы разобрал <a href="https://www.theverge.com/tech/1015906/php2shell-vulnerability-october-2026">репортаж The Verge</a>.</p>
+<figure><img src="/images/php2shell-disclosure-fail/img3.png" alt="Рабочее место инженера с отключенным сетевым интерфейсом и индикатором изоляции веб-серверов" loading="lazy"><figcaption><em>Превентивный офлайн остался единственной защитой для тех, кто не успел накатить патчи вовремя.</em></figcaption></figure>
+<p><em>Превентивный офлайн остался единственной защитой для тех, кто не успел накатить патчи вовремя.</em></p>
+<h2>Двойной капкан ИИ-эпохи: почему старые правила мертвы</h2>
+<p>Когда я узнал детали срыва, меня зацепило, насколько беспощадно кейс разрушил иллюзию контроля. Я считаю, что авария PHP — приговор привычным регламентам безопасности.</p>
+<p>Держать в голове одну мысль: появление Gemini 4 Argon и GPT-5.6 Sol создало ловушку. С одной стороны, сложные бреши в коде раскапываются за дни. С другой — доработка утекших PoC с помощью нейросетей сжалась до пары часов.</p>
+<p>Окно между утечкой и атаками схлопнулось. Раньше у инженеров были дни на накатку патчей. Теперь форы нет: пока читается новость, боты сканируют порты. Старый протокол строился под человеческий темп — в эпоху мыслящего софта он не выдерживает нагрузок.</p>
+<p>Контекст события и выводы — <a href="https://t.me/galaktionov_hub?start=dzen">в Telegram</a>.</p>
+<p>Как ваша инфраструктура встретила релиз php2shell: успели обновиться или пришлось гасить серверы? Напишите в комментариях, как вы перестраиваете защиту под новую скорость атак.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram: <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a> — <a href="https://t.me/galaktionov_hub?start=dzen">подписаться</a></p>
+    </article>
+  </div>
+</body>
+</html>
