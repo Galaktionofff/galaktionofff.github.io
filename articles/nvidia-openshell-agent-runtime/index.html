@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Изоляция агентов ценой слежки: зачем NVIDIA добавила телеметрию в защищённый рантайм OpenShell</title>
+  <meta name="description" content="Дать агенту доступ в консоль — всё равно что пустить стажёра с ломом в серверную. Рано или поздно модель снесёт базу или сольёт токены. На этой неделе закрыть проблему взялась NVIDIA.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Изоляция агентов ценой слежки: зачем NVIDIA добавила телеметрию в защищённый рантайм OpenShell">
+  <meta property="og:description" content="Дать агенту доступ в консоль — всё равно что пустить стажёра с ломом в серверную. Рано или поздно модель снесёт базу или сольёт токены. На этой неделе закрыть проблему взялась NVIDIA.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/nvidia-openshell-agent-runtime/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/nvidia-openshell-agent-runtime/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/nvidia-openshell-agent-runtime/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Изоляция агентов ценой слежки: зачем NVIDIA добавила телеметрию в защищённый рантайм OpenShell</h1>
+      <div class="meta">23 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Изоляция агентов ценой слежки: зачем NVIDIA добавила телеметрию в защищённый рантайм OpenShell</h1>
+<p>Дать агенту доступ в консоль — всё равно что пустить стажёра с ломом в серверную. Рано или поздно модель снесёт базу или сольёт токены. На этой неделе закрыть проблему взялась NVIDIA.</p>
+<p>Компания выкатила OpenShell — изолированный рантайм для флотов агентов. Но стоило разработчикам открыть спецификацию, как вспыхнул скандал: в защищённую среду по умолчанию зашили сбор телеметрии.</p>
+<figure><img src="/images/nvidia-openshell-agent-runtime/img1.png" alt="Белая серверная платформа с пустой овальной зоной под эмблему NVIDIA в окружении изолированных модулей микропесочниц" loading="lazy"><figcaption><em>Выход аппаратного гиганта в программный слой исполнения меняет правила изоляции автономных агентов.</em></figcaption></figure>
+<p><em>Выход аппаратного гиганта в программный слой исполнения меняет правила изоляции автономных агентов.</em></p>
+<h2>Проблема кувалды: почему агентам закрывают прямой терминал</h2>
+<p>Каждый, кто связывал агентов в автоматизациях, знает эту дилемму. Мы хотим, чтобы модель сама запускала тесты и правила код. Но доступ к терминалу ломает безопасность системы.</p>
+<p>Начнём с основания: языковая модель стохастична. Она не понимает рисков удаления системных файлов или сетевых вызовов наружу. Поймав инъекцию промпта в коде, агент выполнит опасный вызов с правами вашего пользователя.</p>
+<p>NVIDIA на конференции GTC Europe 2026 решила закрыть эту брешь. В <a href="https://github.com/NVIDIA/OpenShell">репозитории OpenShell на GitHub</a> выложена платформа изоляции: агенты работают в микропесочницах, где сетевой шлюз блокирует несанкционированные вызовы, а доступ зажат политиками ядра.</p>
+<p>Контекст события и выводы — <a href="https://t.me/galaktionov_hub?start=dzen">в Telegram</a>.</p>
+<h2>Скрытый маяк: за что сообщество разнесло телеметрию</h2>
+<p>На бумаге всё жирно, но скрытый подвох вылез в первой строчке конфигурации. Инженеры на Hacker News открыли спецификацию шлюза и нашли параметр по умолчанию: OPENSHELL_TELEMETRY_ENABLED=true.</p>
+<p>В шлюзе для закрытого кода включена отправка операционных данных в NVIDIA. Чтобы отключить сбор метрик, администратор обязан передавать флаг в переменных среды или в Helm-манифестах.</p>
+<p>Реакция практиков понятна. Когда инструмент подают как приватный контур, фоновый трафик выглядит дико. В закрытых системах любой пакет наружу — повод для тревоги специалистов по безопасности.</p>
+<p>Разборы кейсов по безопасности агентов — <a href="https://t.me/galaktionov_hub?start=dzen">в канале</a>.</p>
+<figure><img src="/images/nvidia-openshell-agent-runtime/img2.png" alt="Архитектурный шлюз сетевой изоляции с активным исходящим каналом телеметрии, передающим пакеты во внешний контур" loading="lazy"><figcaption><em>Включение фоновой телеметрии по умолчанию превращает изолированный контур агента в источник утечки операционных метрик.</em></figcaption></figure>
+<p><em>Включение фоновой телеметрии по умолчанию превращает изолированный контур агента в источник утечки операционных метрик.</em></p>
+<h2>Ловушка Кубернетеса: нужен ли микробизнесу энтерпрайз-комбайн</h2>
+<p>Вторая претензия оказалась архитектурной. NVIDIA спроектировала OpenShell под enterprise: оркестрация флотов агентов разворачивается через Helm-чарты в кластерах Kubernetes.</p>
+<p>Это не война инструментов, это разделение ролей: корпорациям требуются строгие права доступа. Но небольшим командам тащить Kubernetes ради пары агентов — чистый оверхед по ресурсам.</p>
+<p>Быстро делать не равно быстро в реальности: гигант привязывает софт к своей инфраструктуре. Прагматичному разработчику в связках n8n, Hermes или Antigravity не нужен парк микросервисов. Эфемерные контейнеры с отключенной сетью снимают угрозы без лишней телеметрии.</p>
+<p>Связанные материалы и практические схемы — <a href="https://t.me/galaktionov_hub?start=dzen">здесь</a>.</p>
+<figure><img src="/images/nvidia-openshell-agent-runtime/img3.png" alt="Сравнение легковесного изолированного контейнера и громоздкой многоярусной конструкции корпоративного кластера" loading="lazy"><figcaption><em>Разделение прав и локальные песочницы защищают сервер от сбоев агентов без избыточной сложности многоуровневых кластеров.</em></figcaption></figure>
+<p><em>Разделение прав и локальные песочницы защищают сервер от сбоев агентов без избыточной сложности многоуровневых кластеров.</em></p>
+<h2>Личный взгляд: как зажимать агентов без лишнего оверхеда</h2>
+<p>Меня в этой истории зацепила показательная тенденция: крупные корпорации пытаются перехватить контроль над средами выполнения ИИ.</p>
+<p>Я считаю появление OpenShell важным маркером взросления индустрии. Период наивного оптимизма, когда моделям без оглядки отдавали доступ к серверам, подошёл к концу. Без жестких заборов выпускать стохастические системы в реальную работу нельзя.</p>
+<p>И вот тут скажу то, чего вы не ждёте: сам факт выхода NVIDIA в рантаймы полезен, потому что заставляет задуматься о защите контура. Но копировать корпоративные решения вслепую не стоит.</p>
+<p>Суть в следующем: забирайте проверенные архитектурные принципы, а не тяжелые пакеты со скрытой телеметрией. Стройте изоляцию на простых детерминированных инструментах: запускайте агентов под урезанными пользователями, держите файловые песочницы и блокируйте исходящие соединения локальным фаерволом.</p>
+<p>А как вы изолируете системы при работе с агентами: пускаете модели напрямую на рабочую машину, используете Docker-песочницы или настраиваете жесткие права? Поделитесь в комментариях своим опытом.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram: <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a> — <a href="https://t.me/galaktionov_hub?start=dzen">подписаться</a></p>
+    </article>
+  </div>
+</body>
+</html>
