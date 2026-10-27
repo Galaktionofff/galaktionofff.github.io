@@ -8,7 +8,7 @@
     <link>https://galaktionofff.github.io/</link>
     <description>Статьи о прагматичной ИИ-разработке, архитектуре автономных агентов и автоматизации в n8n</description>
     <language>ru</language>
-    <lastBuildDate>Tue, 27 Oct 2026 09:16:03 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 09:20:33 GMT</lastBuildDate>
     <atom:link href="https://galaktionofff.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://galaktionofff.github.io/images/gpt-starcraft-cheat/1.png</url>
@@ -51,7 +51,7 @@
 <h2>Сухой остаток</h2>
 <p>Изолированное обучение у OpenAI — не анекдот про трусливых корпораций, а рабочий пример для твоей инфраструктуры: белые списки, бэкапы, запрет удаления. Три строчки в системном промте стоят дешевле любого инцидента.</p>
 <p>А у ваших агентов есть жёсткие запреты — или они пока на честном слове? Напишите в комментариях, как ограничиваете права агентов: белым списком, ревью действий или пока верите в лучшее.</p>
-<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a>. Подписаться: <a href="https://t.me/galaktionov_hub?start=dzen">t.me/galaktionov_hub?start=dzen</a></p>]]></content:encoded>
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a>. Подписаться: <a href="https://t.me/galaktionov_hub?start=dzen">по ссылке</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Сеть из 2015 года обошла GPT-6 и Claude Fable: почему LLM — плохой выбор для узких задач</title>
