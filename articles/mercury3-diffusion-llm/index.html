@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Mercury 3 от Inception Labs: модель, которая пишет всё сразу, и где кончается её магия</title>
+  <meta name="description" content="Мы привыкли, как работают языковые модели: курсор медленно выдавливает ответ по одному слову. Нужен черновик на три страницы — сиди и жди втрое дольше.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mercury 3 от Inception Labs: модель, которая пишет всё сразу, и где кончается её магия">
+  <meta property="og:description" content="Мы привыкли, как работают языковые модели: курсор медленно выдавливает ответ по одному слову. Нужен черновик на три страницы — сиди и жди втрое дольше.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/mercury3-diffusion-llm/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/mercury3-diffusion-llm/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/mercury3-diffusion-llm/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Mercury 3 от Inception Labs: модель, которая пишет всё сразу, и где кончается её магия</h1>
+      <div class="meta">28 октября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Mercury 3 от Inception Labs: модель, которая пишет всё сразу, и где кончается её магия</h1>
+<p>Мы привыкли, как работают языковые модели: курсор медленно выдавливает ответ по одному слову. Нужен черновик на три страницы — сиди и жди втрое дольше.</p>
+<p>В октябре эту механику сломали. Inception Labs выпустила Mercury 3 — первую диффузионную языковую модель промышленного масштаба. Она генерирует ответ не по цепочке токенов, а выдаёт блок текста целиком.</p>
+<figure><img src="/images/mercury3-diffusion-llm/img1.png" alt="Секундомер с одинаковым временем для короткого сообщения и длинного отчёта рядом с логотипом Inception Labs" loading="lazy"><figcaption><em>Диффузионный метод формирует весь блок текста параллельно, поэтому время ответа почти не зависит от его длины.</em></figcaption></figure>
+<p><em>Диффузионный метод формирует весь блок текста параллельно, поэтому время ответа почти не зависит от его длины.</em></p>
+<h2>Как устроена диффузионная печать и где исчезает задержка</h2>
+<p>Классические языковые модели авторегрессионны: они пишут строго по цепочке. Модель вычисляет вероятность следующего слова, выводит его и повторяет цикл. Ответ из тысячи слов требует тысячи последовательных проходов.</p>
+<p>Смотрите, в чём разница: диффузионная модель — это архитектура, которая формирует ответ иначе. Она берёт заготовку из цифрового шума и очищает весь блок текста параллельно за несколько шагов. Это похоже на фильтр, который обрабатывает всю картинку сразу, а не перерисовывает её по пикселям.</p>
+<p>Время ответа почти не зависит от объёма. Подробности релиза есть на <a href="https://inceptionlabs.ai">официальном сайте Inception Labs</a>.</p>
+<p>Меня зацепила не теория, а прикладной вопрос: сколько пользы эта скорость даёт на практике.</p>
+<h2>Реальный замер в боевом контуре: черновики против кода</h2>
+<p>Бенчмарки вендоров привлекательны, но проверять инструмент нужно на своём стенде.</p>
+<p>Тестовый доступ к API у Inception Labs открыт без карты. API совместим с привычными обёртками: подключение свелось к замене эндпоинта и переменной в конфиге.</p>
+<p>Я прогнал модель через свой штатный пайплайн на базе Hermes и n8n на регулярных рабочих промтах.</p>
+<p>Информация возникает там, где есть разница:
+* Массовые черновики (дайджесты, первичные описания, шаблоны). Диффузионный подход показал заметное ускорение, а качество осталось нормальным для рабочей базы.
+* Технические задачи (код, интеграции, строгая логика). Романтика закончилась: разницы по времени почти нет.</p>
+<p>Причина простая: диффузионная модель ускоряет печать текста, но не мышление нейросети. Думать ей столько же. Если задача упирается в логику, параллельная печать слов не даёт выигрыша.</p>
+<figure><img src="/images/mercury3-diffusion-llm/img2.png" alt="Сравнение двух потоков обработки данных: быстрый конвейер черновиков и стандартный блок кода" loading="lazy"><figcaption><em>На потоковых черновиках параллельная генерация даёт ощутимый выигрыш, но на задачах с кодом скорость упирается в рассуждения.</em></figcaption></figure>
+<p><em>На потоковых черновиках параллельная генерация даёт ощутимый выигрыш, но на задачах с кодом скорость упирается в рассуждения.</em></p>
+<h2>Почему секунды не имеют значения, если не считать копейки</h2>
+<p>Главная ошибка — измерять выгоду только секундомером.</p>
+<p>В разработке скорость без цены — половина картины. Если инструмент печатает втрое быстрее, но дороже за токен, экономика развалится. Считать автоматизацию нужно в копейках.</p>
+<p>Связанные материалы и разборы — <a href="https://t.me/galaktionov_hub?start=dzen">здесь</a>.</p>
+<p>Шпаргалку «модель → цена за токен» и готовый n8n-скрипт для сравнения стоимости генерации на реальных задачах выложил <a href="https://t.me/galaktionov_hub?start=dzen">в Telegram</a>.</p>
+<p>Десять минут проверки на боевых данных отрезвляют лучше презентаций: по тарифу за тысячу прогонов сразу ясно, где выгодно переключить роутер, а где оставить прежний стек.</p>
+<figure><img src="/images/mercury3-diffusion-llm/img3.png" alt="Схема роутинга запросов в n8n с разделением задач на черновой конвейер и техническую аналитику" loading="lazy"><figcaption><em>Разделение потоков задач по специализированным моделям снижает операционные затраты без падения качества итогового продукта.</em></figcaption></figure>
+<p><em>Разделение потоков задач по специализированным моделям снижает операционные затраты без падения качества итогового продукта.</em></p>
+<h2>Сухой остаток: кому подходит Mercury 3</h2>
+<p>Я считаю, что Mercury 3 — не замена рабочей модели, а инструмент с узкой зоной применимости.</p>
+<p>Его зона — потоки однотипных текстов: описания, выжимки, черновики или шаблоны. Там параллельная генерация экономит часы. Но там, где нужен сложный код или строгая логика, менять стек бессмысленно.</p>
+<p>Соло-разработчики выигрывают от таких релизов первыми: пока корпорации согласуют пилоты, независимый инженер за вечер подключает эндпоинт и принимает решение по цифрам.</p>
+<p>А на каких задачах в вашей рутине задержка мешает сильнее: на длинных текстах или на коде? Напишите в комментариях, тестировали ли диффузионный подход.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — в моём Telegram: <a href="https://t.me/galaktionov_hub?start=dzen">@galaktionov_hub</a> — <a href="https://t.me/galaktionov_hub?start=dzen">подписаться</a></p>
+    </article>
+  </div>
+</body>
+</html>
