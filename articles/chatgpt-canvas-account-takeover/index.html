@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Одна ссылка — и аккаунт у тебя: как ломали ChatGPT через Canvas</title>
+  <meta name="description" content="Вы отправляете коллеге ссылку на чат с нейросетью: «глянь, какой инструмент я собрал». Он кликает — и уходит. Не в смысле уходит с разговора. В смысле: его аккаунт теперь ваш.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Одна ссылка — и аккаунт у тебя: как ломали ChatGPT через Canvas">
+  <meta property="og:description" content="Вы отправляете коллеге ссылку на чат с нейросетью: «глянь, какой инструмент я собрал». Он кликает — и уходит. Не в смысле уходит с разговора. В смысле: его аккаунт теперь ваш.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/chatgpt-canvas-account-takeover/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/chatgpt-canvas-account-takeover/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/chatgpt-canvas-account-takeover/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Одна ссылка — и аккаунт у тебя: как ломали ChatGPT через Canvas</h1>
+      <div class="meta">3 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Одна ссылка — и аккаунт у тебя: как ломали ChatGPT через Canvas</h1>
+<p>Вы отправляете коллеге ссылку на чат с нейросетью: «глянь, какой инструмент я собрал». Он кликает — и уходит. Не в смысле уходит с разговора. В смысле: его аккаунт теперь ваш.</p>
+<figure><img src="/images/chatgpt-canvas-account-takeover/img1.png" alt="Стрелка от ссылки-чата к экрану с надписью «Доступ получен»" loading="lazy"><figcaption><em>Один клик по расшаренному чату — и чужой код уже внутри аккаунта.</em></figcaption></figure>
+<p><em>Один клик по расшаренному чату — и чужой код уже внутри аккаунта.</em></p>
+<p>Так работала уязвимость, которую недавно раскрыли исследователи из Parameter Labs. Мишенью стал механизм HTML-превью в ChatGPT — тот самый Canvas, где модель рисует интерфейсы и артефакты прямо в чате. Ошибка была не в модели, а в обвязке: в том, как платформа изолирует чужой код от себя.</p>
+<h2>Как вылезти из песочницы</h2>
+<p>Схема состояла из двух ходов. Сначала — побег из iframe-песочницы. Внутри HTML-превью есть компонент виртуальной клавиатуры MathLive, и через него можно отправить сообщение (postMessage) мимо всех ограничений — прямо в родительское окно, куда коду лезть нельзя.</p>
+<p>Оставалась защита на уровне браузера — CSP, политика, которая запрещает исполнять посторонние скрипты. Её обошли красиво: через стандартный YouTube-плеер и oEmbed. Плеер — легальный и разрешённый, но им можно управлять. Через него исследователи дотянулись до исполнения произвольного JavaScript уже в родительском окне.</p>
+<p>Дальше — как в кино. Злоумышленник генерировал ссылку на расшаренный чат, жертва кликала, и вредоносный код получал доступ к API-токенам пользователя: читал переписку, выгружал данные и отправлял команды от лица владельца аккаунта. Всё это — без единого подозрительного файла, просто по ссылке.</p>
+<figure><img src="/images/chatgpt-canvas-account-takeover/img2.png" alt="Схема атаки: iframe-песочница, virtual keyboard, YouTube-плеер, стрелка к JS в родительском окне" loading="lazy"><figcaption><em>Два хода: побег из песочницы через клавиатуру, обход CSP через ютубовский плеер.</em></figcaption></figure>
+<p><em>Два хода: побег из песочницы через клавиатуру, обход CSP через ютубовский плеер.</em></p>
+<p>OpenAI закрыла дыру и выплатила исследователям пять тысяч долларов баунти. Формально — инцидент исчерпан. Практически — остались вопросы, на которые стоит ответить себе честно.</p>
+<h2>Почему это касается каждого, а не только параноиков</h2>
+<p>Мы пользуемся облачными чатами так, будто они — личный сейф. В переписки летят ключи к сервисам, клиентские данные, куски кода заказчиков. А потом мы шарим эти чаты ссылками — коллегам, клиентам, в чаты комьюнити.</p>
+<p>Уязвимость показала: это решето, и дырявость не теоретическая. Отдельно удручает цена вопроса — пять тысяч за критический перехват аккаунтов платформы, на которой держатся миллионы рабочих процессов. Такова индустрия баунти: годится как жест, не годится как оценка риска.</p>
+<p>Я после этой новости за вечер провёл чистку у себя. Закрыл все публичные шары, вычистил ключи из переписок и контекстов, а чувствительные задачи — клиентские данные и приватный код — перевёл в локальный контур: у меня эта часть живёт в Antigravity и Hermes с локальной обвязкой, и облако её просто не видит.</p>
+<figure><img src="/images/chatgpt-canvas-account-takeover/img3.png" alt="Экран терминала локальной машины с закрытыми share-ссылками и менеджером секретов" loading="lazy"><figcaption><em>Параноидальный минимум: без шар, без ключей в чатах, локально для приватного.</em></figcaption></figure>
+<p><em>Параноидальный минимум: без шар, без ключей в чатах, локально для приватного.</em></p>
+<p>Пять пунктов, которые стоит пройти каждому:</p>
+<ol>
+<li>Закрыть все share-ссылки — старые публичные чаты живут вечно.</li>
+<li>Убрать ключи из промптов и переписок — только менеджер секретов.</li>
+<li>Чужие HTML-артефакты открывать в отдельном браузерном профиле.</li>
+<li>Приватные задачи — в локальный или изолированный контур.</li>
+<li>Перевыпустить то, что успело засветиться в переписках.</li>
+</ol>
+<p>Контекст события и разборы похожих кейсов — <a href="https://t.me/galaktionov_hub?start=dzen">здесь</a>.</p>
+<h2>Что в сухом остатке</h2>
+<p>«Песочница» — это обещание вендора, а не физический закон. Пока вы доверяете облаку то, что терять больно, работайте в расчёте на то, что однажды дыра найдётся. Найдена — значит, будут и другие.</p>
+<p>А вы уже проверили, сколько расшаренных чатов с ключами валяется в истории? Посчитайте — и напишите в комментариях, что нашли. Уверен, у некоторых счёт пойдёт на десятки.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и материалы, которые не выходят в блог — <a href="https://t.me/galaktionov_hub?start=dzen">в моём канале</a></p>
+    </article>
+  </div>
+</body>
+</html>
