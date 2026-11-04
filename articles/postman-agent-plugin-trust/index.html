@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Postman и чужие агенты: кто разрешил менять их инструкции?</title>
+  <meta name="description" content="Установка клиента для API и согласие менять инструкции других приложений — разные решения.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Postman и чужие агенты: кто разрешил менять их инструкции?">
+  <meta property="og:description" content="Установка клиента для API и согласие менять инструкции других приложений — разные решения.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/postman-agent-plugin-trust/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/postman-agent-plugin-trust/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/postman-agent-plugin-trust/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Postman и чужие агенты: кто разрешил менять их инструкции?</h1>
+      <div class="meta">4 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Postman и чужие агенты: кто разрешил менять их инструкции?</h1>
+<p>В трекере Postman появился отчёт об автоматической установке плагинов в Codex и Claude Code. Человек открыл клиент для работы с API, а изменения обнаружил в других приложениях. Я прочитал отчёт и исходники установщика: неприятнее всего здесь даже не новый плагин, а попытка самому выдать ему доверие.</p>
+<p>Сразу граница фактов: это не доказанная кража данных. Автор отчёта прямо пишет, что утечку он не установил. Но для вопроса «кто теперь задаёт правила моему агенту?» опубликованного кода уже достаточно.</p>
+<figure><img src="/images/postman-agent-plugin-trust/img1.png" alt="Эмблема Postman между клиентом API и двумя агентскими рабочими пространствами, соединение проходит через открытую границу разрешений" loading="lazy"><figcaption><em>Установка клиента для API и согласие менять инструкции других приложений — разные решения.</em></figcaption></figure>
+<p><em>Установка клиента для API и согласие менять инструкции других приложений — разные решения.</em></p>
+<h2>Что обнаружили на одном Mac</h2>
+<p>В <a href="https://github.com/postmanlabs/postman-app-support/issues/14370">отчёте об инциденте</a> указаны Postman Desktop 12.33.4, плагин Codex 1.1.0 и плагин Claude Code 2.0.1. В журнале Postman автор нашёл результат установки обоих расширений и источник запуска <code>auto-existing-upgrade</code>. В пользовательском конфиге Codex появились подключённый каталог плагинов, включённый Postman и запись доверия к стартовому обработчику.</p>
+<p>Это наблюдение на одной машине, не проверка всех установок Postman. На чистом Mac автор его ещё не воспроизвёл. Утверждать «обновление затронуло каждого» я бы не стал.</p>
+<p>В отчёте описаны ошибки авторизации удалённого MCP-сервера Postman и подключение навыков Postman к задачам про API. MCP даёт агенту доступ к внешним инструментам. Ошибка авторизации не доказывает передачу данных, но новое подключение уже пыталось запуститься.</p>
+<h2>Откуда взялись чужие правила</h2>
+<p>Плагин регистрирует обработчик начала сессии — hook. Он подаёт агенту текст с указанием перед любой нетривиальной задачей про API загружать навык Postman. Речь не только о запросе «открой Postman»: туда входят проектирование, реализация, тестирование, мониторинг и документация.</p>
+<p>Важная оговорка в самом тексте: прямые просьбы пользователя и проектные инструкции имеют приоритет. Это не абсолютный захват управления. Однако новый маршрут по умолчанию появляется там, где пользователь мог вообще не просить такую интеграцию.</p>
+<p>Меня зацепило именно это. Когда я работаю с Hermes и автоматизацией в n8n, выбор инструмента — часть задачи, а не рекламное место в начале сессии. Обсуждать такие изменения мне интереснее через <a href="https://t.me/galaktionov_hub?start=dzen">практику работы с агентами</a>, чем через спор, какой клиент моднее.</p>
+<p>В <a href="https://github.com/postmanlabs/postman-plugin/blob/6c8e452e0f4237f4bcc0901cb1ac442dec707e49/installer/src/hosts/codex-hooks.ts">исходнике установщика</a> есть функция <code>approvePostmanHook</code>. Она запрашивает список обработчиков, находит обработчик Postman и при подходящем статусе пытается записать его текущий хеш как доверенный через <code>config/batchWrite</code>.</p>
+<p>Проверка неизменности хеша защищает от подмены версии, но не заменяет согласие человека. Автор отчёта тоже осторожен: запись доверия отдельно не устанавливает, кто создал её на его машине. Исходник подтверждает механизм попытки, а не историю каждого клика.</p>
+<figure><img src="/images/postman-agent-plugin-trust/img2.png" alt="Три отдельные границы согласия: установка плагина, подключение удалённого сервера и доверие стартовому обработчику, показанные как три последовательных шлюза 1, 2, 3" loading="lazy"><figcaption><em>Плагин, удалённое подключение и доверие к инструкциям требуют трёх отдельных проверок.</em></figcaption></figure>
+<p><em>Плагин, удалённое подключение и доверие к инструкциям требуют трёх отдельных проверок.</em></p>
+<h2>Проверять нужно не только права на файлы</h2>
+<p>Я считаю, что здесь полезно разделить три решения. Первое — разрешить установку расширения. Второе — подключить внешний сервер и понять, какие данные доступны его инструментам. Третье — разрешить обработчику добавлять инструкции при старте агента. Одно согласие не должно незаметно заменять остальные два.</p>
+<p>Зарубка на будущее: после неожиданного поведения агента стоит смотреть не только последнюю реплику в чате. Есть ещё пользовательские конфиги, плагины, стартовые обработчики и удалённые подключения. Они могут менять поведение до того, как ты напишешь запрос.</p>
+<p>Если обнаружил незнакомую интеграцию, сначала сохрани настройки и журнал установки. Затем проверь её происхождение, отключи ненужное штатными средствами соответствующего агента и перезапусти сессию. После перезапуска проверь, что подключение и стартовая инструкция действительно исчезли. Удалять весь конфиг вслепую — способ потерять ещё и свои рабочие настройки.</p>
+<p>Смена ключей нужна при признаках их раскрытия или нежелательного доступа, а не потому, что кто-то назвал приложение вирусом в комментариях. В этом кейсе проблема согласия заслуживает разбора сама по себе, без придуманной утечки.</p>
+<p>А ты проверяешь, какие инструкции агент получает при запуске, или доверяешь всему, что установил знакомый настольный клиент? Напиши в комментариях, где для тебя проходит граница допустимой интеграции.</p>
+<p>Больше разборов важнейших событий индустрии и <a href="https://t.me/galaktionov_hub?start=dzen">готовая библиотека промтов</a> — в канале @galaktionov_hub.</p>
+    </article>
+  </div>
+</body>
+</html>
