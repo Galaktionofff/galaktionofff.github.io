@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Агент застрял на сборке Python? Не спеши удалять uv.lock</title>
+  <meta name="description" content="Совет «сборка сломалась — удали uv.lock» опасно похож на лечение компьютера переустановкой системы. Иногда помогает. Только причину ты так и не узнал, а зависимости уже другие.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Агент застрял на сборке Python? Не спеши удалять uv.lock">
+  <meta property="og:description" content="Совет «сборка сломалась — удали uv.lock» опасно похож на лечение компьютера переустановкой системы. Иногда помогает. Только причину ты так и не узнал, а зависимости уже другие.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/uv-lock-agent-builds/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/uv-lock-agent-builds/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/uv-lock-agent-builds/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Агент застрял на сборке Python? Не спеши удалять uv.lock</h1>
+      <div class="meta">5 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Агент застрял на сборке Python? Не спеши удалять uv.lock</h1>
+<p>Совет «сборка сломалась — удали uv.lock» опасно похож на лечение компьютера переустановкой системы. Иногда помогает. Только причину ты так и не узнал, а зависимости уже другие.</p>
+<p>Я сверил этот рецепт с документацией uv, менеджера Python-проектов. Меня зацепила ошибка в самом объяснении: lock-файл называют слепком чужой машины. У uv он устроен иначе. Для агента, который чинит сборку по кругу, эта разница важнее очередного промта «подумай лучше».</p>
+<figure><img src="/images/uv-lock-agent-builds/img1.png" alt="сохранённый файл зависимостей между повторяющимися попытками сборки и управляемой диагностикой" loading="lazy"><figcaption><em>Ошибка сборки ещё не доказывает, что нужно выбрасывать зафиксированные зависимости.</em></figcaption></figure>
+<p><em>Ошибка сборки ещё не доказывает, что нужно выбрасывать зафиксированные зависимости.</em></p>
+<h2>Lock-файл не привязан к одному ноутбуку</h2>
+<p>В <a href="https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile">документации Astral</a> uv.lock описан как универсальный, кроссплатформенный файл. Он хранит разрешённые версии зависимостей с учётом условий: версии Python, операционной системы, архитектуры. Это не копия установленной папки .venv.</p>
+<p>Поэтому переход с Windows на macOS сам по себе не делает lock «мусором». И смена Python не означает гарантированную поломку. Другое дело — конкретный пакет: для нового интерпретатора может не оказаться подходящей готовой сборки, wheel. Тогда установка может перейти к сборке из исходников, а ей потребуются компилятор и системные библиотеки.</p>
+<p>Есть три разных объекта: требования в pyproject.toml, выбранные версии в uv.lock и установленное окружение .venv. Ещё отдельно живёт кэш скачанных и собранных пакетов. Когда агент смешивает всё это в одну «проблему зависимостей», он способен чинить не тот слой сколько угодно.</p>
+<h2>Сначала выясни, что именно сломалось</h2>
+<p>Иногда самая дешёвая оптимизация — открыть документацию. В <a href="https://docs.astral.sh/uv/concepts/projects/sync/">правилах синхронизации uv</a> уже есть средства, которые полезнее автоматического удаления файла.</p>
+<p>Первый шаг — сохранить исходную ошибку и определить этап. Не удалось скачать пакет? Не нашёлся совместимый wheel? Упал компилятор? Проект запущен другим Python? Одинаковая просьба «почини установку» скрывает разные задачи.</p>
+<p>Второй — проверить согласованность требований и фиксации: <code>uv lock --check</code>. Команда завершается ошибкой, если lock требует обновления. Для установки без его изменения есть <code>uv sync --locked</code>: устаревший файл даст ошибку вместо незаметного пересчёта.</p>
+<p>Третий — менять только то, на что указывает лог. Пример формы команды: <code>uv lock --upgrade-package имя-пакета</code>. Вместо «имя-пакета» ставится реальная зависимость из ошибки. Обновление ограничено требованиями проекта; если нужна новая версия вне этих границ, сначала придётся осознанно изменить требования.</p>
+<p>Разборы таких ограничений я продолжаю в <a href="https://t.me/galaktionov_hub?start=dzen">канале об ИИ и автоматизации</a>: здесь интересен не героизм агента, а цена его решений.</p>
+<figure><img src="/images/uv-lock-agent-builds/img2.png" alt="три раздельных объекта — требования, фиксация версий и установленное окружение; кэш вынесен отдельно" loading="lazy"><figcaption><em>Три слоя проекта и отдельный кэш требуют разных способов исправления.</em></figcaption></figure>
+<p><em>Три слоя проекта и отдельный кэш требуют разных способов исправления.</em></p>
+<h2>Кэш чистят отдельно от фиксации версий</h2>
+<p>Если подозрение именно на кэш, у uv есть <code>uv sync --refresh-package имя-пакета</code>: перепроверка данных для выбранной зависимости. Есть и адресная очистка <code>uv cache clean имя-пакета</code>. В <a href="https://docs.astral.sh/uv/concepts/cache/">документации по кэшу</a> это отдельные операции, а не повод заново выбирать весь набор версий.</p>
+<p>Удаление uv.lock меняет другую вещь: при следующем разрешении зависимостей исчезает опора на прежние зафиксированные версии. Новый набор может пройти тесты, но это уже обновление зависимостей, а не доказательство порчи старого файла. Сравни изменения через Git и прогони тесты до принятия такого «ремонта».</p>
+<p>Я бы не зашивал удаление lock в автоматическое правило для Hermes или Antigravity. Агент должен сначала объяснить, почему текущая версия пакета несовместима, и показать минимальную правку. Иначе зелёная установка маскирует десяток незапрошенных обновлений.</p>
+<h2>Правило остановки полезнее правила удаления</h2>
+<p>Практический предел я предлагаю такой: после двух одинаковых ошибок без новой гипотезы остановить повторные запуски. Это не статистика uv и не измеренный выигрыш, а ограничитель для автоматизации. Дальше нужен отчёт: пакет, интерпретатор, команда, первая существенная ошибка и следующее проверяемое предположение.</p>
+<p>В экспериментальной ветке пересоздать lock допустимо. В рабочем проекте я считаю более разумным сохранить исходное состояние, проверить совместимость и отдельно согласовать обновления. Воспроизводимость не обещает, что сборка никогда не упадёт. Она позволяет понять, что именно ты изменил, когда сборка наконец прошла.</p>
+<p>А ты разрешаешь агенту обновлять зависимости ради успешного запуска — или требуешь сначала доказать, что проблема в них? Расскажи в комментариях, где проводишь эту границу.</p>
+<hr />
+<p>Больше разборов важнейших событий индустрии и <a href="https://t.me/galaktionov_hub?start=dzen">готовая библиотека промтов</a> — в канале @galaktionov_hub.</p>
+    </article>
+  </div>
+</body>
+</html>
