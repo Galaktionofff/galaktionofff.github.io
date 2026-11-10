@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Claude Fable 5.2: дешевле токен, дороже задача?</title>
+  <meta name="description" content="Одна модель может работать с разной глубиной рассуждений — и разными расходами на задачу.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Claude Fable 5.2: дешевле токен, дороже задача?">
+  <meta property="og:description" content="Одна модель может работать с разной глубиной рассуждений — и разными расходами на задачу.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/fable-5-2-effort-cost/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/fable-5-2-effort-cost/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/fable-5-2-effort-cost/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Claude Fable 5.2: дешевле токен, дороже задача?</h1>
+      <div class="meta">10 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Claude Fable 5.2: дешевле токен, дороже задача?</h1>
+<p>Anthropic выпустила Claude Fable 5.2 и снизила цену API: $8 за миллион входных токенов и $40 за миллион выходных. Я открыл анонс ради улучшений в коде, а задержался на рекомендации самой компании: для большинства повседневных задач начинать стоит вообще с Opus 5.5.</p>
+<p>Сильную модель предлагают включать там, где более простая не справилась. И это не робость маркетологов: у Fable есть настройка, способная сильно поменять цену результата, — глубина рассуждений, или effort.</p>
+<figure><img src="/images/fable-5-2-effort-cost/img1.png" alt="Эмблема Claude над регулятором глубины рассуждений, соединённым с чашей расходов" loading="lazy"><figcaption><em>Одна модель может работать с разной глубиной рассуждений — и разными расходами на задачу.</em></figcaption></figure>
+<p><em>Одна модель может работать с разной глубиной рассуждений — и разными расходами на задачу.</em></p>
+<h2>В анонсе важнее не максимальный балл</h2>
+<p>В <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2">официальном релизе</a> от 9 ноября Anthropic показывает Fable 5.2 на тесте FrontierCode 2.0. Он оценивает, приняли бы сопровождающие открытого проекта предложенные моделью изменения кода.</p>
+<p>На уровне high новая модель получает 45,3% против лучшего результата Opus 5.5 — 45,5%. При этом Anthropic заявляет примерно вдвое меньшую стоимость задачи. На xhigh Fable достигает 49,1% — лучшего результата среди выпущенных моделей, которые компания проверила.</p>
+<p>Это результат конкретного теста, а не обещание вдвое сократить любой счёт. Но он показывает интересный выбор: можно купить больше качества, а можно оставить близкое качество и потратить меньше. Автоматически выкручивать настройку вправо не требуется.</p>
+<p>Я бы смотрел на эту развилку раньше, чем на рассказы об операционной системе, которую агенты писали восемь дней. Для рабочей автоматизации полезнее знать, какой режим справляется с твоей задачей и сколько попыток ему нужно.</p>
+<h2>Лидер рейтинга может оказаться дорогим исполнителем</h2>
+<p>На странице <a href="https://artificialanalysis.ai/models/claude-fable-5-2">Artificial Analysis</a> у Fable 5.2 в конфигурации Max, Default Fallback — 65 баллов Intelligence Index. На момент проверки это первое место. Рядом стоит другая цифра: $26,54 за задачу этого индекса.</p>
+<p>Здесь «задача» — не произвольный запрос в чате и не средний заказ разработчика. Это взвешенная стоимость по набору оценок Artificial Analysis. Она учитывает вход, работу с кэшем, рассуждения и ответ. Переносить её напрямую в бюджет своего бота нельзя.</p>
+<p>Так же осторожно надо читать 46,4 минуты на задачу. У площадки это расчётная метрика из выходных токенов и скорости с весами отдельных тестов, а не обещание, что каждый запрос будет висеть столько времени.</p>
+<p>Меня здесь цепляет не дороговизна сама по себе. Сложная задача может оправдывать такой расход. Плохо, когда место в рейтинге превращается в аргумент поставить max на сортировку писем. В <a href="https://t.me/galaktionov_hub?start=dzen">разборах индустрии в канале</a> я предпочитаю обсуждать именно этот переход: от способности модели к цене её применения.</p>
+<figure><img src="/images/fable-5-2-effort-cost/img2.png" alt="Сравнение FrontierCode 2.0: Fable 5.2 high — 45,3%, Opus 5.5 max — 45,5%, почти равные столбцы" loading="lazy"><figcaption><em>По оценке Anthropic, Fable 5.2 на high почти сравнялась с Opus 5.5 на max при примерно половине стоимости задачи.</em></figcaption></figure>
+<p><em>По оценке Anthropic, Fable 5.2 на high почти сравнялась с Opus 5.5 на max при примерно половине стоимости задачи.</em></p>
+<h2>Max — не синоним «делай нормально»</h2>
+<p>В <a href="https://platform.claude.com/docs/en/build-with-claude/effort">документации effort</a> рекомендации сформулированы жёстче рекламного лозунга. Для Fable 5.2 в API по умолчанию используется high. Переходить на xhigh советуют для самых сложных долгих задач, где прирост уже измерен. Max — для проверки предела возможностей и редких случаев, когда время и токены не важны.</p>
+<p>Компания прямо предупреждает: max медленнее и дороже xhigh, а прибавка часто небольшая. При этом effort почти не меняет длину видимого ответа Fable 5.2. Короткий финал не доказывает, что модель мало потратила на рассуждения.</p>
+<p>Сила стратегии определяется качеством разменов. Я не считаю max ошибкой; ошибка — не знать, за что доплачиваешь. Для моей работы с Hermes и n8n это полезный вопрос к настройкам исполнителя, а не повод немедленно менять весь набор моделей.</p>
+<h2>Что проверить до переключения</h2>
+<p>Взял бы несколько повторяющихся задач с уже известным правильным результатом. Для каждой оставил одинаковые входные данные и проверки, затем сравнил high с medium и xhigh. В журнал записал бы принятые результаты, полное время, стоимость и повторы после неудачи.</p>
+<p>Проверять нужно результат, а не убедительность объяснения. Для кода — нужный сценарий и отсутствие поломок рядом; для извлечения данных — пропуски и ошибки в полях. Если более дорогой режим уменьшает переделки, доплата может быть разумной. Если меняет лишь красоту отчёта — пока не за что платить.</p>
+<p>У тебя глубина рассуждений выбрана по замерам или просто стоит максимум «на всякий случай»? Напиши в комментариях, на какой задаче повышение effort действительно окупилось.</p>
+<p>Больше разборов важнейших событий индустрии и <a href="https://t.me/galaktionov_hub?start=dzen">готовая библиотека промтов</a> — в канале @galaktionov_hub.</p>
+    </article>
+  </div>
+</body>
+</html>
