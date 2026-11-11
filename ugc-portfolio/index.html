@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UGC Portfolio — [Имя креатора]</title>
+  <meta
+    name="description"
+    content="Портфолио UGC-креатора: видео Reels, фото-карусели, результаты и условия сотрудничества."
+  />
+
+  <!-- Google Fonts: editorial serif + clean grotesk + optional script accent -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body id="top">
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand-logo" data-bind="brandName">[BRAND.NAME]</a>
+
+      <nav class="main-nav" aria-label="Основная навигация">
+        <a href="#about">Обо мне</a>
+        <a href="#videos">Видео</a>
+        <a href="#results">Результаты</a>
+        <a href="#photo">Фото</a>
+        <a href="#formats">Форматы</a>
+        <a href="#services">Услуги</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#contact" class="btn btn-wine btn-sm">Связаться</a>
+        <button
+          class="burger-btn"
+          id="burger-btn"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobile-nav" hidden>
+      <a href="#about">Обо мне</a>
+      <a href="#videos">Видео</a>
+      <a href="#results">Результаты</a>
+      <a href="#photo">Фото</a>
+      <a href="#formats">Форматы</a>
+      <a href="#services">Услуги</a>
+      <a href="#contact" class="btn btn-wine">Связаться</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="hero-badges">
+            <span class="pill pill-blue" data-bind="heroBadge">UGC-КРЕАТОР</span>
+            <span class="pill pill-outline" data-bind="heroLocation">[Город / Удалённо]</span>
+          </div>
+
+          <h1 class="hero-title" data-bind="heroTitle">
+            Создаю контент, который вовлекает и продаёт
+          </h1>
+
+          <p class="hero-subtitle" data-bind="heroSubtitle">
+            [Короткий оффер: нативные Reels, эстетичные распаковки и фото-карусели для брендов. Живая подача, продуманный сценарий и монтаж под задачу бизнеса.]
+          </p>
+
+          <div class="hero-cta">
+            <a href="#videos" class="btn btn-wine">Смотреть видео</a>
+            <a href="#contact" class="btn btn-outline">Связаться</a>
+          </div>
+
+          <div class="hero-meta-strip">
+            <div class="meta-dot"></div>
+            <span data-bind="heroAvailability">[Открыта к съёмкам и проектам на текущий месяц]</span>
+          </div>
+        </div>
+
+        <div class="hero-media reveal">
+          <div class="hero-photo-frame" id="hero-photo-frame">
+            <!-- Заменится изображением, если в data.js указать heroPhotoUrl -->
+            <div class="media-placeholder">
+              <span class="placeholder-tag">HERO PHOTO • 4:5</span>
+              <p class="placeholder-title">[Главное фото креатора]</p>
+              <p class="placeholder-hint">Вертикальный портрет со смартфоном или продуктом в кадре</p>
+            </div>
+          </div>
+
+          <div class="hero-floating-card">
+            <span class="floating-label">Специализация</span>
+            <strong data-bind="heroNiches">[Beauty • Fashion • Lifestyle • Tech]</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT & STATS ================= -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-photo-col reveal">
+          <div class="about-photo-card" id="about-photo-frame">
+            <div class="media-placeholder media-placeholder--dark">
+              <span class="placeholder-tag">PORTRAIT • 3:4</span>
+              <p class="placeholder-title">[Фото для блока «Обо мне»]</p>
+              <p class="placeholder-hint">Портрет в стиле бренда или backstage со съёмки</p>
+            </div>
+          </div>
+          <p class="script-caption" data-bind="aboutSignature">— [Имя креатора]</p>
+        </div>
+
+        <div class="about-content-col reveal">
+          <div class="section-heading">
+            <span class="eyebrow">01 / Позиционирование</span>
+            <h2>Обо мне</h2>
+          </div>
+
+          <div class="about-text" id="about-paragraphs"></div>
+
+          <!-- Modular stats grid inspired by reference #2 & bozz-create -->
+          <div class="stats-bento" id="stats-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIDEO PORTFOLIO (#videos) ================= -->
+    <section class="section section-alt" id="videos">
+      <div class="container">
+        <div class="section-header-row reveal">
+          <div class="section-heading">
+            <span class="eyebrow">02 / Видео-кейсы</span>
+            <h2>Видео-портфолио</h2>
+            <p class="section-lead" data-bind="videosSubtitle">
+              [Подзаголовок секции: подборки вертикальных роликов 9:16 с разной подачей — от нативных обзоров до креативного монтажа.]
+            </p>
+          </div>
+
+          <div class="filter-pills" id="video-filters" role="tablist" aria-label="Фильтр видео"></div>
+        </div>
+
+        <div class="videos-grid" id="videos-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================= RESULTS & METRICS ================= -->
+    <section class="section" id="results">
+      <div class="container">
+        <div class="section-header-row reveal">
+          <div class="section-heading">
+            <span class="eyebrow">03 / Цифры и охваты</span>
+            <h2>Результаты</h2>
+            <p class="section-lead" data-bind="resultsSubtitle">
+              [Шаблоны под скриншоты статистики и ключевые метрики ваших роликов и постов.]
+            </p>
+          </div>
+
+          <div class="results-controls">
+            <div class="tab-switch" id="results-tabs" role="tablist" aria-label="Категория метрик">
+              <button type="button" class="tab-btn is-active" data-result-tab="reels">Reels</button>
+              <button type="button" class="tab-btn" data-result-tab="posts">Посты</button>
+            </div>
+            <div class="carousel-arrows">
+              <button type="button" class="icon-circle-btn" id="results-prev" aria-label="Предыдущие результаты">←</button>
+              <button type="button" class="icon-circle-btn" id="results-next" aria-label="Следующие результаты">→</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-track" id="results-track"></div>
+      </div>
+    </section>
+
+    <!-- ================= PHOTO CASES / CAROUSELS ================= -->
+    <section class="section section-soil-tint" id="photo">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">04 / Визуальные посты</span>
+          <h2>Фото-кейсы и карусели</h2>
+          <p class="section-lead" data-bind="photoSubtitle">
+            [Интерактивные слайдеры для примеров фото-постов, лукбуков и сторителлинга в каруселях.]
+          </p>
+        </div>
+
+        <div class="photo-cases-grid" id="photo-cases-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================= FORMATS & APPROACH ================= -->
+    <section class="section" id="formats">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">05 / Направления и подход</span>
+          <h2>Что я создаю</h2>
+          <p class="section-lead" data-bind="formatsSubtitle">
+            [Набор форматов под разные задачи бренда: прогрев, нативная интеграция, перформанс-креативы и визуальная лента.]
+          </p>
+        </div>
+
+        <div class="formats-grid" id="formats-grid"></div>
+
+        <!-- Editorial split block inspired by reference #2: Approach + Workflow -->
+        <div class="approach-workflow-grid">
+          <div class="wine-panel reveal">
+            <div class="wine-panel-header">
+              <span class="pill pill-blue">Подход</span>
+              <h3>Принципы работы</h3>
+            </div>
+            <div class="bento-cells" id="approach-grid"></div>
+          </div>
+
+          <div class="editorial-panel reveal">
+            <div class="editorial-panel-header">
+              <span class="eyebrow">Процесс</span>
+              <h3>Этапы сотрудничества</h3>
+            </div>
+            <div class="workflow-list" id="workflow-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES & PRICING ================= -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">06 / Тарифы и форматы</span>
+          <h2>Услуги и стоимость</h2>
+          <p class="section-lead" data-bind="servicesSubtitle">
+            [Шаблонные карточки тарифов. Легко адаптировать под ваши форматы, пакеты и расценки.]
+          </p>
+        </div>
+
+        <div class="services-grid" id="services-grid"></div>
+
+        <div class="cta-banner reveal">
+          <div class="cta-banner-text">
+            <span class="pill pill-blue">Кастомный бриф</span>
+            <h3 data-bind="ctaBannerTitle">Нужен нестандартный формат или пакет съёмок на месяц?</h3>
+            <p data-bind="ctaBannerSubtitle">[Опишите задачу бренда — соберу индивидуальное предложение со сметой и референсами.]</p>
+          </div>
+          <a href="#contact" class="btn btn-cream">Обсудить проект</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= CONTACTS & FOOTER ================= -->
+  <footer class="contact-footer" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-media reveal">
+        <div class="contact-photo-frame" id="contact-photo-frame">
+          <div class="media-placeholder media-placeholder--footer">
+            <span class="placeholder-tag">FOOTER PHOTO • 4:3</span>
+            <p class="placeholder-title">[Атмосферное фото для финала]</p>
+            <p class="placeholder-hint">Лайфстайл-кадр, который оставляет приятное послевкусие</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-info reveal">
+        <span class="eyebrow eyebrow-light">07 / Контакты</span>
+        <h2 class="contact-title" data-bind="contactTitle">Поговорим о проекте</h2>
+        <p class="contact-lead" data-bind="contactSubtitle">
+          [Расскажите о продукте, сроках и цели кампании. Отвечу в течение дня с идеями и оценкой стоимости.]
+        </p>
+
+        <div class="selected-service-note" id="selected-service-note" hidden>
+          <span>Выбранный формат: <strong id="selected-service-label"></strong></span>
+          <button type="button" id="clear-service-btn" aria-label="Сбросить выбор">×</button>
+        </div>
+
+        <div class="contact-buttons" id="contact-buttons"></div>
+
+        <div class="contact-direct-row">
+          <button type="button" class="copy-handle-btn" id="copy-handle-btn">
+            <span>Скопировать контакт:</span>
+            <strong data-bind="primaryHandle">@username_ugc</strong>
+          </button>
+          <span class="copy-feedback" id="copy-feedback" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span class="footer-brand" data-bind="brandName">[BRAND.NAME]</span>
+      <span class="footer-meta" data-bind="footerMeta">UGC-креатор / [Город] / 2026</span>
+    </div>
+  </footer>
+
+  <!-- ================= VIDEO MODAL ================= -->
+  <div class="modal-backdrop" id="video-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-video-title">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Закрыть окно">×</button>
+      <div class="modal-layout">
+        <div class="modal-player-wrap" id="modal-player-wrap"></div>
+        <div class="modal-details">
+          <span class="pill pill-blue" id="modal-video-category"></span>
+          <h3 id="modal-video-title"></h3>
+          <p class="modal-brand" id="modal-video-brand"></p>
+          <p class="modal-desc" id="modal-video-desc"></p>
+          <div class="modal-actions">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-wine" id="modal-external-link">
+              Открыть оригинал →
+            </a>
+            <a href="#contact" class="btn btn-outline" id="modal-inquire-btn">Хочу такой формат</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
