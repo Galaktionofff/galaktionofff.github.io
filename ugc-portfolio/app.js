@@ -277,105 +277,7 @@
     });
   }
 
-  // Фото-кейсы со слайдерами (#photo)
-  function renderPhotoCases() {
-    const grid = document.getElementById("photo-cases-grid");
-    if (!grid) return;
-    grid.innerHTML = "";
-
-    data.photoCases.forEach((postCase) => {
-      let currentSlide = 0;
-      const total = postCase.slides.length;
-
-      const card = el("article", "photo-case-card");
-      const slider = el("div", "photo-slider");
-      const slideHost = el("div", "photo-slide");
-      const counter = el("span", "slider-counter");
-      const dotsWrap = el("div", "slider-dots");
-
-      const prevBtn = el("button", "slider-nav-btn slider-prev", "←");
-      prevBtn.type = "button";
-      prevBtn.setAttribute("aria-label", "Предыдущий слайд");
-
-      const nextBtn = el("button", "slider-nav-btn slider-next", "→");
-      nextBtn.type = "button";
-      nextBtn.setAttribute("aria-label", "Следующий слайд");
-
-      function updateSlide() {
-        const slide = postCase.slides[currentSlide];
-        slideHost.innerHTML = "";
-
-        if (slide.imageUrl) {
-          const img = el("img");
-          img.src = slide.imageUrl;
-          img.alt = slide.label;
-          img.loading = "lazy";
-          slideHost.style.padding = "0";
-          slideHost.appendChild(img);
-        } else {
-          slideHost.style.padding = "28px";
-          slideHost.appendChild(el("span", "placeholder-tag", `SLIDE ${currentSlide + 1} / ${total}`));
-          slideHost.appendChild(el("p", "placeholder-title", slide.label));
-          slideHost.appendChild(
-            el("p", "placeholder-hint", "Укажите imageUrl в data.js для показа фото")
-          );
-        }
-
-        counter.textContent = `${currentSlide + 1} / ${total}`;
-        dotsWrap.querySelectorAll(".slider-dot").forEach((dot, idx) => {
-          dot.classList.toggle("is-active", idx === currentSlide);
-        });
-      }
-
-      prevBtn.addEventListener("click", () => {
-        currentSlide = (currentSlide - 1 + total) % total;
-        updateSlide();
-      });
-
-      nextBtn.addEventListener("click", () => {
-        currentSlide = (currentSlide + 1) % total;
-        updateSlide();
-      });
-
-      postCase.slides.forEach((_, idx) => {
-        const dot = el("button", "slider-dot");
-        dot.type = "button";
-        dot.setAttribute("aria-label", `Слайд ${idx + 1}`);
-        dot.addEventListener("click", () => {
-          currentSlide = idx;
-          updateSlide();
-        });
-        dotsWrap.appendChild(dot);
-      });
-
-      slider.appendChild(slideHost);
-      slider.appendChild(counter);
-      slider.appendChild(prevBtn);
-      slider.appendChild(nextBtn);
-      card.appendChild(slider);
-      card.appendChild(dotsWrap);
-
-      const meta = el("div", "photo-case-meta");
-      const metaLeft = el("div");
-      metaLeft.appendChild(el("h3", "", postCase.title));
-      metaLeft.appendChild(el("p", "", postCase.subtitle));
-      meta.appendChild(metaLeft);
-
-      const link = el("a", "text-link", "Открыть пост →");
-      link.href = postCase.externalUrl || "#";
-      if (postCase.externalUrl && postCase.externalUrl !== "#") {
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-      }
-      meta.appendChild(link);
-
-      card.appendChild(meta);
-      grid.appendChild(card);
-      updateSlide();
-    });
-  }
-
-  // 12 форматов + принципы + этапы (#formats)
+  // Форматы и принципы работы (#formats)
   function renderFormatsAndApproach() {
     const formatsGrid = document.getElementById("formats-grid");
     if (formatsGrid) {
@@ -397,20 +299,6 @@
         cell.appendChild(el("strong", "", item.title));
         cell.appendChild(el("span", "", item.desc));
         approachGrid.appendChild(cell);
-      });
-    }
-
-    const workflowList = document.getElementById("workflow-list");
-    if (workflowList) {
-      workflowList.innerHTML = "";
-      data.workflowSteps.forEach((st) => {
-        const row = el("div", "workflow-item");
-        row.appendChild(el("span", "workflow-step-badge", st.step));
-        const body = el("div");
-        body.appendChild(el("strong", "", st.title));
-        body.appendChild(el("p", "", st.desc));
-        row.appendChild(body);
-        workflowList.appendChild(row);
       });
     }
   }
@@ -559,7 +447,6 @@
   renderVideosGrid();
   renderResults();
   setupResultsControls();
-  renderPhotoCases();
   renderFormatsAndApproach();
   renderServices();
   setupServiceSelectionClear();
