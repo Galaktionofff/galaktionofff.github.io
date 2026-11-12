@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Gemini научилась выбирать без текста. Ошибки остались</title>
+  <meta name="description" content="Но короткий ответ тоже может быть неверным. Особенно неприятно, когда за ним сразу стоит кнопка возврата денег.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Gemini научилась выбирать без текста. Ошибки остались">
+  <meta property="og:description" content="Но короткий ответ тоже может быть неверным. Особенно неприятно, когда за ним сразу стоит кнопка возврата денег.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/gemini-decisions-confidence/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/gemini-decisions-confidence/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/gemini-decisions-confidence/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Gemini научилась выбирать без текста. Ошибки остались</h1>
+      <div class="meta">12 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Gemini научилась выбирать без текста. Ошибки остались</h1>
+<p>Google выпустила Gemini Decisions API: вместо ответа словами модель возвращает выбор и оценку уверенности. Меня в этом релизе заинтересовало отсутствие привычного чата. Если тебе нужно направить заявку в нужный отдел, зачем оплачивать сочинение о том, какой отдел ей подходит?</p>
+<p>Но короткий ответ тоже может быть неверным. Особенно неприятно, когда за ним сразу стоит кнопка возврата денег.</p>
+<figure><img src="/images/gemini-decisions-confidence/img1.png" alt="Эмблема Gemini над развилкой из одного входа в три отдельных маршрута без текстового ответа" loading="lazy"><figcaption><em>Модель выбирает маршрут, а не пишет объяснение — право выполнить действие остаётся у программы.</em></figcaption></figure>
+<p><em>Модель выбирает маршрут, а не пишет объяснение — право выполнить действие остаётся у программы.</em></p>
+<h2>Что именно убрали из ответа</h2>
+<p>В <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/">анонсе Google</a> от 11 ноября описана отдельная модель Gemini Decision 1. Она оценивает заранее заданные варианты за один проход, без последовательной генерации текста. На вход можно передать текст, изображения, аудио, видео или PDF.</p>
+<p>Типов вопроса три: да или нет; выбор из списка; оценка по шкале с описанными уровнями. Например: есть ли в обращении жалоба на дефект, кому направить заявку, насколько серьёзно сломан экспорт. Это не просьба «подумай и сделай всё». Варианты и критерии задаёт разработчик.</p>
+<p>В одном запросе — до 1000 независимых вопросов. Общее окно — 262 144 токена, включая исходные данные и вопросы. Они не видят ответы друг друга. Зависимость от предыдущего решения нужно собрать в коде или сделать следующий запрос.</p>
+<p>Я считаю это полезным ограничением. Для автоматизации в n8n мне понятнее отдельная проверка с явным результатом, чем абзац, из которого потом приходится выковыривать решение. Но API здесь не исполняет инструменты и не становится самостоятельным агентом.</p>
+<h2>Ноль выходных токенов — не нулевой счёт</h2>
+<p>По <a href="https://aistudio.google.com/docs/pricing#gemini-decision">таблице тарифов</a>, платный вход стоит $0,10 за миллион токенов для перечисленных форматов. Выходных токенов нет, платить за них нечего. Есть и бесплатный уровень, но его условия использования данных отличаются от платного.</p>
+<p>Общий документ внутри одного запроса учитывается один раз. Каждый дополнительный вопрос добавляет собственные инструкции, критерии и оформление. Поэтому «1000 вопросов» не означает «1000 бесплатных проверок».</p>
+<p>Условный расчёт: 10 000 входных токенов стоят $0,001. Если тот же документ отправить в 100 отдельных запросах, только его повторный ввод обойдётся в $0,10 — ещё до инструкций. Это арифметика тарифа, не мой замер экономии: реальные размеры запросов будут другими.</p>
+<p>Для такого случая подходит принцип «лёгкие модели для лёгких задач». О том, где специализация полезнее очередного флагмана, я пишу и в <a href="https://t.me/galaktionov_hub?start=dzen">канале о практической работе с ИИ</a>.</p>
+<p>Есть ограничение, которое легко пропустить: Decisions API не поддерживает кэш контекста и Batch API. Повторно передал документ отдельным запросом — его вход снова считается полностью. Заявленные Google 150–250 мс тоже не стоит превращать в обещание задержки для любого PDF и своей сети.</p>
+<figure><img src="/images/gemini-decisions-confidence/img2.png" alt="Одна общая пачка данных на 10 000 токенов против 100 повторных отправок с ценами $0,001 и $0,10 без стоимости вопросов" loading="lazy"><figcaption><em>При тарифе $0,10 за миллион токенов сто повторных отправок оплачиваются заново; вопросы добавляют свой расход.</em></figcaption></figure>
+<p><em>При тарифе $0,10 за миллион токенов сто повторных отправок оплачиваются заново; вопросы добавляют свой расход.</em></p>
+<h2>Уверенность не заменяет разрешение</h2>
+<p>Самая важная часть <a href="https://aistudio.google.com/docs/decisions-api">документации</a> — предупреждение о выборе: модель распределяет вероятности между предложенными вариантами, даже если подходящего среди них нет. Если оставить только «вернуть деньги» и «отправить замену», обычный вопрос о доставке тоже получит одного из победителей.</p>
+<p>Нужны вариант «другое», отдельная проверка соответствия задаче и маршрут к человеку. Порог уверенности выбирают на размеченных примерах своего потока, с учётом цены двух ошибок: пропустить проблему или запустить лишнее действие. Просто поставить красивое 0,9 — ещё не проверка качества.</p>
+<p>У бинарного ответа есть дополнительная ловушка. Вероятность «да» и уверенность — не одно и то же: уверенное «нет» тоже даёт высокую уверенность. Перед возвратом денег надо проверять именно нужный исход, а не только число в поле confidence.</p>
+<p>Я бы начинал с сортировки обращений без финансовых последствий. Сохранял вход, выбор, оценку уверенности и решение оператора. Уже потом разрешал автоматический маршрут там, где ошибки понятны и приемлемы. Срок заказа, сумму возврата и полномочия на платёж всё равно должен проверять обычный код.</p>
+<p>Для меня ценность релиза в разделении ролей: модель оценивает неоднозначный текст, программа применяет правила. Убрали болтовню — хорошо. Убирать вслед за ней контроль я бы не стал.</p>
+<p>Какую ошибку в своей автоматизации ты готов принять: лишнюю передачу человеку или неверное действие без спроса? Напиши в комментариях, где проходит граница.</p>
+<p>Больше разборов важнейших событий индустрии и <a href="https://t.me/galaktionov_hub?start=dzen">готовая библиотека промтов</a> — в канале @galaktionov_hub.</p>
+    </article>
+  </div>
+</body>
+</html>
