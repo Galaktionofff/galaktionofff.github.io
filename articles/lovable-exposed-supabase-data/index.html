@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Lovable и открытые базы: что скрывается за цифрой 30%</title>
+  <meta name="description" content="Я остановился на исследовании Lovable не из-за страшного заголовка про ИИ-код. Важнее другое: как легко принять работающий интерфейс за проверенную модель доступа.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lovable и открытые базы: что скрывается за цифрой 30%">
+  <meta property="og:description" content="Я остановился на исследовании Lovable не из-за страшного заголовка про ИИ-код. Важнее другое: как легко принять работающий интерфейс за проверенную модель доступа.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/lovable-exposed-supabase-data/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/lovable-exposed-supabase-data/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/lovable-exposed-supabase-data/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Lovable и открытые базы: что скрывается за цифрой 30%</h1>
+      <div class="meta">16 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Lovable и открытые базы: что скрывается за цифрой 30%</h1>
+<p>Приложение выглядит готовым, форма регистрации работает, база подключена. А потом выясняется: записи о пользователях можно получить без входа в аккаунт. Не взламывая сервер — с теми правами, которые само приложение выдаёт браузеру.</p>
+<p>Я остановился на исследовании Lovable не из-за страшного заголовка про ИИ-код. Важнее другое: как легко принять работающий интерфейс за проверенную модель доступа.</p>
+<figure><img src="/images/lovable-exposed-supabase-data/img1.png" alt="Эмблема Lovable над приложением, браузер соединён с открытой таблицей пользовательских записей" loading="lazy"><figcaption><em>У красивой формы может оказаться совсем некрасивый маршрут к базе.</em></figcaption></figure>
+<p><em>У красивой формы может оказаться совсем некрасивый маршрут к базе.</em></p>
+<h2>Что исследователи действительно измерили</h2>
+<p><a href="https://www.crissyfield.de/research/lovable-en/">Crissy Field</a> совместно с Handelsblatt изучила 159 041 проект Lovable, найденный в Common Crawl за период с декабря 2025-го по сентябрь 2026-го. Из них 34 545 использовали Supabase. На 24 664 сайтах записи из базы приходили уже при загрузке страницы без авторизации. Это <strong>не равно</strong> 24 664 утечкам: публичный каталог тоже должен показывать данные гостю.</p>
+<p>Дальше исследователи делали дополнительные запросы только на чтение с тем же ключом API, который использует приложение. На 7 403 из этих 24 664 сайтов обнаружились доступные таблицы с адресами электронной почты — всего 10 560 таблиц. Отсюда и 30%. Это доля внутри <em>отобранной группы сайтов</em>, а не доля всех приложений Lovable.</p>
+<p>Авторы отдельно предупреждают: почта в таблице может быть публичным контактом или тестовой записью. И наоборот, личные данные без почты этот способ не ловит. Выборка Common Crawl не представляет все проекты платформы. Поэтому выдавать 30% за подтверждённый уровень утечек было бы нечестно.</p>
+<figure><img src="/images/lovable-exposed-supabase-data/img2.png" alt="Четыре вложенные группы проектов: 159 041 найденных, 34 545 с Supabase, 24 664 с данными при загрузке, 7 403 с доступными таблицами почты" loading="lazy"><figcaption><em>30% относятся к последней проверенной группе, а не ко всей платформе.</em></figcaption></figure>
+<p><em>30% относятся к последней проверенной группе, а не ко всей платформе.</em></p>
+<h2>За сухой статистикой есть настоящие данные</h2>
+<p>Оговорки не отменяют конкретных случаев. Исследователи получили доступ к более чем 80 000 профилей немецкого форума и более чем 200 000 сообщений. В другом сервисе — к более чем 1 000 записей с номерами паспортов, сроками действия и гражданством. Ещё один случай — 280 000 отправленных клиентам писем. Это объём фактически просмотренных записей, не оценка всей базы.</p>
+<p>Исследователи не установили, воспользовался ли кто-то ещё этим доступом. Доступность данных и доказанное злоупотребление — разные утверждения. Но для владельца проекта отсутствие следов злоупотребления не повод оставить доступ как есть.</p>
+<h2>Где проходит граница полномочий</h2>
+<p>Публичный ключ Supabase в браузере сам по себе не секрет. Он предназначен для клиентского приложения. Вопрос в том, что может сделать роль гостя с этим ключом: какие таблицы открыты, какие операции разрешены и какие строки возвращаются. Привилегированный <code>service_role</code>-ключ в браузере — уже отдельная грубая ошибка; исследование не требует предполагать, что он был в этих проектах.</p>
+<p><a href="https://supabase.com/docs/guides/database/postgres/row-level-security">Документация Supabase</a> разделяет grants — разрешение на операцию — и RLS-политики, которые фильтруют строки. Для приватной таблицы мало просто «включить RLS» или нарисовать экран входа. Нужно убрать лишние права <code>anon</code>, задать политики для нужных ролей и проверить отрицательный сценарий: чужой пользователь не видит запись. Представления и серверные функции тоже требуют проверки.</p>
+<p>Я бы начал с одной записи, которую точно нельзя показывать гостю: открыл приложение без сессии, проверил ответ API, затем вошёл под другим тестовым пользователем. Если ответ содержит чужую запись — интерфейс уже не имеет значения. После исправления повторил бы тест для чтения и записи, а не ограничился зелёным значком сканера.</p>
+<figure><img src="/images/lovable-exposed-supabase-data/img3.png" alt="Два изолированных пользователя и гость обращаются к базе, приватная запись доступна только владельцу" loading="lazy"><figcaption><em>Нужная проверка — не наличие экрана входа, а отказ в доступе к чужой строке.</em></figcaption></figure>
+<p><em>Нужная проверка — не наличие экрана входа, а отказ в доступе к чужой строке.</em></p>
+<h2>Сканер — помощник, не приёмщик</h2>
+<p>У Lovable уже есть <a href="https://docs.lovable.dev/features/security">проверки безопасности</a>: быстрый скан выполняется при публикации, глубокий можно запустить отдельно. Платформа указывает на ошибочные политики RLS и рекомендует пересматривать их после изменений. Это полезно, но и собственная документация не заменяет проверку того, какие данные действительно получает чужой клиент.</p>
+<p>Меня в этой истории тревожит не скорость сборки на Lovable. Быстро собрать прототип нормально. Опасно перенести ту же скорость на запуск с настоящими паспортами и перепиской, не проверив права. В проекте с данными людей я бы поручил отдельному человеку посмотреть схему доступа до публикации и после серьёзных изменений. Если такого человека нет — сначала убрал бы чувствительные данные из прототипа.</p>
+<p>А ты проверял своё приложение от имени гостя и другого пользователя — или пока доверяешь экрану входа и отчёту сканера?</p>
+    </article>
+  </div>
+</body>
+</html>
