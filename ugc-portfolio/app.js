@@ -333,6 +333,11 @@
       });
       bottom.appendChild(prices);
 
+      if (srv.note) {
+        const noteEl = el("p", "service-note", srv.note);
+        bottom.appendChild(noteEl);
+      }
+
       const cta = el("a", "btn btn-outline service-select-btn", srv.ctaLabel);
       cta.href = "#contact";
       cta.style.marginTop = "16px";
