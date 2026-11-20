@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Как запустить Claude Code на сервере и управлять им с телефона?</title>
+  <meta name="description" content="Одного токена бота мало: доступ к агенту заканчивается проверкой отправителя.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Как запустить Claude Code на сервере и управлять им с телефона?">
+  <meta property="og:description" content="Одного токена бота мало: доступ к агенту заканчивается проверкой отправителя.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/kak-zapustit-claude-code-na-vps-i-upravlyat-s-telefona/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/kak-zapustit-claude-code-na-vps-i-upravlyat-s-telefona/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/kak-zapustit-claude-code-na-vps-i-upravlyat-s-telefona/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Как запустить Claude Code на сервере и управлять им с телефона?</h1>
+      <div class="meta">20 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Как запустить Claude Code на сервере и управлять им с телефона?</h1>
+<p>Ноутбук закрылся — агент пропал. Перенос Claude Code на VPS решает только половину проблемы: процессу ещё нужен постоянный запуск, а сообщениям с телефона — защищённый канал. Иначе вместо карманного помощника получится открытый терминал на чужой машине.</p>
+<p>В <a href="https://www.youtube.com/watch?v=DMdqpLr2DlQ">демонстрации Нейта Херка</a> агент работает на облачном сервере и отвечает через бота. Я бы повторял этот сценарий не по рекламному таймеру «10 минут», а по контрольным точкам: вход, связь, права, восстановление после перезагрузки.</p>
+<figure><img src="/images/kak-zapustit-claude-code-na-vps-i-upravlyat-s-telefona/img1.png" alt="Claude Code на удалённом сервере отвечает на сообщение с телефона через защищённый канал" loading="lazy"><figcaption><em>Сервер держит сессию, а телефон служит только окном для сообщений.</em></figcaption></figure>
+<p><em>Сервер держит сессию, а телефон служит только окном для сообщений.</em></p>
+<h2>Сначала решите, нужен ли вообще бот</h2>
+<p>Самый короткий маршрут — VPS с установленным Claude Code, SSH-доступ и рабочий каталог проекта. По <a href="https://code.claude.com/docs/en/channels">официальной документации каналов</a>, Telegram-плагин не обязателен для работы самого агента. Если вы подключаетесь к серверу с ноутбука по SSH, на этом настройку можно остановить. Бот нужен, когда хочется отправить задачу с телефона и получить ответ там же.</p>
+<p>В ролике Херк выбирает образ VPS с предустановленным Claude Code, проверяет <code>tmux</code> и обнаруживает, что <code>bun</code> отсутствует. Это разные зависимости: Claude Code запускается без Telegram-канала, а официальные плагины каналов требуют Bun. Предустановка у хостера не заменяет авторизацию Anthropic; вход через подписку или API настраивается отдельно. Цена VPS тоже отдельна от оплаты модели. Обещание, что «сервер никогда не выключается», я бы сразу заменил проверкой сервиса после рестарта.</p>
+<h2>Подключите канал, не отдавая сервер всему чату</h2>
+<p>Последовательность у Anthropic конкретная: создать бота в BotFather, установить <code>telegram@claude-plugins-official</code> через <code>/plugin install</code>, передать токен команде <code>/telegram:configure</code>, затем перезапустить Claude Code с <code>--channels plugin:telegram@claude-plugins-official</code>. После первого сообщения бот выдаёт код сопряжения; его подтверждают командой <code>/telegram:access pair &lt;code&gt;</code>, после чего ставят <code>/telegram:access policy allowlist</code>. Если бот молчит, первым делом проверьте, жив ли процесс с флагом <code>--channels</code>.</p>
+<figure><img src="/images/kak-zapustit-claude-code-na-vps-i-upravlyat-s-telefona/img2.png" alt="Четыре этапа допуска сообщения к агенту: бот, работающий канал, сопряжение, список разрешённых отправителей" loading="lazy"><figcaption><em>Одного токена бота мало: доступ к агенту заканчивается проверкой отправителя.</em></figcaption></figure>
+<p><em>Одного токена бота мало: доступ к агенту заканчивается проверкой отправителя.</em></p>
+<p>Я бы не переносил из демонстрации совет складывать пароль root и токены в проектный <code>.env</code>, который агент может прочитать или случайно отправить в репозиторий. Секреты держите вне проекта в хранилище с ограниченным доступом; для SSH используйте отдельного пользователя и ключи, а права агента на файлы и команды ограничьте. Список разрешённых отправителей фильтрует входящие сообщения, но не превращает выполняемые команды в безопасные. Присланный извне текст всё равно способен содержать вредоносные инструкции.</p>
+<h2>Проверьте не приветствие, а отказоустойчивость</h2>
+<p>У Херка бот отвечает после настройки, а затем после перезапуска VPS: для его конфигурации создан фоновый сервис. Это важнее первого красивого ответа. <code>tmux</code> сохраняет терминальную сессию при разрыве SSH-соединения, но сам по себе не гарантирует запуск после перезагрузки машины. Нужно проверить, какой сервис поднимает Claude Code, с какими правами он работает и где смотреть его журнал. Название службы из чужого видео копировать вслепую не стоит.</p>
+<p>Моя проверка была бы приземлённой: отправить тестовое сообщение, убедиться в ответе, перезагрузить VPS, повторить сообщение и проверить, что посторонний аккаунт не получает доступ к агенту. Затем остановить канал и убедиться, что бот перестал отвечать. По документации события приходят только пока открыта сессия Claude Code; постоянно включённый VPS без запущенного процесса не поможет.</p>
+<p>Херк предлагает понизить порог автосжатия контекста до 400 тысяч и называет 960 тысяч значением по умолчанию. Я не стал бы переносить эти числа в рецепт без сверки с документацией установленной версии и вашей модели: пределы контекста и поведение длинной сессии меняются. Надёжнее завести отдельные задачи и хранить важные решения в файлах проекта, не полагаясь на бесконечную историю чата.</p>
+<h2>Когда такая связка оправданна</h2>
+<p>Мне нравится идея телефона как пульта для уже настроенной рабочей среды: можно спросить статус сборки или запустить ограниченную процедуру без ноутбука. Но root-доступ, живой бот и полный набор API-ключей в одном сеансе — плохая цена за удобство. Сначала проверьте SSH-версию без канала. Потом добавляйте бот, сопряжение и фоновую службу по одному, с проверкой после каждого шага.</p>
+<p>А какую задачу вы действительно доверили бы агенту с телефона без ручного подтверждения — просмотр логов, запуск тестов или изменение рабочего сервера?</p>
+    </article>
+  </div>
+</body>
+</html>
