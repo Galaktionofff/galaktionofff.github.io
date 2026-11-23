@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Стоит ли менять рабочую модель на Gemini 4 Neon?</title>
+  <meta name="description" content="18 ноября Google представила Gemini 4 Neon. Я бы включил её в ограниченное сравнение, но не переключал основной поток задач в день релиза: сначала нужен одинаковый тест для старой и новой модели.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Стоит ли менять рабочую модель на Gemini 4 Neon?">
+  <meta property="og:description" content="18 ноября Google представила Gemini 4 Neon. Я бы включил её в ограниченное сравнение, но не переключал основной поток задач в день релиза: сначала нужен одинаковый тест для старой и новой модели.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/stoit-li-menyat-rabochuyu-model-na-gemini-4-neon/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/stoit-li-menyat-rabochuyu-model-na-gemini-4-neon/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/stoit-li-menyat-rabochuyu-model-na-gemini-4-neon/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Стоит ли менять рабочую модель на Gemini 4 Neon?</h1>
+      <div class="meta">23 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Стоит ли менять рабочую модель на Gemini 4 Neon?</h1>
+<p>Можно получить дешёвый первый ответ и дорогой финальный результат. У новой модели Google цена входа и выхода известна заранее, а число повторных попыток в вашем проекте — нет. Именно этот разрыв важнее места в рейтинге, когда агенту доверен рабочий репозиторий.</p>
+<p>18 ноября Google представила Gemini 4 Neon. Я бы включил её в ограниченное сравнение, но не переключал основной поток задач в день релиза: сначала нужен одинаковый тест для старой и новой модели.</p>
+<figure><img src="/images/stoit-li-menyat-rabochuyu-model-na-gemini-4-neon/img1.png" alt="Выбор рабочей модели: один репозиторий разделён на два маршрута, результаты сходятся у блока проверки" loading="lazy"><figcaption><em>Две модели получают одно задание, а решение о замене принимается после проверки результата.</em></figcaption></figure>
+<p><em>Две модели получают одно задание, а решение о замене принимается после проверки результата.</em></p>
+<h2>Сначала проверьте, куда у вас вообще есть доступ</h2>
+<p>По <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/">анонсу Google</a>, Neon доступна разработчикам в платном Gemini API через AI Studio; в Antigravity её предлагают подписчикам Google AI Pro и Ultra. Наличие модели в приложении не даёт автоматически ту же квоту или тот же счёт, что в API. Если ваш агент запускается через стороннего посредника, сначала проверьте конкретный идентификатор модели, маршрут запроса и условия провайдера.</p>
+<p>У <a href="https://aistudio.google.com/docs/models/gemini-4-neon">карточки модели</a> есть важная сноска: окно в 1 048 576 токенов общее для входа и выхода. Обычная синхронная генерация ограничена 65 536 выходными токенами; выпуск вплоть до миллиона — отдельный режим long decode. Это не обещание, что длинный репозиторий целиком поместится вместе с историей вызовов инструментов и готовым ответом.</p>
+<p>Google описывает четыре уровня глубины рассуждения. Поэтому сравнение при разных настройках effort нечестно: более долгий прогон может изменить и качество, и расход. Я записал бы конфигурацию до первого теста, а не после красивого скриншота.</p>
+<h2>Считайте законченный цикл, а не строку тарифа</h2>
+<p>В <a href="https://aistudio.google.com/docs/pricing#gemini-4-neon">таблице Gemini API</a> на 23 ноября указаны $3 за миллион входных токенов и $15 за миллион выходных, включая токены рассуждений. Кэшированный вход — $0,15 за миллион, но у Neon поддерживается только неявный кэш: на скидку нельзя закладываться как на обязательный результат каждого запроса. Бесплатного API-тарифа для этой модели нет.</p>
+<p>Платёж за одну задачу складывается из всех запросов агента: исходного контекста, прочитанных файлов, результатов инструментов, повторных попыток и выхода. Для наглядности возьмём условный одиночный вызов без кэша: 100 тысяч входных и 10 тысяч выходных токенов. По указанному тарифу он стоит $0,45. Если агент после теста трижды перечитывает проект и переделывает код, цена итоговой принятой правки уже не равна этим сорока пяти центам. Это арифметический пример, не мой замер Neon.</p>
+<figure><img src="/images/stoit-li-menyat-rabochuyu-model-na-gemini-4-neon/img2.png" alt="Условный одиночный вызов: вход 100 тысяч токенов стоит 0,30 доллара, выход 10 тысяч стоит 0,15 доллара, итого 0,45 доллара" loading="lazy"><figcaption><em>Сумма за один вызов понятна, но исправления и повторные чтения появятся в отдельной строке расходов.</em></figcaption></figure>
+<p><em>Сумма за один вызов понятна, но исправления и повторные чтения появятся в отдельной строке расходов.</em></p>
+<p>Google пишет о снижении стоимости задачи относительно Carbon на своих сравнительных тестах при уровне high. Это не значит, что ваш баг обойдётся дешевле на тот же процент. Бенчмарк, настройка рассуждения и агентская обвязка влияют на результат: в анонсе результат SWE-sweep mini-SWE и результат того же семейства в Antigravity заметно различаются. Приписывать всю разницу одним весам модели было бы слишком удобно.</p>
+<h2>Тест, после которого можно принимать решение</h2>
+<p>Возьмите несколько задач из своего потока: исправление бага с воспроизводимым тестом, правку нескольких файлов с жёстким ограничением на побочные изменения и анализ документа с проверяемыми ссылками. Не выбирайте задачи, ответы на которые уже знаете по рекламному ролику. Для каждой создайте одинаковую исходную копию проекта и заранее запишите критерий приёмки.</p>
+<p>Дайте обеим моделям одинаковые инструменты, лимит времени и уровень доступа. В моём стеке с Hermes и Antigravity я прежде всего сравнил бы итоговый diff, независимый прогон тестов и логи затрат — отдельно от уверенного текста отчёта агента. Прохождение тестов ещё не оправдывает случайную перепись соседнего модуля. А если одна модель зовёт поиск, а другой его запретили, такой забег ничего не решает.</p>
+<p>Меня здесь больше интересует не победитель таблички, а цена принятой работы. Записывайте число попыток, входные и выходные токены с учётом reasoning, попадания в кэш и минуты ручной доводки. Если новая модель стабильно закрывает конкретный класс задач при приемлемом полном счёте, переведите сначала только этот маршрут. Остальные не трогайте до собственных проверок.</p>
+<p>Мой вывод скучный: Neon заслуживает места в тестовом контуре, а не немедленной замены основного агента. Рейтинг показывает, какие задачи стоит попробовать; решение о миграции принимает ваша проверка на реальном коде. Какую одну рабочую задачу вы дали бы двум моделям на одинаковых условиях — и что сочли бы доказательством победы?</p>
+    </article>
+  </div>
+</body>
+</html>
