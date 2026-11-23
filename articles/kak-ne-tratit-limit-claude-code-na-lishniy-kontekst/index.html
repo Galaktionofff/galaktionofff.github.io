@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Как перестать тратить лимит Claude Code на старые задачи?</title>
+  <meta name="description" content="Старые задачи продолжают занимать контекст, пока ты не начнёшь новую сессию.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Как перестать тратить лимит Claude Code на старые задачи?">
+  <meta property="og:description" content="Старые задачи продолжают занимать контекст, пока ты не начнёшь новую сессию.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/kak-ne-tratit-limit-claude-code-na-lishniy-kontekst/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/kak-ne-tratit-limit-claude-code-na-lishniy-kontekst/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/kak-ne-tratit-limit-claude-code-na-lishniy-kontekst/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Как перестать тратить лимит Claude Code на старые задачи?</h1>
+      <div class="meta">23 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Как перестать тратить лимит Claude Code на старые задачи?</h1>
+<p>Ты исправил баг, перешёл к письму клиенту, а потом попросил агента набросать тесты. Во всех трёх случаях он получил историю предыдущих разговоров. Даже когда повторный ввод обслуживает кэш, длинный чат остаётся длинным: за ненужный контекст всё равно платят токенами или расходуют лимит подписки.</p>
+<p>Я взял за отправную точку <a href="https://www.youtube.com/watch?v=0RF9ml43ups">разбор Нейта Херка</a> о привычках пользователей Claude Code, но проверил советы по документации Anthropic. Там есть существенная оговорка: цена API-запроса и полоска недельного лимита подписки — разные вещи. Точную экономию в часах или процентах здесь никто не гарантирует.</p>
+<figure><img src="/images/kak-ne-tratit-limit-claude-code-na-lishniy-kontekst/img1.png" alt="Длинная история трёх разных задач перегружает окно Claude Code, отдельная чистая сессия содержит только текущие файлы" loading="lazy"><figcaption><em>Старые задачи продолжают занимать контекст, пока ты не начнёшь новую сессию.</em></figcaption></figure>
+<p><em>Старые задачи продолжают занимать контекст, пока ты не начнёшь новую сессию.</em></p>
+<h2>Сначала посмотри, что расходуется</h2>
+<p>В Claude Code команда <code>/usage</code> показывает расход сессии по вводу, выводу, чтению и записи кэша. Для API-пользователя оценка в долларах считается по токенам; для подписчика это не счёт к оплате, а отдельные показатели плана. Если команда показывает много <code>cache read</code>, это не означает нулевой расход: кэшированный ввод дешевле обычного, но не бесплатен.</p>
+<p><a href="https://code.claude.com/docs/en/prompt-caching">Документация Anthropic о кэшировании</a> описывает три слоя: системные инструкции и инструменты, контекст проекта, затем историю беседы. Кэш повторно использует совпадающий префикс. Когда меняются определения инструментов или прежние сообщения, часть истории приходится обработать заново. Но из этого не следует, что любой переход на дешёвую модель непременно дороже: результат зависит от длины истории, тарифа модели и дальнейшего числа запросов. В ролике Херка это скорее предупреждение о скрытой цене переключения, а не универсальная формула.</p>
+<h2>Раздели работу по задачам</h2>
+<p>Самый полезный приём для меня — завершать задачу отдельной сессией. <code>/clear</code> открывает чистую историю; когда нужно сохранить результаты, сначала записываю важное в файл проекта либо делаю краткую передачу контекста. Если задача продолжается и история уже разрослась, <code>/compact</code> делает резюме вместо полного чата. Это не бесплатная кнопка: сжатие само читает историю и пересобирает кэш.</p>
+<p>Вместо «найди ошибку во всём репозитории» дай агенту точку входа: файл, функцию, ожидаемое поведение и команду проверки. Меньше случайно открытых файлов — меньше шума в ответе. Но не запрещай поиск совсем: если названный файл не объясняет сбой, агенту нужны соседние модули и тесты. Я предпочитаю разрешить расширить область после первой проверяемой гипотезы, а не заставлять его угадывать по одному фрагменту.</p>
+<figure><img src="/images/kak-ne-tratit-limit-claude-code-na-lishniy-kontekst/img2.png" alt="Три задачи отделены друг от друга: завершённый баг, чистая сессия для письма, новая сессия с указанным файлом тестов" loading="lazy"><figcaption><em>Новая задача не обязана тащить за собой переписку о предыдущей.</em></figcaption></figure>
+<p><em>Новая задача не обязана тащить за собой переписку о предыдущей.</em></p>
+<h2>Убери постоянный груз из инструкций</h2>
+<p><code>CLAUDE.md</code> загружается как проектный контекст. Если туда складывать каждый временный рецепт, агент будет видеть лишние правила в неподходящих задачах. <a href="https://code.claude.com/docs/en/memory">Руководство Claude Code</a> советует держать файл коротким, ориентир — менее 200 строк на файл. Это рекомендация по управляемости, а не жёсткий предел продукта. Разовые процедуры разумнее вынести в навыки, которые открываются по необходимости; неизменные ограничения проекта оставить на виду.</p>
+<p>Я бы начал с ревизии противоречий: одна строка требует писать комментарии, другая запрещает их. Такую пару нельзя «оптимизировать» одной лишь сменой модели. Потом проверил бы, какие инструкции действительно нужны каждому запросу. Удалять все правила разом опасно: сначала сохрани контрольный набор задач, прогони до и после и сравни не только длину контекста, но и качество результата.</p>
+<p>Кэш живёт ограниченное время: стандартное время жизни в API — пять минут с обновлением при использовании; у Claude Code с подпиской обычно около часа. Не советую отправлять пустые запросы ради его «подогрева»: новый запрос тоже расходует ресурсы, а выигрыш зависит от конкретной сессии. Мой выбор проще: проверить <code>/usage</code>, разделить несвязанные задачи и не держать лишние инструкции постоянно загруженными.</p>
+<p>Где у тебя чаще уходит лимит: на длинный чат с несколькими задачами, на чтение всего проекта или на постоянно разрастающийся <code>CLAUDE.md</code>?</p>
+    </article>
+  </div>
+</body>
+</html>
