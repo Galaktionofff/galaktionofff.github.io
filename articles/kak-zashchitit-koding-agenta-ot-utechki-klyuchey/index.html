@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Как защитить кодинг-агента от утечки ключей и чужих команд?</title>
+  <meta name="description" content="Команда из конфигурации и открытый ключ дают атакующему разные пути, но оба начинаются на машине разработчика.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Как защитить кодинг-агента от утечки ключей и чужих команд?">
+  <meta property="og:description" content="Команда из конфигурации и открытый ключ дают атакующему разные пути, но оба начинаются на машине разработчика.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/kak-zashchitit-koding-agenta-ot-utechki-klyuchey/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/kak-zashchitit-koding-agenta-ot-utechki-klyuchey/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/kak-zashchitit-koding-agenta-ot-utechki-klyuchey/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Как защитить кодинг-агента от утечки ключей и чужих команд?</h1>
+      <div class="meta">24 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Как защитить кодинг-агента от утечки ключей и чужих команд?</h1>
+<p>Один файл настроек способен превратить привычный запуск помощника в запуск чужого скрипта. А пароль, однажды вставленный в команду агента, может остаться не только в истории диалога, но и в локальном списке разрешённых команд. Я бы начал аудит с этих двух мест, а не с очередного обещания «безопасного промпта».</p>
+<figure><img src="/images/kak-zashchitit-koding-agenta-ot-utechki-klyuchey/img1.png" alt="Кодинг-агент рядом с двумя путями риска — конфигурационным файлом запуска и открытым ключом доступа" loading="lazy"><figcaption><em>Команда из конфигурации и открытый ключ дают атакующему разные пути, но оба начинаются на машине разработчика.</em></figcaption></figure>
+<p><em>Команда из конфигурации и открытый ключ дают атакующему разные пути, но оба начинаются на машине разработчика.</em></p>
+<h2>Сначала проверьте, что запускается без вас</h2>
+<p>В <a href="https://www.youtube.com/watch?v=0q0UbO4oqgQ">разборе Коула Медина</a> меня зацепила простая мысль: агенту можно дать опасную команду не только в чате. Настройки проекта, хуки и подключённые инструменты переживают отдельную сессию. Хук — это команда или обработчик, который срабатывает на событие вроде начала работы либо вызова инструмента. Если репозиторий чужой, его конфигурация тоже чужая, даже когда выглядит как обычный JSON.</p>
+<p>У Claude Code общие настройки проекта лежат в <code>.claude/settings.json</code>, личные — в <code>.claude/settings.local.json</code>. Последний файл клиент старается не отправлять в Git, когда создаёт его сам; если сделали вручную, <a href="https://code.claude.com/docs/en/settings">добавьте исключение</a> сами и проверьте <code>git ls-files .claude/settings.local.json</code>. Отдельно просмотрите команды хуков в <code>.claude/settings.json</code> и подключённые MCP-серверы: это не декоративные записи, а возможные точки выполнения кода или доступа к данным. В самом Claude Code доступны <code>/hooks</code> и <code>/mcp</code>; для других агентов названия и места хранения отличаются.</p>
+<p>Я бы не нажимал «доверять проекту» до просмотра изменений в этих файлах. Если кто-то прислал PR с правкой зависимостей и настроек агента, читать нужно обе части. Правило «модель сама разберётся» здесь работает против вас: она исполняет предоставленное окружение, а не устанавливает происхождение каждого обработчика.</p>
+<h2>Затем найдите секреты вне хранилища секретов</h2>
+<p>Плохой маршрут выглядит так: вставили токен в чат → агент построил команду с токеном в аргументах → разрешили её навсегда → локальный конфиг сохранил строку. Секрет может оказаться и в истории сессии, и в файле настроек, а при неосторожном коммите — в репозитории. Не считайте <code>.gitignore</code> лекарством для уже опубликованного ключа: <a href="https://docs.github.com/en/code-security/concepts/secret-security/secret-leakage-risks">GitHub рекомендует</a> отозвать и заменить раскрытый секрет. Удаление строки из текущего файла не стирает её из истории Git.</p>
+<figure><img src="/images/kak-zashchitit-koding-agenta-ot-utechki-klyuchey/img2.png" alt="Один ключ доступа попадает из диалога в команду и затем в локальные настройки, три крупных соединённых блока" loading="lazy"><figcaption><em>Один раз показанный агенту токен может оставить несколько копий в разных местах.</em></figcaption></figure>
+<p><em>Один раз показанный агенту токен может оставить несколько копий в разных местах.</em></p>
+<p>Пройдите маршрут руками: проверьте локальные разрешения, историю команд и Git-историю на следы секретов; найденные значения не копируйте в отчёт аудита. Включите доступное для репозитория сканирование секретов и защиту при отправке изменений. Не запускайте случайный «аудиторский» скрипт из сети с теми же правами, что у агента: сначала прочитайте код и его зависимости. У Медина есть <a href="https://github.com/coleam00/skills/tree/main/.claude/skills/agent-config-audit">открытый инструмент аудита</a>, но его вывод — подсказка для проверки, а не гарантия безопасности.</p>
+<h2>Ограничьте ущерб, даже если ключ утечёт</h2>
+<p>Для каждой среды выпускайте отдельный ключ с минимальными правами. На провайдере выставьте лимит расхода на ключ и уведомления, если они доступны. Например, <a href="https://openrouter.ai/docs/api_reference/authentication">OpenRouter позволяет</a> задать кредитный предел отдельному API-ключу; без него украденный ключ способен расходовать доступный баланс. Проверьте, какие расходы входят в лимит: при использовании собственных ключей внешнего поставщика (BYOK) это зависит от настройки учёта.</p>
+<p>Здесь не стоит путать три действия. Лимит сдерживает счёт, но не возвращает секретность. Запрет агенту читать <code>.env</code> уменьшает один путь доступа, но не мешает другому процессу с теми же правами прочитать файл. Изоляция рабочего окружения и отзыв украденного ключа решают другие задачи. Если уже видите секрет в публичной истории, первым делом замените его у поставщика, а потом разбирайтесь с очисткой истории.</p>
+<h2>Что я оставил бы в рабочем процессе</h2>
+<p>Перед запуском нового репозитория — просмотр настроек и хуков; перед выдачей доступа — отдельные ключи и предел расходов; перед коммитом — проверка на секреты. Повторяйте это после изменений зависимостей и конфигурации, а не только при первом клонировании. Мне проще потерять несколько минут на ревью, чем обнаружить токен в публичном коммите после очередной «безобидной» правки агента.</p>
+<p>Какую точку у своего кодинг-агента вы проверяли последней: хуки, разрешённые команды или историю сессий?</p>
+    </article>
+  </div>
+</body>
+</html>
