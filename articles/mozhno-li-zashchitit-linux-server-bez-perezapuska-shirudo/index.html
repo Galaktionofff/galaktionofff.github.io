@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Можно ли защитить Linux-сервер без перезапуска с Shirudo?</title>
+  <meta name="description" content="Временная защита закрывает опасный путь, пока служба продолжает отвечать клиентам.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Можно ли защитить Linux-сервер без перезапуска с Shirudo?">
+  <meta property="og:description" content="Временная защита закрывает опасный путь, пока служба продолжает отвечать клиентам.">
+  <meta property="og:url" content="https://galaktionofff.github.io/articles/mozhno-li-zashchitit-linux-server-bez-perezapuska-shirudo/">
+  <meta property="og:image" content="https://galaktionofff.github.io/images/mozhno-li-zashchitit-linux-server-bez-perezapuska-shirudo/img1.png">
+  <link rel="canonical" href="https://galaktionofff.github.io/articles/mozhno-li-zashchitit-linux-server-bez-perezapuska-shirudo/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="../../feed.xml">
+  <style>
+    :root {
+      --background: #101418;
+      --bg: #101418;
+      --text: #e6e9ee;
+      --muted: #9aa4b2;
+      --link: #5ea3ff;
+      --border: #222a35;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .nav-back {
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .nav-back a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .nav-back a:hover {
+      text-decoration: underline;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    article p {
+      font-size: 1.05rem;
+      margin-bottom: 1.35rem;
+      color: var(--text);
+    }
+    article h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    article ol, article ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    article li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65;
+    }
+    article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    article a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-back">
+      <a href="../../">← Циничные строители</a>
+    </div>
+
+    <header>
+      <h1>Можно ли защитить Linux-сервер без перезапуска с Shirudo?</h1>
+      <div class="meta">24 ноября 2026 · 4 мин чтения</div>
+    </header>
+
+    <article>
+<h1>Можно ли защитить Linux-сервер без перезапуска с Shirudo?</h1>
+<p>Уязвимость уже известна, а исправление нельзя поставить до ночного окна обслуживания. Остановить сервис прямо сейчас — тоже плохой вариант. OpenAI и Cisco предлагают промежуточную защиту: небольшой «щит» для работающей системы, который проверяет опасное действие, пока команда готовит обычный патч. Это не замена обновлению.</p>
+<p>Меня в анонсе <a href="https://openai.com/index/introducing-shirudo/">Shirudo</a> заинтересовало не слово «ИИ», а право последнего решения. Код защиты может подготовить агент, но включить его на сервере должен оператор после проверки. Для инфраструктуры, на которой крутится клиентский сервис, разница принципиальная.</p>
+<figure><img src="/images/mozhno-li-zashchitit-linux-server-bez-perezapuska-shirudo/img1.png" alt="Работающий Linux-сервер защищён временным щитом на время подготовки постоянного исправления" loading="lazy"><figcaption><em>Временная защита закрывает опасный путь, пока служба продолжает отвечать клиентам.</em></figcaption></figure>
+<p><em>Временная защита закрывает опасный путь, пока служба продолжает отвечать клиентам.</em></p>
+<h2>Что именно включается без остановки</h2>
+<p>Shirudo — открытый проект для Linux. Его защитные программы могут подключаться через eBPF к определённым точкам системы: там наблюдать за действиями процесса или блокировать нужный путь атаки. Вместо запрета всей операции можно попытаться отсеять конкретный опасный сценарий. Перед применением команда оценивает влияние защиты на обычную работу сервиса; после одобрения оператором загружает щит.</p>
+<p>Но слово «eBPF» не объясняет весь показанный опыт. В <a href="https://isovalent.com/blog/post/cisco-openai-shirudo/">техническом разборе Cisco Isovalent</a> для Java4Shell агент подготовил изменение <strong>байткода Java</strong>, а не просто eBPF-фильтр. Проверку добавили к обработке входа Base64 в работающем Elasticsearch. В контролируемом испытании попытка эксплуатации не удалась, а сервис продолжил работать без перезапуска. Это один описанный сценарий, не обещание остановить любой эксплойт в любой версии Java.</p>
+<p>Я бы не ставил такой щит в один ряд с патчем OpenJDK. Он закрывает конкретный способ эксплуатации на период ожидания обновления; уязвимый код при этом не исчезает сам собой. Если атака находит другой путь, прежняя проверка может оказаться недостаточной.</p>
+<h2>Где проходит граница доверия</h2>
+<p>Агенту можно поручить поиск точки вмешательства и подготовку кода. Его предложение ещё нужно прогнать против воспроизведённой атаки и нормальной нагрузки: иначе защита остановит клиентов вместе с атакующим. Подписанный пакет подтверждает происхождение и целостность доставленного кода, а проверка программы ядром ограничивает допустимое поведение eBPF. Ни подпись, ни проверка ядра сами по себе не доказывают, что правило безопасности поймало все варианты атаки.</p>
+<figure><img src="/images/mozhno-li-zashchitit-linux-server-bez-perezapuska-shirudo/img2.png" alt="Агент предлагает временную защиту; оператор сравнивает исход атаки и обычного запроса перед включением" loading="lazy"><figcaption><em>Перед включением щита важны две проверки: атака блокируется, обычный запрос проходит.</em></figcaption></figure>
+<p><em>Перед включением щита важны две проверки: атака блокируется, обычный запрос проходит.</em></p>
+<p>В <a href="https://docs.shirudo.dev/start/quickstart.html">руководстве проекта</a> путь начинается не с команды «поставь на прод», а с Linux-хоста, KVM и тестовой виртуальной машины. Требуются инструменты сборки, подходящий тестовый kernel, TPM в гостевой системе и отдельная подпись защитного пакета. Руководство проводит через загрузку, проверку состояния и выгрузку пробного upatch. Это лабораторный маршрут для инженера, не кнопка защиты любого VPS за пять минут.</p>
+<p>Есть и важное ограничение примера: тестовую VM запускают напрямую с ядром и initrd, поэтому часть измерений загрузки отличается от производственной схемы. Проверка записи TPM говорит о том, что именно загрузили на целевой машине; она не оценивает качество логики щита. Я бы сперва проверил восстановление и путь отката, а уже потом обсуждал автономную доставку такого кода.</p>
+<h2>Кому это пригодится сейчас</h2>
+<p>Если сервис можно безопасно обновить сегодня — обновляй. Shirudo интереснее там, где у тебя есть окно между раскрытием ошибки и разрешённым перезапуском: долгоживущий сервис, строгие требования к доступности, подготовленная команда безопасности. Человеку, который держит один экспериментальный сайт, сложность сборки и проверки может обойтись дороже обычного планового обновления.</p>
+<p>Мне нравится сама постановка задачи: не просить модель «защити сервер», а дать ей узкий участок работы и проверять наблюдаемое поведение на двух наборах запросов. В моих автоматизациях на n8n я тоже стараюсь оставлять решение о рискованном действии за отдельным этапом контроля. Но результаты демонстрации Cisco нельзя переносить на мой стек или объявлять готовой универсальной защитой.</p>
+<p>Пока это открытая разработка и показанный контролируемый тест. Использовали бы вы временный щит на работающем сервере до выхода патча — или риск вмешательства в живой процесс для вас выше риска подождать окно обновления?</p>
+    </article>
+  </div>
+</body>
+</html>
