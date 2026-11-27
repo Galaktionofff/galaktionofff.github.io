@@ -96,51 +96,92 @@
     });
   }
 
+  function pluralizeVideos(count) {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    if (mod10 === 1 && mod100 !== 11) return `${count} ролик`;
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) {
+      return `${count} ролика`;
+    }
+    return `${count} роликов`;
+  }
+
   function renderVideosGrid() {
-    const grid = document.getElementById("videos-grid");
-    if (!grid) return;
-    grid.innerHTML = "";
+    const host = document.getElementById("videos-grid");
+    if (!host) return;
+    host.innerHTML = "";
 
-    const items =
+    const categories = data.videoCategories.filter((c) => c !== "Все");
+    const visibleCategories =
       activeVideoCategory === "Все"
-        ? data.videos
-        : data.videos.filter((v) => v.category === activeVideoCategory);
+        ? categories
+        : categories.filter((c) => c === activeVideoCategory);
 
-    items.forEach((video) => {
-      const card = el("button", "video-card");
-      card.type = "button";
-      card.addEventListener("click", () => openVideoModal(video));
+    visibleCategories.forEach((categoryName, groupIdx) => {
+      const groupItems = data.videos.filter((v) => v.category === categoryName);
+      if (!groupItems.length) return;
 
-      const thumb = el("div", "video-thumb");
-      if (video.coverUrl) {
-        const img = el("img");
-        img.src = video.coverUrl;
-        img.alt = video.title;
-        img.loading = "lazy";
-        thumb.appendChild(img);
-      } else {
-        const ph = el("div", "video-thumb-placeholder");
-        const topMeta = el("div", "video-top-meta");
-        topMeta.appendChild(el("span", "video-tag", video.category));
-        topMeta.appendChild(el("span", "video-duration", video.duration));
-        ph.appendChild(topMeta);
-        ph.appendChild(
-          el("span", "video-thumb-caption", "Нажмите для просмотра превью 9:16")
-        );
-        thumb.appendChild(ph);
-      }
+      const groupSection = el("div", "video-group");
+      const groupHeader = el("div", "video-group-header");
+      const titleWrap = el("div", "video-group-title-wrap");
+      titleWrap.appendChild(
+        el("span", "video-group-num", String(groupIdx + 1).padStart(2, "0") + "/")
+      );
+      titleWrap.appendChild(el("h3", "video-group-title", categoryName));
+      groupHeader.appendChild(titleWrap);
+      groupHeader.appendChild(
+        el("span", "pill pill-outline", pluralizeVideos(groupItems.length))
+      );
+      groupSection.appendChild(groupHeader);
 
-      const play = el("span", "play-badge", "▶");
-      thumb.appendChild(play);
-      card.appendChild(thumb);
+      const grid = el("div", "videos-grid");
+      groupItems.forEach((video) => {
+        const useExternalLink = !video.videoUrl && video.externalUrl && video.externalUrl !== "#";
+        const card = el(useExternalLink ? "a" : "button", "video-card");
 
-      const info = el("div", "video-info");
-      info.appendChild(el("div", "video-brand", video.brand));
-      info.appendChild(el("h3", "video-title", video.title));
-      info.appendChild(el("p", "video-goal", video.goal));
-      card.appendChild(info);
+        if (useExternalLink) {
+          card.href = video.externalUrl;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+        } else {
+          card.type = "button";
+          card.addEventListener("click", () => openVideoModal(video));
+        }
 
-      grid.appendChild(card);
+        const thumb = el("div", "video-thumb");
+        if (video.coverUrl) {
+          const img = el("img");
+          img.src = video.coverUrl;
+          img.alt = video.title;
+          img.loading = "lazy";
+          thumb.appendChild(img);
+        } else {
+          const ph = el("div", "video-thumb-placeholder");
+          const topMeta = el("div", "video-top-meta");
+          topMeta.appendChild(el("span", "video-tag", video.duration || "Reels"));
+          topMeta.appendChild(el("span", "video-duration", "9:16 ↗"));
+          ph.appendChild(topMeta);
+          ph.appendChild(
+            el("span", "video-thumb-caption", "Смотреть Reel в Instagram")
+          );
+          thumb.appendChild(ph);
+        }
+
+        const play = el("span", "play-badge", "▶");
+        thumb.appendChild(play);
+        card.appendChild(thumb);
+
+        const info = el("div", "video-info");
+        info.appendChild(el("div", "video-brand", video.brand));
+        info.appendChild(el("h4", "video-title", video.title));
+        info.appendChild(el("p", "video-goal", video.goal));
+        card.appendChild(info);
+
+        grid.appendChild(card);
+      });
+
+      groupSection.appendChild(grid);
+      host.appendChild(groupSection);
     });
   }
 

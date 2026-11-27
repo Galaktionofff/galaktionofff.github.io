@@ -52,7 +52,7 @@ window.PORTFOLIO_DATA = {
   // Подзаголовки секций
   sections: {
     videosSubtitle:
-      "[Вертикальные ролики 9:16 для Reels, Shorts и TikTok. Нажмите на карточку, чтобы открыть плеер или ссылку на оригинал.]",
+      "Подборка вертикальных роликов 9:16 по направлениям — нажмите на карточку, чтобы открыть Reel в Instagram.",
     resultsSubtitle:
       "[Реальные показатели охватов, вовлечённости и удержания по категориям Reels и фото-постов.]",
     formatsSubtitle:
@@ -65,75 +65,137 @@ window.PORTFOLIO_DATA = {
   },
 
   // Категории фильтра видео
-  videoCategories: ["Все", "Распаковки", "Обзоры", "GRWM", "Креатив / AI"],
+  videoCategories: [
+    "Все",
+    "Нативные интеграции и GRWM",
+    "Экспертный и образовательный UGC",
+    "Beauty UGC и демонстрация продукта",
+    "Трендовый и развлекательный UGC",
+    "АСМР распаковки"
+  ],
 
   // Карточки видео-портфолио (#videos)
   videos: [
     {
       id: "vid-1",
-      category: "Креатив / AI",
-      title: "[Танцевальный / динамичный ролик с продуктом]",
-      brand: "[Бренд / Ниша #1]",
-      duration: "0:18",
-      goal: "[Задача: нативная интеграция и охваты]",
-      coverUrl: "", // Например: "./assets/vid-1.jpg"
-      videoUrl: "", // Например: "./assets/vid-1.mp4"
-      externalUrl: "#"
+      category: "Нативные интеграции и GRWM",
+      title: "Reel #1 • Нативная интеграция / GRWM",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
+      coverUrl: "",
+      videoUrl: "",
+      externalUrl: "https://www.instagram.com/reel/DbBVeoloINa/?obrf=eWYwcHo0NW9qMmNi"
     },
     {
       id: "vid-2",
-      category: "Обзоры",
-      title: "[Экспертный обзор сервиса или продукта]",
-      brand: "[Бренд / Ниша #2]",
-      duration: "0:34",
-      goal: "[Задача: объяснить ценность за 30 секунд]",
+      category: "Нативные интеграции и GRWM",
+      title: "Reel #2 • Нативная интеграция / GRWM",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
       coverUrl: "",
       videoUrl: "",
-      externalUrl: "#"
+      externalUrl: "https://www.instagram.com/reel/Dcv5VLAolqX/?dlrf=Yng2ZmxrOTU0MWFi"
     },
     {
       id: "vid-3",
-      category: "GRWM",
-      title: "[GRWM — сборы с использованием бренда]",
-      brand: "[Бренд / Ниша #3]",
-      duration: "0:42",
-      goal: "[Задача: показать продукт в живом контексте]",
+      category: "Экспертный и образовательный UGC",
+      title: "Reel #1 • Экспертный UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
       coverUrl: "",
       videoUrl: "",
-      externalUrl: "#"
+      externalUrl: "https://www.instagram.com/reel/DeGq2_xosS9/?xtok=Y2ppZ2gzaTNmZ28x"
     },
     {
       id: "vid-4",
-      category: "Распаковки",
-      title: "[Эстетичная ASMR-распаковка новинки]",
-      brand: "[Бренд / Ниша #4]",
-      duration: "0:25",
-      goal: "[Задача: эмоции первого касания и детали]",
+      category: "Экспертный и образовательный UGC",
+      title: "Reel #2 • Экспертный UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
       coverUrl: "",
       videoUrl: "",
-      externalUrl: "#"
+      externalUrl: "https://www.instagram.com/reel/Dfwhs-aR1dE/?dlrf=dm5reW1weGE3cjM3"
     },
     {
       id: "vid-5",
-      category: "Обзоры",
-      title: "[Пошаговый туториал / сценарий «до — после»]",
-      brand: "[Бренд / Ниша #5]",
-      duration: "0:31",
-      goal: "[Задача: показать результат применения]",
+      category: "Экспертный и образовательный UGC",
+      title: "Reel #3 • Образовательный UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
       coverUrl: "",
       videoUrl: "",
-      externalUrl: "#"
+      externalUrl: "https://www.instagram.com/reel/DdboBKNIzz4/?vrfl=MTRza2c4MG02ZXY1cg=="
     },
     {
       id: "vid-6",
-      category: "Креатив / AI",
-      title: "[Креативный ролик с AI-сценами / эффектами]",
-      brand: "[Бренд / Ниша #6]",
-      duration: "0:22",
-      goal: "[Задача: зацепить внимание в первые 2 сек]",
+      category: "Экспертный и образовательный UGC",
+      title: "Reel #4 • Образовательный UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
       coverUrl: "",
       videoUrl: "",
-      externalUrl: "#"
+      externalUrl: "https://www.instagram.com/reel/Ddg_9vAI-Kg/?srtk=dnIwNWtkb2VmeGdy"
+    },
+    {
+      id: "vid-7",
+      category: "Beauty UGC и демонстрация продукта",
+      title: "Reel #1 • Beauty UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
+      coverUrl: "",
+      videoUrl: "",
+      externalUrl: "https://www.instagram.com/reel/DbUdiezqQcz/?srtk=MXVtaWloYXE0c3Jo"
+    },
+    {
+      id: "vid-8",
+      category: "Beauty UGC и демонстрация продукта",
+      title: "Reel #2 • Демонстрация продукта",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
+      coverUrl: "",
+      videoUrl: "",
+      externalUrl: "https://www.instagram.com/reel/DXd_tnuiK4D/?exln=MW9peWdrZTgxNTF4bg=="
+    },
+    {
+      id: "vid-9",
+      category: "Трендовый и развлекательный UGC",
+      title: "Reel #1 • Трендовый UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
+      coverUrl: "",
+      videoUrl: "",
+      externalUrl: "https://www.instagram.com/reel/DfEb2sIx7L3/?vrfl=eWU5a2g2cGxjb2Zy"
+    },
+    {
+      id: "vid-10",
+      category: "Трендовый и развлекательный UGC",
+      title: "Reel #2 • Развлекательный UGC",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
+      coverUrl: "",
+      videoUrl: "",
+      externalUrl: "https://www.instagram.com/reel/Deyhl1nIv7a/?dlrf=d3gyeGFzZHY4dXlx"
+    },
+    {
+      id: "vid-11",
+      category: "АСМР распаковки",
+      title: "Reel #1 • АСМР распаковка",
+      brand: "Instagram Reels",
+      duration: "Reels",
+      goal: "Открыть ролик в Instagram →",
+      coverUrl: "",
+      videoUrl: "",
+      externalUrl: "https://www.instagram.com/reel/DejBESRxgw3/?exln=ZWtpZjVmNjRpbGto"
     }
   ],
 
