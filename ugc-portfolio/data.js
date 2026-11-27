@@ -83,7 +83,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-1.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DbBVeoloINa/?obrf=eWYwcHo0NW9qMmNi"
     },
@@ -94,7 +94,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-2.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/Dcv5VLAolqX/?dlrf=Yng2ZmxrOTU0MWFi"
     },
@@ -105,7 +105,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-3.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DeGq2_xosS9/?xtok=Y2ppZ2gzaTNmZ28x"
     },
@@ -116,7 +116,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-4.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/Dfwhs-aR1dE/?dlrf=dm5reW1weGE3cjM3"
     },
@@ -127,7 +127,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-5.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DdboBKNIzz4/?vrfl=MTRza2c4MG02ZXY1cg=="
     },
@@ -138,7 +138,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-6.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/Ddg_9vAI-Kg/?srtk=dnIwNWtkb2VmeGdy"
     },
@@ -149,7 +149,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-7.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DbUdiezqQcz/?srtk=MXVtaWloYXE0c3Jo"
     },
@@ -160,7 +160,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-8.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DXd_tnuiK4D/?exln=MW9peWdrZTgxNTF4bg=="
     },
@@ -171,7 +171,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-9.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DfEb2sIx7L3/?vrfl=eWU5a2g2cGxjb2Zy"
     },
@@ -182,7 +182,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-10.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/Deyhl1nIv7a/?dlrf=d3gyeGFzZHY4dXlx"
     },
@@ -193,7 +193,7 @@ window.PORTFOLIO_DATA = {
       brand: "Instagram Reels",
       duration: "Reels",
       goal: "Открыть ролик в Instagram →",
-      coverUrl: "",
+      coverUrl: "./assets/reels/vid-11.jpg",
       videoUrl: "",
       externalUrl: "https://www.instagram.com/reel/DejBESRxgw3/?exln=ZWtpZjVmNjRpbGto"
     }
