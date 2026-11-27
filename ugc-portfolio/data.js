@@ -18,12 +18,12 @@ window.PORTFOLIO_DATA = {
       "Создаю живой, эстетичный и вовлекающий контент для брендов. Снимаю распаковки, обзоры, GRWM, туториалы, разговорные и креативные видео. Люблю превращать обычные продукты в интересные истории, которые органично вписываются в ленту и вызывают желание узнать о бренде больше.",
     heroAvailability: "От идеи и сценария до готового видео",
     heroNiches: "Beauty • Fashion • Lifestyle • Reviews • Unboxing",
-    heroPhotoUrl: "", // Например: "./assets/hero.jpg"
+    heroPhotoUrl: "./assets/hero.webp", // Главное фото креатора
 
-    aboutPhotoUrl: "", // Например: "./assets/about.jpg"
+    aboutPhotoUrl: "./assets/about.webp", // Фото блока «Обо мне»
     aboutSignature: "— Аня Иванова (@annet.kalife)",
 
-    contactPhotoUrl: "", // Например: "./assets/contact.jpg"
+    contactPhotoUrl: "./assets/contact.webp", // Атмосферное фото для финала
     contactTitle: "Поговорим о проекте",
     contactSubtitle:
       "[Расскажите о продукте, сроках и цели кампании. Отвечу в течение дня с идеями и оценкой стоимости.]",
@@ -141,34 +141,28 @@ window.PORTFOLIO_DATA = {
   results: {
     reels: [
       {
-        metric: "[XX XXX]",
-        label: "взаимодействий",
-        note: "[Кейс Reels #1 — категория / формат]",
-        screenshotUrl: ""
-      },
-      {
-        metric: "[XX XXX]",
-        label: "взаимодействий",
-        note: "[Кейс Reels #2 — категория / формат]",
-        screenshotUrl: ""
-      },
-      {
-        metric: "[XX XXX]",
+        metric: "77 243",
         label: "просмотров",
-        note: "[Кейс Reels #3 — органика без рекламы]",
-        screenshotUrl: ""
+        note: "77 243 просмотров • 55 765 зрителей • 1,1 тыс. репостов",
+        screenshotUrl: "./assets/result-1.webp"
       },
       {
-        metric: "[X XXX]",
-        label: "сохранений",
-        note: "[Кейс Reels #4 — туториал / подборка]",
-        screenshotUrl: ""
+        metric: "755 645",
+        label: "просмотров",
+        note: "755 645 просмотров • 477 988 зрителей • 23 тыс. репостов",
+        screenshotUrl: "./assets/result-2.webp"
       },
       {
-        metric: "[XX XXX]",
-        label: "охватов",
-        note: "[Кейс Reels #5 — нативная интеграция]",
-        screenshotUrl: ""
+        metric: "217 367",
+        label: "просмотров",
+        note: "217 367 просмотров • 159 570 зрителей • 1,9 тыс. сохранений",
+        screenshotUrl: "./assets/result-3.webp"
+      },
+      {
+        metric: "628 639",
+        label: "просмотров",
+        note: "628 639 просмотров • 299 460 зрителей • 5,7 тыс. сохранений",
+        screenshotUrl: "./assets/result-4.webp"
       }
     ],
     posts: [
